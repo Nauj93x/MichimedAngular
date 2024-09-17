@@ -1,4 +1,4 @@
-import { Tratamiento } from './tratamiento';  // Asegurando que Tratamiento también esté definido
+import { Tratamiento } from './tratamiento';  // Clase Tratamiento
 
 export class Droga {
   id: number | null;  // El id puede ser null cuando aún no se ha generado
@@ -7,7 +7,7 @@ export class Droga {
   precioVenta: number;
   uniDisp: number;
   uniVend: number;
-  tratamiento: Tratamiento | null;  // Asumiendo que "Tratamiento" es otra clase o interfaz
+  tratamiento: Tratamiento | null;
 
   constructor(
     nombre: string,
@@ -27,7 +27,7 @@ export class Droga {
     this.tratamiento = tratamiento || null;  // Tratamiento puede ser opcional
   }
 
-  // Getters y setters (opcional en TypeScript)
+  // Getters y setters 
   getId(): number | null {
     return this.id;
   }

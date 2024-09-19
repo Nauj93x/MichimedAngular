@@ -11,7 +11,7 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { InfoComponent } from './pages/mascotas/info/info.component';
 import { AddComponent } from './pages/mascotas/add/add.component';
 import { UpdateComponent } from './pages/mascotas/update/update.component';
-import { MascotaFormComponent } from './pages/mascotas/mascota-form/mascota-form.component';
+import { MascotaFormComponent } from './components/panel/layout/mascota-form/mascota-form.component';
 import { LayoutComponent } from './components/panel/layout/layout.component';
 
 @NgModule({

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="/assets/icons/FaviconMichiMed.ico" type="image/x-icon" />
+    <title>Mascotas</title>
+  </head>
+  <body>
+    <!-- Layout - Menu Lateral y header -->
+    <img src="/assets/img/Michimed_Logo 1.png" class="logo" id="toggleSidebar" alt="Michimed Logo">
+    <aside id="sidebar">
+      <nav class="h-100 d-flex flex-column justify-content-between align-items-start">
+          <ul class="nav flex-column">
+              <li class="nav-item">
+                  <a href="#" class="nav-link active"><i class="bi bi-house me-3"></i>Panel</a>
+              </li>
+              <li class="nav-item">
+                  <a routerLink="/clientes" class="nav-link"><i class="bi bi-person-gear me-3"></i>Clientes</a>
+              </li>
+              <li class="nav-item">
+                  <a href="#" class="nav-link"><i class="bi bi-person-gear me-3"></i>Veterinarios</a>
+              </li>
+              <li class="nav-item">
+                  <a href="#" class="nav-link"><i class="bi bi-file-earmark-text me-3"></i>Historial Médico</a>
+              </li>
+              <li class="nav-item">
+                  <a routerLink="/mascotas" class="nav-link"><i class="bi bi-activity me-3"></i>Mascotas</a>
+              </li>
+              <li class="nav-item">
+                  <a href="#" class="nav-link"><i class="bi bi-plus-circle me-3"></i>Agregar tratamiento</a>
+              </li>
+          </ul>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a href="../" class="nav-link mb-2"><i class="bi bi-box-arrow-left me-3"></i>Logout</a>
+            </li>
+          </ul>
+      </nav>
+    </aside>
+    <header class="header-2">
+      <img src="/assets/img/User.png" alt="User photo" />
+    </header>
+    <!-- // -->
+    <main id="content">
+      <div class="info">
+        <h1 class="mb-3">Todos nuestros gatitos</h1>
+        <div class="d-flex flex-row">
+          <input id="searchInput" class="mb-0" type="text" placeholder="Buscar por el nombre del gatito..."/>
+          <a class="btn btn-primary text-white ms-2 d-flex align-items-center" routerLink="/mascotas/add"><i class="bi bi-plus"></i>Add</a>
+        </div>
+      </div>
+      <div class="table-container">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Raza</th>
+              <th>Edad</th>
+              <th>Peso</th>
+              <th>Enfermedad</th>
+              <th>Estado</th>
+              <th>Foto</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let mascota of mascotas">
+              <td>{{ mascota.nombre }}</td>
+              <td>{{ mascota.raza }}</td>
+              <td>{{ mascota.edad }} años</td>
+              <td>{{ mascota.peso }} kg</td>
+              <td>{{ mascota.enfermedad }}</td>
+              <td [ngClass]="{'estado-tratamiento': mascota.estado === 'En tratamiento', 'estado-normal': mascota.estado !== 'En tratamiento'}">{{ mascota.estado }}</td>
+              <td>
+                <img [src]="mascota.foto" alt="" class="table-img img-fluid" />
+              </td>
+              <td>
+                <a class="btn btn-primary rounded-5" [routerLink]="['/mascotas', mascota.id]"><i class="bi bi-eye-fill"></i></a>
+                <a class="btn btn-primary rounded-5" [routerLink]="['/mascotas/update', mascota.id]"><i class="bi bi-pen"></i></a>
+                <a class="btn btn-danger rounded-5" [routerLink]="['/mascotas/delete', mascota.id]">X</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- jQuery y Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/assets/js/mascotas.js"></script>
+    <script src="/assets/js/panelMenu.js"></script>
+  </body>
+</html>

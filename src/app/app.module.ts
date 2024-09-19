@@ -8,6 +8,7 @@ import { MascotasComponent } from './pages/mascotas/mascotas.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LandingComponent } from './pages/landing/landing.component';
+import { InfoComponent } from './pages/mascotas/info/info.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { LandingComponent } from './pages/landing/landing.component';
     HeaderComponent,
     FooterComponent,
     MascotasComponent,
-    LandingComponent
+    LandingComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,

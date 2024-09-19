@@ -124,9 +124,9 @@ input:focus, select:focus {
     padding: 5px; /* Opcional: para añadir algo de espacio alrededor del texto */
 }
 
-.estado-normal {
-    background-color: var(--input-color);
-}
+/* .estado-normal {
+
+} */
 
 .table-img {
     width: 40px;
@@ -154,6 +154,10 @@ main .volver{
     text-decoration: none;
     font-size: larger;
     font-weight: 300;
+}
+
+.btn-danger, .btn-primary{
+  margin: 3px;
 }
 
 

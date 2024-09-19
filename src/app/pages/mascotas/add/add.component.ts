@@ -7,7 +7,7 @@ import { Mascota } from '../../../model/mascota';
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
-  styleUrls: ['../mascotas.component.css', '../../../app.component.css']
+  styleUrls: ['./add.component.css','../mascotas.component.css', '../../../app.component.css']
 })
 export class AddComponent implements OnInit {
   mascotaForm: FormGroup;

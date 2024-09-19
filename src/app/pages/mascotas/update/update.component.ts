@@ -7,7 +7,7 @@ import { Mascota } from '../../../model/mascota';
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
-  styleUrls: ['../mascotas.component.css', '../../../app.component.css']
+  styleUrls: ['./update.component.css','../mascotas.component.css', '../../../app.component.css']
 })
 export class UpdateComponent implements OnInit {
   mascotaForm: FormGroup;

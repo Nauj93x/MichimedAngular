@@ -150,7 +150,7 @@
                 ></a>
                 <a
                   class="btn btn-danger rounded-5"
-                  [routerLink]="['/mascotas/delete', mascota.id]"
+                  (click)="mascota.id !== null && deleteMascota(mascota.id)"
                   >X</a
                 >
               </td>

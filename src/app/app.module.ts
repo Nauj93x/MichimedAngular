@@ -5,10 +5,12 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/landing/header/header.component';
 import { FooterComponent } from './components/landing/footer/footer.component';
 import { MascotasComponent } from './pages/mascotas/mascotas.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
 import { HttpClientModule } from '@angular/common/http';
 import { LandingComponent } from './pages/landing/landing.component';
 import { InfoComponent } from './pages/mascotas/info/info.component';
+import { AddComponent } from './pages/mascotas/add/add.component';
+import { UpdateComponent } from './pages/mascotas/update/update.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,15 @@ import { InfoComponent } from './pages/mascotas/info/info.component';
     FooterComponent,
     MascotasComponent,
     LandingComponent,
-    InfoComponent
+    InfoComponent,
+    AddComponent,
+    UpdateComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule, // Asegúrate de que ReactiveFormsModule esté aquí
     HttpClientModule,
   ],
   providers: [],

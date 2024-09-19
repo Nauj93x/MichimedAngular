@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Mascota } from '../../model/mascota';
+import { MascotaService } from '../../services/mascota.service';
 
 @Component({
   selector: 'app-mascotas',
@@ -9,23 +10,18 @@ import { Mascota } from '../../model/mascota';
 export class MascotasComponent implements OnInit {
   mascotas: Mascota[] = [];
 
+  constructor(private mascotaService: MascotaService) {}
+
   ngOnInit(): void {
-    // Aquí puedes inicializar la lista de mascotas, por ejemplo, llamando a un servicio
-    this.mascotas = [
-      {
-        id: 1,
-        nombre: 'Michi',
-        edad: 2,
-        raza: 'Siamés',
-        peso: 4.5,
-        enfermedad: 'Ninguna',
-        estado: 'Sano',
-        fechaEntrada: '2022-01-01',
-        fechaSalida: '2022-01-10',
-        medicamento: 'Ninguno',
-        foto: '/assets/img/michi.jpg'
-      },
-      // Agrega más mascotas según sea necesario
-    ];
+    this.mascotas = this.mascotaService.getMascotas();
+  }
+
+  deleteMascota(id: number): void {
+    const success = this.mascotaService.deleteMascota(id);
+    if (success) {
+      this.mascotas = this.mascotas.filter(mascota => mascota.id !== id);
+    } else {
+      console.error('Error al eliminar la mascota');
+    }
   }
 }

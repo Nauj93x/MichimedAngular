@@ -2,24 +2,25 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Mascota } from '../../../model/mascota';
 import { Cliente } from '../../../model/cliente';
+import { MascotaService } from '../../../services/mascota.service';
 
 @Component({
   selector: 'app-info',
   templateUrl: './info.component.html',
-  styleUrls: ['./info.component.css','../../../app.component.css']
+  styleUrls: ['./info.component.css', '../../../app.component.css']
 })
 export class InfoComponent implements OnInit, AfterViewInit {
   mascota: Mascota | null = null;
   cliente: Cliente | null = null;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private mascotaService: MascotaService) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = Number(params.get('id'));
-      // Aquí puedes usar el id para cargar la información de la mascota y el cliente
+      this.mascota = this.mascotaService.getMascotaById(id) ?? null;
+      // Aquí puedes usar el id para cargar la información del cliente si es necesario
       // Ejemplo:
-      // this.mascotaService.getMascotaById(id).subscribe(mascota => this.mascota = mascota);
       // this.clienteService.getClienteByMascotaId(id).subscribe(cliente => this.cliente = cliente);
     });
   }

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Mascota } from '../model/mascota';  // Interfaz Mascota
+import { Mascota } from '../model/mascota'; // Interfaz Mascota
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MascotaService {
-
   private mascotas: Mascota[] = [];
 
   constructor() {
@@ -22,7 +21,7 @@ export class MascotaService {
         fechaEntrada: '2023-01-10',
         fechaSalida: '2023-01-20',
         medicamento: 'Antibiótico',
-        foto: 'url-de-la-foto-fido.jpg'
+        foto: 'url-de-la-foto-fido.jpg',
       },
       {
         id: 2,
@@ -35,7 +34,7 @@ export class MascotaService {
         fechaEntrada: '2023-03-15',
         fechaSalida: '2023-03-22',
         medicamento: 'Antialérgico',
-        foto: 'url-de-la-foto-max.jpg'
+        foto: 'url-de-la-foto-max.jpg',
       },
       {
         id: 3,
@@ -48,7 +47,7 @@ export class MascotaService {
         fechaEntrada: '2023-05-12',
         fechaSalida: '2023-05-20',
         medicamento: 'Control de peso',
-        foto: 'url-de-la-foto-bella.jpg'
+        foto: 'url-de-la-foto-bella.jpg',
       },
       {
         id: 4,
@@ -61,7 +60,7 @@ export class MascotaService {
         fechaEntrada: '2023-07-10',
         fechaSalida: '2023-07-18',
         medicamento: 'Analgésico',
-        foto: 'url-de-la-foto-rocky.jpg'
+        foto: 'url-de-la-foto-rocky.jpg',
       },
       {
         id: 5,
@@ -74,7 +73,7 @@ export class MascotaService {
         fechaEntrada: '2023-08-01',
         fechaSalida: '2023-08-10',
         medicamento: 'Cardiotónico',
-        foto: 'url-de-la-foto-luna.jpg'
+        foto: 'url-de-la-foto-luna.jpg',
       },
       {
         id: 6,
@@ -87,7 +86,7 @@ export class MascotaService {
         fechaEntrada: '2023-09-05',
         fechaSalida: '2023-09-12',
         medicamento: 'Ninguno',
-        foto: 'url-de-la-foto-simba.jpg'
+        foto: 'url-de-la-foto-simba.jpg',
       },
       {
         id: 7,
@@ -100,8 +99,8 @@ export class MascotaService {
         fechaEntrada: '2023-09-10',
         fechaSalida: '2023-09-18',
         medicamento: 'Suplemento articular',
-        foto: 'url-de-la-foto-nala.jpg'
-      }
+        foto: 'url-de-la-foto-nala.jpg',
+      },
     ];
   }
 
@@ -112,6 +111,33 @@ export class MascotaService {
 
   // Método para obtener una mascota por su id
   getMascotaById(id: number): Mascota | undefined {
-    return this.mascotas.find(mascota => mascota.id === id);
+    return this.mascotas.find((mascota) => mascota.id === id);
+  }
+
+  // Método para agregar una nueva mascota
+  addMascota(mascota: Mascota): void {
+    this.mascotas.push(mascota);
+  }
+
+  // Método para actualizar una mascota existente
+  updateMascota(updatedMascota: Mascota): boolean {
+    const index = this.mascotas.findIndex(
+      (mascota) => mascota.id === updatedMascota.id
+    );
+    if (index !== -1) {
+      this.mascotas[index] = updatedMascota;
+      return true;
+    }
+    return false;
+  }
+
+  // Método para eliminar una mascota por su id
+  deleteMascota(id: number): boolean {
+    const index = this.mascotas.findIndex((mascota) => mascota.id === id);
+    if (index !== -1) {
+      this.mascotas.splice(index, 1);
+      return true;
+    }
+    return false;
   }
 }

@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+:root {
+    --primary-color: #7FA1C3;
+    --secondary-color: #E2DAD6;
+    --terciary-color: #F5EDED;
+    --input-color:#f0f2f5;
+    --text-color: #121417;
+    --text-secondary: #637387;
+    --text-terciary: #ACAFCA;
+    --white: #FFFFFF;
+    --gray: #757575;
+    --color-gainsboro-200: #e2dad6;
+    --schemes-error: #B3261E;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* MAIN */
+
+main {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+
+.info {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 10px;
+    width: 100%;
+    background-color: var(--input-color);
+    color: var(--text-secondary);
+    border-radius: 10px;
+    border: 0;
+    margin-bottom: 10px;
+}
+
+
+select {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 100%;
+    color: #757575;
+    border: 0;
+    background-color: #f0f2f5;
+    padding: 10px;
+    border-radius: 10px;
+    appearance: none; /* Elimina el estilo predeterminado del navegador */
+    -webkit-appearance: none; /* Para Safari y Chrome */
+    -moz-appearance: none; /* Para Firefox */
+}
+
+input:focus, select:focus {
+    outline-color: var(--text-secondary);
+    background-color: var(--white);
+    color: var(--text-secondary);
+}
+
+.table-container {
+    width: 100%;
+    border: 1px solid var(--text-secondary);
+    border-radius: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 0;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0;
+    text-align: start;
+}
+
+.table td, .table th {
+    border-bottom: 1px solid var(--text-terciary);
+    padding: 8px;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+
+.table th {
+    color: var(--text-secondary);
+}
+
+.table td {
+    color: var(--text-color);
+    font-weight: 300;
+}
+
+.estado-tratamiento {
+    background-color: var(--schemes-error);
+    color: var(--white);
+    border-radius: 20px;
+    padding: 5px; /* Opcional: para añadir algo de espacio alrededor del texto */
+}
+
+.estado-normal {
+    background-color: var(--input-color);
+}
+
+.table-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit:cover;
+}
+
+
+.add {
+    background-color: var(--primary-color);
+    color: var(--text-terciary);
+    color: var(--white);
+    border: 0;
+    padding: 10px;
+    border-radius: 40px;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+main .volver{
+    align-self: flex-start;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: larger;
+    font-weight: 300;
+}
+
+
+
+
+

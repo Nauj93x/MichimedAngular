@@ -1,0 +1,77 @@
+<form [formGroup]="mascotaForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-md-6">
+      <label for="nombre">Nombre</label>
+      <input
+        formControlName="nombre"
+        type="text"
+        id="nombreUpdate"
+        class="form-control"
+        placeholder="Ingresa el nombre del gatito"
+      />
+
+      <label for="enfermedad">Enfermedad</label>
+      <input
+        formControlName="enfermedad"
+        type="text"
+        id="enfermedadUpdate"
+        class="form-control"
+        placeholder="Ingresa la enfermedad del gatito"
+      />
+
+      <label for="raza">Raza</label>
+      <input
+        formControlName="raza"
+        id="razaUpdate"
+        class="form-control"
+        placeholder="Ingresa la raza del gatito"
+        type="text"
+      />
+
+      <label for="peso">Peso (kg)</label>
+      <input
+        formControlName="peso"
+        id="pesoUpdate"
+        class="form-control"
+        placeholder="Ingresa el peso del gatito"
+        type="number"
+        step="0.01"
+      />
+    </div>
+
+    <div class="col-md-6">
+      <div class="upload">
+        <label for="foto">Upload image</label>
+        <input
+          formControlName="foto"
+          type="text"
+          id="foto"
+          placeholder="Ingresa la URL de la foto de tu mascota"
+        />
+      </div>
+
+      <label for="estado">Estado</label>
+      <select
+        formControlName="estado"
+        id="estadoUpdate"
+        class="form-control"
+      >
+        <option value="">Seleccione un estado</option>
+        <option value="En tratamiento">En tratamiento</option>
+        <option value="Tratado">Tratado</option>
+      </select>
+
+      <label for="edadUpdate">Edad(años)</label>
+      <input
+        formControlName="edad"
+        id="edadUpdate"
+        class="form-control"
+        type="number"
+      />
+    </div>
+  </div>
+  <button type="submit" class="add">Update</button>
+  <input type="hidden" formControlName="medicamento" />
+  <input type="hidden" formControlName="fechaEntrada" />
+  <input type="hidden" formControlName="fechaSalida" />
+</form>

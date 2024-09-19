@@ -24,7 +24,6 @@ export class VeterinarioService {
         contrasena: 'password123',
         especialidad: 'Cardiología',
         urlFoto: 'url-de-la-foto-vet1.jpg',
-        numAtenciones: 100,
         mascotas: mascotas1  // Relacionamos el veterinario con las mascotas
       },
       {
@@ -34,7 +33,6 @@ export class VeterinarioService {
         contrasena: 'password456',
         especialidad: 'Dermatología',
         urlFoto: 'url-de-la-foto-vet2.jpg',
-        numAtenciones: 200,
         mascotas: mascotas2  // Relacionamos el veterinario con las mascotas
       }
     ];

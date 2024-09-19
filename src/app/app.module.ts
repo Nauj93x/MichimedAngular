@@ -11,6 +11,7 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { InfoComponent } from './pages/mascotas/info/info.component';
 import { AddComponent } from './pages/mascotas/add/add.component';
 import { UpdateComponent } from './pages/mascotas/update/update.component';
+import { LayoutComponent } from './components/panel/layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UpdateComponent } from './pages/mascotas/update/update.component';
     LandingComponent,
     InfoComponent,
     AddComponent,
-    UpdateComponent
+    UpdateComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,

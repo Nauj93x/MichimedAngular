@@ -6,5 +6,5 @@
     nombre: string;
     email: string;
     contrasena: string;
-    mascotas: Mascota[];
+    mascotas?: Mascota[];
   }

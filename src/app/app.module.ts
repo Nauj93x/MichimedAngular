@@ -11,7 +11,11 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { InfoComponent } from './pages/mascotas/info/info.component';
 import { AddComponent } from './pages/mascotas/add/add.component';
 import { UpdateComponent } from './pages/mascotas/update/update.component';
+<<<<<<< HEAD
 import { MascotaFormComponent } from './pages/mascotas/mascota-form/mascota-form.component';
+=======
+import { LayoutComponent } from './components/panel/layout/layout.component';
+>>>>>>> 808672d05557b9ff468ccecf2680710e0c4f708c
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { MascotaFormComponent } from './pages/mascotas/mascota-form/mascota-form
     InfoComponent,
     AddComponent,
     UpdateComponent,
+<<<<<<< HEAD
     MascotaFormComponent
+=======
+    LayoutComponent
+>>>>>>> 808672d05557b9ff468ccecf2680710e0c4f708c
   ],
   imports: [
     BrowserModule,

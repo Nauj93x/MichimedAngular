@@ -5,7 +5,7 @@ import { MascotaService } from '../../../services/mascota.service';
 import { Mascota } from '../../../model/mascota';
 
 @Component({
-  selector: 'app-edit',
+  selector: 'app-update',
   templateUrl: './update.component.html',
   styleUrls: ['../mascotas.component.css', '../../../app.component.css']
 })

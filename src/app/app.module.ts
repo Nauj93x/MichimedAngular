@@ -13,6 +13,7 @@ import { AddComponent } from './pages/mascotas/add/add.component';
 import { UpdateComponent } from './pages/mascotas/update/update.component';
 import { MascotaFormComponent } from './components/panel/layout/mascota-form/mascota-form.component';
 import { LayoutComponent } from './components/panel/layout/layout.component';
+import { ErrorComponent } from './pages/error/error.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LayoutComponent } from './components/panel/layout/layout.component';
     AddComponent,
     UpdateComponent,
     MascotaFormComponent,
-    LayoutComponent
+    LayoutComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

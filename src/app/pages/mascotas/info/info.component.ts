@@ -18,7 +18,9 @@ export class InfoComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = Number(params.get('id'));
-      this.mascota = this.mascotaService.getMascotaById(id) ?? null;
+      this.mascotaService.getMascotaById(id).subscribe(
+        (mascota) => this.mascota = mascota
+      );
       // Aquí puedes usar el id para cargar la información del cliente si es necesario
       // Ejemplo:
       // this.clienteService.getClienteByMascotaId(id).subscribe(cliente => this.cliente = cliente);

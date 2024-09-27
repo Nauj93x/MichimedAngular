@@ -13,15 +13,14 @@ export class MascotasComponent implements OnInit {
   constructor(private mascotaService: MascotaService) {}
 
   ngOnInit(): void {
-    this.mascotas = this.mascotaService.getMascotas();
+    this.mascotaService.getMascotas().subscribe(
+      (mascotas) => this.mascotas = mascotas
+    );
   }
 
   deleteMascota(id: number): void {
-    const success = this.mascotaService.deleteMascota(id);
-    if (success) {
-      this.mascotas = this.mascotas.filter(mascota => mascota.id !== id);
-    } else {
-      console.error('Error al eliminar la mascota');
-    }
+    this.mascotaService.deleteMascota(id);
+    //Agregar nuevamente validación para eliminar mascota de la lista
+    this.mascotas = this.mascotas.filter(mascota => mascota.id !== id);
   }
 }

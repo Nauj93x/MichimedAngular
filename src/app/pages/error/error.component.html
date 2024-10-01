@@ -1,1 +1,24 @@
-<p>error works!</p>
+<div class="error-background">
+  <header class="header-3">
+    <a routerLink="/mascotas">
+        <img src="/assets/img/Michimed_Logo 1.png" alt="MichiMed Logo" />
+    </a>
+  </header>
+
+  <div class="d-flex flex-column justify-content-center align-items-center flex-grow-1">
+    <div class="error-container text-center bg-light p-5 rounded shadow">
+        <h1 class="display-4 fw-bold oops-title">¡Oops!</h1>
+        <h2 class="mb-4 error-code">Error 404</h2>
+        <p class="lead mb-4 error-message">No se encontró la página</p>
+        <a routerLink="/" class="btn btn-primary">Regresar al inicio</a>
+    </div>
+  </div>
+
+  <footer class="text-center mt-auto">
+    <div class="legal">
+        <a href="#">Privacy & policies</a>
+        <a href="#">Terms & conditions</a>
+    </div>
+    <p class="copy">&copy; 2024 MichiMed. All rights reserved.</p>
+  </footer>
+</div>

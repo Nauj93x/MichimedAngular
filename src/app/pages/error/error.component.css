@@ -1,0 +1,92 @@
+/* Estilo para el cuerpo de la página */
+.error-background {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenedor principal centrado */
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+/* Estilos para el contenedor de error */
+.error-container {
+  max-width: 600px;
+  background-color: rgba(255, 255, 255, 0.85); /* Fondo semitransparente */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  transition: color 0.3s ease; /* Suaviza la transición del color en el contenedor */
+}
+
+/* Estilos para h1 y h2 */
+.error-container h1,
+.error-container h2 {
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+/* Hover en todo el contenedor que afecta a h1 y h2 */
+.error-container:hover h1,
+.error-container:hover h2 {
+  color: var(--text-primary);
+}
+
+/* Estilo para p */
+.error-container p {
+  color: var(--text-tertiary);
+  transition: color 0.3s ease;
+}
+
+/* Oscurecer el texto del párrafo en hover */
+.error-container p:hover {
+  color: #333333; /* Color más oscuro para el párrafo en hover */
+}
+
+/* Botón primario */
+.error-container .btn-primary {
+  background-color: var(--text-secondary);
+  border-color: var(--text-secondary);
+  border-radius: 20px;
+}
+
+/* Hover para botón */
+.error-container .btn-primary:hover {
+  background-color: #4d617e;
+  border-color: #4d617e;
+}
+
+/* Footer */
+footer {
+  margin-top: 50px;
+}
+
+footer .legal a {
+  margin: 0 15px;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+footer .legal a:hover {
+  text-decoration: underline;
+}
+
+footer .copy {
+  color: #ffffff;
+}
+
+
+.logo img {
+  margin-top: 20px; /* Margen superior para el logo */
+  margin-left: -50px; /* Margen izquierdo para pegarlo a la izquierda */
+  max-width: 1000%; /* Ajusta el tamaño máximo del logo si es necesario */
+}

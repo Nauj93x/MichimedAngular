@@ -6,8 +6,10 @@ import { AddComponent } from './pages/mascotas/add/add.component';
 import {UpdateComponent} from './pages/mascotas/update/update.component'
 import { LandingComponent } from './pages/landing/landing.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { SignInComponent } from './pages/sign-in/sign-in.component';
 
 const routes: Routes = [
+  { path: 'sign-in', component: SignInComponent },
   { path: 'mascotas', component: MascotasComponent },
   { path: 'mascotas/add', component: AddComponent },
   { path: 'mascotas/update/:id', component: UpdateComponent },

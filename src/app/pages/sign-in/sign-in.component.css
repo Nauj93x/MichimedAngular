@@ -1,0 +1,11 @@
+.login-container {
+    max-width: 500px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+.login-container .form-control {border-radius: 8px;}
+
+.login-container .label-color {color: var(--text-terciary);}
+
+.login-container input::placeholder {color: var(--text-secondary)}

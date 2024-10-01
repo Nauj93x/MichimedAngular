@@ -1,0 +1,33 @@
+<header class="header-2">
+  <nav>
+      <div class="logo">
+          <a href="./"><img src="../assets/img/Michimed_Logo 1.png" alt="MichiMed Logo" /></a>
+      </div>
+      <div class="user">
+          <!-- <img src="../assets/icons/people_circle.svg" alt="Profile Image" /> -->
+          <i class="bi bi-person-circle fs-1" style="color: var(--text-secondary);"></i>
+      </div>
+  </nav>
+</header>
+<div class="login-container text-center">
+  <h1 class="mb-5 fw-bold text-3xl">El bienestar de tu gatito comienza aquí . . .</h1>
+  <form th:object="${user}" th:action="@{/sign-in}" method="post">
+      <div class="mb-3">
+          <label for="email" class="form-label w-100 text-start label-color">Email</label>
+          <input th:field="*{email}" type="email" id="email" class="form-control" placeholder="Your email" required>
+      </div>
+      <div class="mb-3">
+          <label for="password" class="form-label w-100 text-start label-color">Password</label>
+          <input th:field="*{password}" type="password" id="password" class="form-control" placeholder="Your password" required>
+      </div>
+      <p th:text="${error}" style="color: red;"></p>
+      <button type="submit" class="btn btn-primary w-100">Sign in</button>
+  </form>
+</div>
+<footer>
+  <div class="legal">
+      <a href="#">Privacy & policies</a>
+      <a href="#">Terms & conditions</a>
+  </div>
+  <p class="copy">&copy; 2024 MichiMed. All rights reserved.</p>
+</footer>

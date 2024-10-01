@@ -25,6 +25,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { PaginatorModule } from 'primeng/paginator';
 import { ToastModule } from 'primeng/toast';
+import { SignInComponent } from './pages/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ToastModule } from 'primeng/toast';
     UpdateComponent,
     MascotaFormComponent,
     LayoutComponent,
-    ErrorComponent
+    ErrorComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,

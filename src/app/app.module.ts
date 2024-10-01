@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/landing/header/header.component';
@@ -14,6 +15,16 @@ import { UpdateComponent } from './pages/mascotas/update/update.component';
 import { MascotaFormComponent } from './components/panel/layout/mascota-form/mascota-form.component';
 import { LayoutComponent } from './components/panel/layout/layout.component';
 import { ErrorComponent } from './pages/error/error.component';
+
+// PrimeNG Components
+import { TableModule } from 'primeng/table';
+import { TagModule } from 'primeng/tag';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { PaginatorModule } from 'primeng/paginator';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -31,10 +42,19 @@ import { ErrorComponent } from './pages/error/error.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule, // Asegúrate de que ReactiveFormsModule esté aquí
     HttpClientModule,
+    TableModule,
+    TagModule,
+    DropdownModule,
+    InputTextModule,
+    ButtonModule,
+    RippleModule,
+    PaginatorModule,
+    ToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

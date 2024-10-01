@@ -1,5 +1,5 @@
 export interface Mascota {
-    id: number | null;
+    id: number;
     nombre: string;
     edad: number;
     raza: string;
@@ -10,5 +10,4 @@ export interface Mascota {
     fechaSalida: string;
     medicamento: string;
     foto: string;
-  }
-  
+}

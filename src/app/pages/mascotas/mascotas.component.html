@@ -1,120 +1,132 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="icon"
-      href="/assets/icons/FaviconMichiMed.ico"
-      type="image/x-icon"
-    />
-    <title>Mascotas</title>
-  </head>
-  <body>
-    <app-layout></app-layout>
-    <main id="content">
-      <div class="info">
-        <h1 class="mb-3">Todos nuestros gatitos</h1>
-        <div class="d-flex flex-row">
-          <input
-            id="searchInput"
-            class="mb-0"
-            type="text"
-            placeholder="Buscar por el nombre del gatito..."
-          />
-          <a
-            class="btn btn-primary text-white ms-2 d-flex align-items-center"
-            routerLink="/mascotas/add"
-            ><i class="bi bi-plus"></i>Add</a
-          >
-        </div>
-      </div>
-      <div class="table-container">
-        <table class="table align-middle">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Raza</th>
-              <th>Edad</th>
-              <th>Peso</th>
-              <th>Enfermedad</th>
-              <th>Estado</th>
-              <th>Foto</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let mascota of mascotas">
-              <td>{{ mascota.nombre }}</td>
-              <td>{{ mascota.raza }}</td>
-              <td>{{ mascota.edad }} años</td>
-              <td>{{ mascota.peso }} kg</td>
-              <td>{{ mascota.enfermedad }}</td>
-              <td
-                [ngClass]="{
-                  'estado-tratamiento': mascota.estado === 'En tratamiento',
-                  'estado-normal': mascota.estado !== 'En tratamiento'
-                }"
-              >
-                {{ mascota.estado }}
-              </td>
-              <td>
-                <img [src]="mascota.foto" alt="" class="table-img img-fluid" />
-              </td>
-              <td>
-                <a
-                  class="btn btn-primary rounded-5"
-                  [routerLink]="['/mascotas', mascota.id]"
-                >
-                  <i class="bi bi-eye-fill"></i>
-                </a>
-                <a
-                  class="btn btn-primary rounded-5"
-                  [routerLink]="['/mascotas/update', mascota.id]"
-                  ><i class="bi bi-pen"></i
-                ></a>
-                <a
-                  class="btn btn-danger rounded-5"
-                  (click)="mascota.id !== null && deleteMascota(mascota.id)"
-                  >X</a
-                >
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </main>
+<app-layout></app-layout>
 
-    <!-- jQuery y Bootstrap JS -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="/assets/js/mascotas.js"></script>
-    <script src="/assets/js/panelMenu.js"></script>
-  </body>
-</html>
+<main id="content">
+  <h1 class="mb-3 text-center text-3xl">Todos nuestros gatitos</h1>
+  <p-toast></p-toast>
+  <p-table #mascotasTable [value]="mascotas" dataKey="id" [resizableColumns]="true" styleClass="p-datatable-sm" [paginator]="true"
+    [rows]="20" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Mostrando {first} - {last} de los {totalRecords} gatitos"
+    [rowsPerPageOptions]="[10, 15, 50]" editMode="row"
+    [globalFilterFields]="['nombre', 'raza', 'edad', 'enfermedad', 'estado']" [tableStyle]="{ 'min-width': '90rem' }">
+    <ng-template pTemplate="caption">
+      <div class="flex items-center">
+        <span class="p-input-icon-left mr-auto">
+          <i class="pi pi-search"></i>
+          <input id="find-mascotas-input" pInputText type="text" (input)="applyFilterGlobal($event, 'contains')"
+          placeholder="Buscar por el nombre del gatito..." />
+        </span>
+        <button type="button" pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="exportExcel()" class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width:15%" pSortableColumn="nombre" pResizableColumn>
+          Nombre <p-sortIcon class="inline-block" field="nombre"></p-sortIcon>
+        </th>
+        <th style="width:15%" pSortableColumn="raza" pResizableColumn>
+          Raza <p-sortIcon class="inline-block" field="raza"></p-sortIcon>
+        </th>
+        <th style="width:10%" pSortableColumn="edad" pResizableColumn>
+          Edad <p-sortIcon class="inline-block" field="edad"></p-sortIcon>
+        </th>
+        <th style="width:10%" pSortableColumn="peso" pResizableColumn>
+          Peso <p-sortIcon class="inline-block" field="peso"></p-sortIcon>
+        </th>
+        <th style="width:20%" pSortableColumn="enfermedad" pResizableColumn>
+          Enfermedad
+          <p-sortIcon class="inline-block" field="enfermedad"></p-sortIcon>
+        </th>
+        <th style="width:10%" pSortableColumn="estado" pResizableColumn>
+          Estado <p-sortIcon class="inline-block" field="estado"></p-sortIcon>
+        </th>
+        <th style="width:10%" pResizableColumn>Foto</th>
+        <th style="width:10%" pResizableColumn>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-mascota let-editing="editing" let-ri="rowIndex">
+      <tr [pEditableRow]="mascota">
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="mascota.nombre" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ mascota.nombre }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="mascota.raza" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ mascota.raza }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="mascota.edad" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ mascota.edad }} años
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="mascota.peso" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ mascota.peso }} kg
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="mascota.enfermedad" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ mascota.enfermedad }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-dropdown [options]="statuses" appendTo="body" [(ngModel)]="mascota.estado"
+                [style]="{ width: '100%' }"></p-dropdown>
+            </ng-template>
+            <ng-template pTemplate="output">
+              <p-tag [value]="mascota.estado" [severity]="getSeverity(mascota.estado)"></p-tag>
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <img [src]="mascota.foto" [alt]="mascota.nombre" width="100"
+            class="shadow-4 w-10 h-10 rounded-full object-cover img-fluid" />
+        </td>
+        <td>
+          <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
+            (click)="onRowEditInit(mascota)" class="p-button-rounded p-button-text"></button>
+          <button *ngIf="!editing" pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+            (click)="deleteMascota(mascota.id)"></button>
+          <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
+            (click)="onRowEditSave(mascota)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+          <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
+            (click)="onRowEditCancel(mascota, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">No se encontraron mascotas.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</main>

@@ -26,6 +26,10 @@ import { RippleModule } from 'primeng/ripple';
 import { PaginatorModule } from 'primeng/paginator';
 import { ToastModule } from 'primeng/toast';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
+import { DialogModule } from 'primeng/dialog';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { ImageModule } from 'primeng/image';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -56,7 +60,11 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
     ButtonModule,
     RippleModule,
     PaginatorModule,
-    ToastModule
+    ToastModule,
+    DialogModule,
+    InputNumberModule,
+    ImageModule,
+    ConfirmDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

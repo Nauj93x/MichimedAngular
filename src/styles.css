@@ -7,9 +7,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 :root {
-    --primary-color: #7FA1C3;
-    --secondary-color: #E2DAD6;
-    --terciary-color: #F5EDED;
+    --color-1: #7FA1C3;
+    --color-2: #E2DAD6;
+    --color-3: #F5EDED;
     --input-color:#f0f2f5;
     --text-color: #121417;
     --text-secondary: #637387;
@@ -51,24 +51,24 @@ button {
     border-radius: 40px;
 }
 
-.btn-primary {
-    background-color: var(--text-secondary);
-    border-color: var(--text-secondary);
-    border-radius: 20px;
-}
-.btn-primary:hover {
-    background-color: #4d617e;
-    border-color: #4d617e;
+.btn-1 {
+  background-color: var(--white);
+  color: var(--text-secondary);
 }
 
-.btn-secondary {
-    background-color: var(--text-secondary);
-    color: var(--white)
+.btn-1:hover, .btn-2 {
+  background-color: var(--text-secondary);
+  color: var(--white);
 }
 
-.btn-secondary:hover {
-    background-color: var(--primary-color);
+.btn-2:hover {background-color: #4d617e;}
+
+.btn-3 {
+  background-color: var(--color-2);
+  color: var(--text-color);
 }
+
+.btn-3:hover {background-color: var(--color-3);}
 
 /* HEADER */
 .header-2 {

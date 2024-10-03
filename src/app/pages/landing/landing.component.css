@@ -65,23 +65,13 @@ main {
 }
 
 mark {
-  background-color: var(--primary-color);
+  background-color: var(--color-1);
   color: var(--white);
   padding: 0.25rem;
   border-radius: 0.5rem;
 }
 
 .content button {margin-top: 1.5rem;}
-
-.action-btn {
-  background-color: var(--white);
-  color: var(--text-secondary);
-}
-
-button:hover {
-  background-color: var(--text-secondary);
-  color: var(--white);
-}
 
 /* SERVICES */
 
@@ -107,7 +97,7 @@ button:hover {
 }
 
 .service-item {
-  background-color: var(--secondary-color);
+  background-color: var(--color-2);
   padding: 1.5rem;
   height: 200px;
   border-radius: 10px;
@@ -118,7 +108,7 @@ button:hover {
 }
 
 .service-grid :hover {
-  background-color: var(--terciary-color);
+  background-color: var(--color-3);
   cursor: pointer;
   transform: scale(1.2, 1.2)
 }
@@ -183,7 +173,7 @@ button:hover {
   justify-content: center;
   width: 100%;
   height: 400px;
-  background-color: var(--terciary-color);
+  background-color: var(--color-3);
   border-radius: 40px;
 }
 
@@ -204,13 +194,13 @@ button:hover {
   text-align: center;
   align-self: center;
   margin-top: 40px;
-  border: 4px solid var(--primary-color);
+  border: 4px solid var(--color-1);
   border-radius: 40px;
   width: 100%;
   margin-bottom: 50px;
 }
 
-#contact h1 {color:var(--primary-color)}
+#contact h1 {color:var(--color-1)}
 
 form {
   max-width: 500px;
@@ -223,14 +213,14 @@ form h3 {
   align-self: flex-start;
   font-size: 15px;
   font-weight: 400;
-  color: var(--primary-color);
+  color: var(--color-1);
   margin-bottom: 5px;
 }
 
 form input, textarea {
   margin-bottom: 1rem;
   padding: 0.75rem;
-  border: 1px solid var(--primary-color);
+  border: 1px solid var(--color-1);
   border-radius: 15px;
   font-weight: 100;
 }
@@ -238,16 +228,6 @@ form input, textarea {
 form input{height: 60px;}
 
 form input::placeholder{color: var(--text-secondary);}
-
-form button {
-  background-color: var(--secondary-color);
-  color: var(--text-color);
-  align-self: center;
-  max-width: 100%;
-  width: 100%;
-}
-
-form button:hover {background-color: var(--terciary-color);}
 
 .Message {height: 200px;}
 

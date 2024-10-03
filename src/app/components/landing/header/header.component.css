@@ -1,6 +1,6 @@
 /* HEADER */
 header {
-  background-color: var(--primary-color);
+  background-color: var(--color-1);
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
@@ -32,10 +32,4 @@ nav ul li {margin-left: 2rem;}
 nav ul li a {
   text-decoration: none;
   color: var(--white);
-}
-
-.sign-in-btn {
-  background-color: var(--white);
-  color: var(--text-secondary);
-  margin-left: 2rem;
 }

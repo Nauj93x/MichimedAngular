@@ -29,10 +29,3 @@
   height: 40px;
   z-index: 1100; /* Por encima del sidebar */
 }
-#content {
-  flex-grow: 1;
-  margin-left: 250px;
-  padding: 20px;
-  transition: margin-left 0.3s ease;
-}
-#content.collapsed {margin-left: 0;}

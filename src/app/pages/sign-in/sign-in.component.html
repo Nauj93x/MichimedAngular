@@ -1,39 +1,37 @@
-<header class="header-2">
-  <nav>
-    <div class="logo">
+<header class="p-3">
+  <nav class="flex justify-between items-center">
       <a href="./"
-        ><img src="../assets/img/Michimed_Logo 1.png" alt="MichiMed Logo"
+        ><img class="h-10 hover:cursor-pointer" src="../assets/img/Michimed_Logo 1.png" alt="MichiMed Logo"
       /></a>
-    </div>
-    <div class="user">
-      <!-- <img src="../assets/icons/people_circle.svg" alt="Profile Image" /> -->
       <i
         class="bi bi-person-circle fs-1"
         style="color: var(--text-secondary)"
       ></i>
-    </div>
   </nav>
 </header>
-<div class="login-container text-center">
-  <h1 class="mb-5 fw-bold text-3xl">
-    El bienestar de tu gatito comienza aquí . . .
-  </h1>
-  <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
-    <div class="mb-3">
-      <label for="email" class="form-label w-100 text-start label-color">Email</label>
-      <input type="email" id="email" class="form-control" formControlName="email" placeholder="Your email" required />
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label w-100 text-start label-color">Password</label>
-      <input type="password" id="password" class="form-control" formControlName="password" placeholder="Your password" required />
-    </div>
-    <button type="submit" class="btn btn-primary w-100">Sign in</button>
-  </form>
-</div>
-<footer>
-  <div class="legal">
-    <a href="#">Privacy & policies</a>
-    <a href="#">Terms & conditions</a>
+<main class="flex justify-center items-center min-h-full">
+  <div class="max-w-[500px] text-center">
+    <h1 class="mb-5 fw-bold text-3xl">
+      El bienestar de tu gatito comienza aquí . . .
+    </h1>
+    <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="email" class="form-label w-100 text-start">Email</label>
+        <input type="email" id="email" class="form-control" formControlName="email" placeholder="Your email" required />
+      </div>
+      <div class="mb-4">
+        <label for="password" class="form-label w-100 text-start">Password</label>
+        <input type="password" id="password" class="form-control" formControlName="password" placeholder="Your password" required />
+      </div>
+      <button type="submit" class="btn-2 w-100">Sign in</button>
+    </form>
   </div>
-  <p class="copy">&copy; 2024 MichiMed. All rights reserved.</p>
+</main>
+<footer class="text-center py-8">
+  <div class="mt-10 text-[var(--text-terciary)]">
+    <a class="no-underline w-5 h-5" href="#">Privacidad y políticas</a>
+    <a class="no-underline w-5 h-5 m-2" href="#">Términos y condiciones</a>
+  </div>
+
+  <p class="mt-2 text-[var(--text-terciary)]">&copy; 2024 MichiMed. Todos los derechos reservados.</p>
 </footer>

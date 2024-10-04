@@ -1,35 +1,4 @@
-/* HEADER */
-header {
-  background-color: var(--color-1);
-  padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.logo-landing {
-  display: flex;
-  align-items: center;
-}
 
-.logo-landing img {height: 40px;}
 
-.logo-landing img:hover {cursor: pointer;}
-
-nav ul {
-  display: flex;
-  align-items: center;
-  list-style-type: none;
-  margin-right: 20px;
-}
-
-nav ul li {margin-left: 2rem;}
-
-nav ul li a {
-  text-decoration: none;
-  color: var(--white);
-}

@@ -7,7 +7,7 @@ import { Table } from 'primeng/table'
 @Component({
   selector: 'app-mascotas',
   templateUrl: './mascotas.component.html',
-  styleUrls: ['./mascotas.component.css', '../../app.component.css'],
+  styleUrls: ['./mascotas.component.css'],
   providers: [MessageService, ConfirmationService]
 })
 export class MascotasComponent implements OnInit {

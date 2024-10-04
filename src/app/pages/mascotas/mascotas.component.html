@@ -4,7 +4,7 @@
   <h1 class="mb-3 text-center text-3xl">Todos nuestros gatitos</h1>
   <p-toast></p-toast>
   <p-table #mascotasTable [value]="mascotas" dataKey="id" [resizableColumns]="true" styleClass="p-datatable-sm"
-    [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
+    [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="Mostrando {first} - {last} de los {totalRecords} gatitos"
     [rowsPerPageOptions]="[10, 15, 50]" editMode="row"
     [globalFilterFields]="['nombre', 'raza', 'edad', 'enfermedad', 'estado']" [tableStyle]="{ 'min-width': '90rem' }">

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Cliente } from '../model/cliente';  // Interfaz Cliente 
+import { Cliente } from '../model/cliente';  // Interfaz Cliente
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,75 +9,32 @@ import { Cliente } from '../model/cliente';  // Interfaz Cliente
 export class ClienteService {
   private clientes: Cliente[] = [];
 
-  constructor() {
-    // Datos quemados de clientes
-    this.clientes = [
-      {
-        id: 1,
-        cedula: '1234567890',
-        nombre: 'Juan Pérez',
-        email: 'juan@example.com',
-        contrasena: 'password123',
-        mascotas: []  
-      },
-      {
-        id: 2,
-        cedula: '0987654321',
-        nombre: 'Ana López',
-        email: 'ana@example.com',
-        contrasena: 'password456',
-        mascotas: []
-      },
-      {
-        id: 3,
-        cedula: '9876543210',
-        nombre: 'Carlos García',
-        email: 'carlos@example.com',
-        contrasena: 'password789',
-        mascotas: []
-      },
-      {
-        id: 4,
-        cedula: '8765432109',
-        nombre: 'María Rodríguez',
-        email: 'maria@example.com',
-        contrasena: 'password987',
-        mascotas: []
-      },
-      {
-        id: 5,
-        cedula: '7654321098',
-        nombre: 'Luis Martínez',
-        email: 'luis@example.com',
-        contrasena: 'password654',
-        mascotas: []
-      },
-      {
-        id: 6,
-        cedula: '6543210987',
-        nombre: 'Sofía Hernández',
-        email: 'sofia@example.com',
-        contrasena: 'password321',
-        mascotas: []
-      },
-      {
-        id: 7,
-        cedula: '5432109876',
-        nombre: 'Pedro Ramírez',
-        email: 'pedro@example.com',
-        contrasena: 'password111',
-        mascotas: []
-      }
-    ];
-  }
+  constructor(
+    private http: HttpClient // Importa HttpClient
+  ) {}
 
   // Método para obtener todos los clientes
-  getClientes(): Cliente[] {
-    return this.clientes;
+  getClientes(): Observable<Cliente[]> {
+    return this.http.get<Cliente[]>('http://localhost:8090/clientes');
   }
 
   // Método para obtener un cliente por su id
-  getClienteById(id: number): Cliente | undefined {
-    return this.clientes.find(cliente => cliente.id === id);
+  getClienteById(id: number): Observable<Cliente> {
+    return this.http.get<Cliente>('http://localhost:8090/clientes/' + id);
+  }
+
+  // Método para agregar una nueva cliente
+  addCliente(cliente: Cliente) {
+    this.http.post('http://localhost:8090/clientes/add', cliente).subscribe();
+  }
+
+  // Método para actualizar una cliente existente
+  updateCliente(updatedCliente: Cliente) {
+    this.http.put('http://localhost:8090/clientes/update', updatedCliente).subscribe();
+  }
+
+  // Método para eliminar una cliente por su id
+  deleteCliente(id: number) {
+    this.http.delete('http://localhost:8090/clientes/delete/' + id).subscribe();
   }
 }

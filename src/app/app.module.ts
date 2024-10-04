@@ -9,10 +9,6 @@ import { MascotasComponent } from './pages/mascotas/mascotas.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
 import { HttpClientModule } from '@angular/common/http';
 import { LandingComponent } from './pages/landing/landing.component';
-import { InfoComponent } from './pages/mascotas/info/info.component';
-import { AddComponent } from './pages/mascotas/add/add.component';
-import { UpdateComponent } from './pages/mascotas/update/update.component';
-import { MascotaFormComponent } from './components/panel/layout/mascota-form/mascota-form.component';
 import { LayoutComponent } from './components/panel/layout/layout.component';
 import { ErrorComponent } from './pages/error/error.component';
 
@@ -30,6 +26,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ImageModule } from 'primeng/image';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ClientesComponent } from './pages/clientes/clientes.component';
 
 @NgModule({
   declarations: [
@@ -38,13 +35,10 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     FooterComponent,
     MascotasComponent,
     LandingComponent,
-    InfoComponent,
-    AddComponent,
-    UpdateComponent,
-    MascotaFormComponent,
     LayoutComponent,
     ErrorComponent,
-    SignInComponent
+    SignInComponent,
+    ClientesComponent
   ],
   imports: [
     BrowserModule,

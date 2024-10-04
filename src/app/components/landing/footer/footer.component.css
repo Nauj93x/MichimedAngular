@@ -1,39 +1,3 @@
-/* FOOTER */
-footer {
-  background-color: var(--white);
-  color: var(--text-secondary);
-  padding: 2rem 0;
-  text-align: center;
-}
 
-.social-links a {
-  color: var(--text-secondary);
-  margin: 0 0.5rem;
-  font-size: 1.5rem;
-  text-decoration: none;
-}
 
-.social-links .social-icon {
-  width: 28px; /* Ajusta el tamaño según tus necesidades */
-  height: 27px; /* Ajusta el tamaño según tus necesidades */
-  fill: var(--text-secondary); /* Cambia el color de relleno del SVG */
-  stroke: var(--text-secondary); /* Cambia el color del trazo del SVG */
-}
 
-.legal{
-  margin-top: 40px;
-  text-align: center;
-  color: var(--text-terciary);
-}
-
-.legal a {
-  color: var(--text-terciary);
-  text-decoration: none;
-  width: 20px;
-  height: 20px;
-}
-
-.copy {
-  margin-top: 20px;
-  color: var(--text-terciary);
-}

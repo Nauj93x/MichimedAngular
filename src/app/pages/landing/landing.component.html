@@ -37,7 +37,7 @@
       mascota, crear una cuenta para gestionar la salud de tu mascota, o ver
       y gestionar mascotas hospitalizadas si eres veterinario.
     </p>
-    <button class="btn-2">Comenzar</button>
+    <button (click)="showFindMascotasDialog()" class="btn-2">Ver mis mascotas</button>
   </section>
   <section class="service-grid">
     <div class="service-item">
@@ -113,3 +113,12 @@
 </main>
 
 <app-footer></app-footer>
+
+<!-- Ver Mascotas de Cliente -->
+<p-dialog header="Buscar mis mascotas" [(visible)]="findMascotasDialog" [style]="{width: '30vw'}" [modal]="true">
+  <div class="flex flex-column gap-2">
+    <label htmlFor="cedula">Ingrese su cédula</label>
+    <input pInputText class="primeng-input" id="cedula" [(ngModel)]="cedula" />
+    <button class="btn-2">Buscar</button>
+</div>
+</p-dialog>

@@ -6,6 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent {
+
+  findMascotasDialog: boolean = false;
+
+  cedula: string = '';
+
+  showFindMascotasDialog(){
+    this.findMascotasDialog = true;
+  }
+
   ngAfterViewInit() {
     const carousel = document.querySelector('.carousel') as HTMLElement;
     const slides = document.querySelectorAll('.slide') as NodeListOf<HTMLElement>;

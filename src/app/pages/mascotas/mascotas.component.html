@@ -236,7 +236,7 @@
       <li>Fecha de entrada: <span [innerText]="selectedMascota.fechaEntrada"></span></li>
       <li>Fecha de salida: <span [innerText]="selectedMascota.fechaSalida"></span></li>
       <li>Droga asignada: <span [innerText]="selectedMascota.medicamento"></span></li>
-      <!-- <li>Cliente: <span [innerText]="cliente.nombre">Nombre del cliente</span></p> -->
+      <li>Cliente: <span [innerText]="selectedCliente?.nombre">Nombre del cliente</span>
     </ul>
   </ng-template>
 </p-dialog>

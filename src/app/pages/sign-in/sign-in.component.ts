@@ -23,22 +23,20 @@ export class SignInComponent {
   ) {
     this.signInForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
   onSubmit(): void {
     if (this.signInForm.valid) {
       const user: User = this.signInForm.value;
-      console.log('Form submitted:', user);
       this.http.post('http://localhost:8090/sign-in', user).subscribe(
         response => {
-          console.log('Sign-in successful:', response);
+          console.log(response);
           this.router.navigate(['/mascotas']);
           this.formSubmit.emit();
         },
         (error: HttpErrorResponse) => {
-          console.error('Sign-in error:', error);
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
@@ -47,7 +45,6 @@ export class SignInComponent {
         }
       );
     } else {
-      console.log('Form is invalid');
       Object.keys(this.signInForm.controls).forEach(key => {
         const control = this.signInForm.get(key);
         if (control?.invalid) {

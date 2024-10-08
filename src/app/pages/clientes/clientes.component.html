@@ -263,6 +263,17 @@
       <li>Cedula: <span [innerText]="selectedCliente.cedula"></span></li>
       <li>Email: <span [innerText]="selectedCliente.email"></span></li>
     </ul>
+    <h2 class="align-self-center text-xl font-bold mt-4">Mascotas:</h2>
+    <div class="w-full grid grid-cols-2 gap-4 mt-3 h-auto">
+      <div class="flex flex-col items-center" *ngFor="let mascota of mascotasCliente">
+        <h3 [innerText]="mascota.nombre"></h3>
+        <img
+          class="shadow-4 w-20 h-20 rounded-full object-cover img-fluid mt-2"
+          src="{{ mascota.foto }}"
+          alt="fotoMascota"
+        />
+      </div>
+    </div>
   </ng-template>
 </p-dialog>
 

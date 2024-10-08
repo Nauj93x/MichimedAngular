@@ -159,7 +159,6 @@
         <input class="primeng-input" type="text" pInputText id="raza" [(ngModel)]="mascota.raza" required autofocus />
         <label htmlFor="raza">Raza</label>
       </span>
-      <small class="p-error" *ngIf="submitted && !mascota.raza">Raza is required.</small>
     </div>
     <div class="formgrid flex mt-[1.70rem]">
       <div class="field primeng-col mr-3">
@@ -181,7 +180,6 @@
           autofocus />
         <label htmlFor="enfermedad">Enfermedad</label>
       </span>
-      <small class="p-error" *ngIf="submitted && !mascota.enfermedad">Enfermedad is required.</small>
     </div>
     <div class="field mt-[1.70rem]">
       <span class="p-float-label">
@@ -202,14 +200,14 @@
         <input class="primeng-input" type="url" pInputText id="foto" [(ngModel)]="mascota.foto" required autofocus />
         <label htmlFor="foto">Foto</label>
       </span>
-      <small class="p-error" *ngIf="submitted && !mascota.foto">Foto is required.</small>
     </div>
     <div class="field mt-[1.70rem]">
+      <!-- <p-dropdown [options]="clientes" [(ngModel)]="selectedCliente" optionLabel="name" [showClear]="true" placeholder="Select a City"></p-dropdown> -->
       <select class="w-full">
         <option value="" disabled selected class="text-gray-500">Dueño</option>
         <option *ngFor="let dueno of clientes" [value]="dueno.id">{{dueno.nombre}}</option>
       </select>
-      <small class="p-error" *ngIf="submitted && !mascota.foto">Foto is required.</small>
+      <!-- <small class="p-error" *ngIf="submitted && !selectedCliente">Dueño is required.</small> -->
     </div>
   </ng-template>
 

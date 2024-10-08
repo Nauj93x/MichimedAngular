@@ -96,12 +96,14 @@ export class ClientesComponent implements OnInit {
   saveCliente() {
     this.submitted = true;
 
-    // Imagen por defecto
-    // this.product.image = 'product-placeholder.svg';
-    this.clienteService.addCliente(this.cliente);
-    this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Cliente creado', life: 3000 });
-    this.clientes.push(this.cliente);
-    this.newClienteDialog = false;
+    if (this.cliente.nombre?.trim()
+        && this.cliente.cedula?.trim()
+        && this.cliente.email?.trim()) {
+      this.clienteService.addCliente(this.cliente);
+      this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Cliente creado', life: 3000 });
+      this.clientes.push(this.cliente);
+      this.newClienteDialog = false;
+    }
   }
 
   exportExcel() {

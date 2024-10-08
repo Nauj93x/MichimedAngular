@@ -113,12 +113,14 @@ export class MascotasComponent implements OnInit {
   saveMascota() {
     this.submitted = true;
 
-    // Imagen por defecto
-    // this.product.image = 'product-placeholder.svg';
-    this.mascotaService.addMascota(this.mascota);
-    this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Mascota creada', life: 3000 });
-    this.mascotas.push(this.mascota);
-    this.newMascotaDialog = false;
+    if (this.mascota.nombre?.trim()){
+        // Imagen por defecto
+      // this.product.image = 'product-placeholder.svg';
+      this.mascotaService.addMascota(this.mascota);
+      this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Mascota creada', life: 3000 });
+      this.mascotas.push(this.mascota);
+      this.newMascotaDialog = false;
+    }
   }
 
   exportExcel() {

@@ -1,12 +1,12 @@
 <header class="p-3">
   <nav class="flex justify-between items-center">
-      <a href="./"
-        ><img class="h-10 hover:cursor-pointer" src="../assets/img/Michimed_Logo 1.png" alt="MichiMed Logo"
-      /></a>
-      <i
-        class="bi bi-person-circle fs-1"
-        style="color: var(--text-secondary)"
-      ></i>
+    <a href="./"
+    ><img class="h-10 hover:cursor-pointer" src="../assets/img/Michimed_Logo 1.png" alt="MichiMed Logo"
+    /></a>
+    <i
+    class="bi bi-person-circle fs-1"
+    style="color: var(--text-secondary)"
+    ></i>
   </nav>
 </header>
 <main class="flex justify-center items-center">
@@ -18,12 +18,15 @@
       <div class="mb-3">
         <label for="email" class="form-label w-100 text-start">Email</label>
         <input type="email" id="email" class="form-control" formControlName="email" placeholder="Your email" required />
+        <small class="text-danger" *ngIf="signInForm.get('email')?.invalid && signInForm.get('email')?.touched">
+          Please enter a valid email address.
+        </small>
       </div>
       <div class="mb-4">
         <label for="password" class="form-label w-100 text-start">Password</label>
         <input type="password" id="password" class="form-control" formControlName="password" placeholder="Your password" required />
       </div>
-      <button type="submit" class="btn-2 w-100">Sign in</button>
+      <button type="submit" class="btn-2 w-100" >Sign in</button>
     </form>
   </div>
 </main>
@@ -35,3 +38,4 @@
 
   <p class="mt-2 text-[var(--text-terciary)]">&copy; 2024 MichiMed. Todos los derechos reservados.</p>
 </footer>
+<p-toast></p-toast>

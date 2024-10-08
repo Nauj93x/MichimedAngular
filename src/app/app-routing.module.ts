@@ -5,11 +5,13 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
+import { DrogasComponent } from './pages/drogas/drogas.component';
 
 const routes: Routes = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'mascotas', component: MascotasComponent },
   { path: 'clientes', component: ClientesComponent },
+  { path: 'drogas', component: DrogasComponent },
   { path: '', component: LandingComponent },
   { path: '**', component: ErrorComponent}
 ];

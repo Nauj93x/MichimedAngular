@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+  
+  table, th, td {
+    border: 1px solid #dee2e6;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  input[type="text"] {
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+  }
+    

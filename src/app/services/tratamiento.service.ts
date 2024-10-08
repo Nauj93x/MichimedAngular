@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Tratamiento } from '../model/tratamiento';  // Interfaz Tratamiento
 import { MascotaService } from './mascota.service';  // Servicio para obtener mascotas
 import { VeterinarioService } from './veterinario.service';  // Servicio para obtener veterinarios
-import { DrogaService } from './droga.service';  // Servicio para obtener drogas
+import { DrogaService } from './drogas.service';  // Servicio para obtener drogas
 
 @Injectable({
   providedIn: 'root'

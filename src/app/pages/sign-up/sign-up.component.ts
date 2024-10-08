@@ -20,18 +20,9 @@ export class SignUpComponent {
     private messageService: MessageService
   ) {
     this.signUpForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
-    }, { validator: this.passwordMatchValidator });
-  }
-
-  passwordMatchValidator(form: FormGroup) {
-    const password = form.get('password');
-    const confirmPassword = form.get('confirmPassword');
-    return password && confirmPassword && password.value === confirmPassword.value
-      ? null : { mismatch: true };
+      password: ['', [Validators.required]],
+    });
   }
 
   onSubmit(): void {

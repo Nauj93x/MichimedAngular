@@ -6,6 +6,7 @@ import { Table } from 'primeng/table'
 import { Cliente } from 'src/app/model/cliente';
 import { ClienteService } from '../../services/cliente.service';
 
+
 @Component({
   selector: 'app-mascotas',
   templateUrl: './mascotas.component.html',
@@ -28,6 +29,7 @@ export class MascotasComponent implements OnInit {
 
   clientes: Cliente[] = [];
   selectedCliente: Cliente | null = null;
+  dueno!: Cliente;
 
   clonedMascotas: { [s: string]: Mascota } = {};
 
@@ -54,10 +56,15 @@ export class MascotasComponent implements OnInit {
       header: 'Confirmar eliminación',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.mascotaService.deleteMascota(id);
-        //Agregar nuevamente validación para eliminar mascota de la lista
-        this.mascotas = this.mascotas.filter(mascota => mascota.id !== id);
-        this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Mascota eliminada', life: 3000 });
+        this.mascotaService.deleteMascota(id).subscribe(
+          () => {
+            this.mascotas = this.mascotas.filter(mascota => mascota.id !== id);
+            this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Mascota eliminada', life: 3000 });
+          },
+          (error) => {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al eliminar la mascota', life: 3000 });
+          }
+        );
       }
     });
   }
@@ -78,9 +85,14 @@ export class MascotasComponent implements OnInit {
   }
 
   onRowEditSave(mascota: Mascota) {
-    //PENDIENTE: Agregar validaciones para actualizar mascota
-    this.mascotaService.updateMascota(mascota);
-    this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Mascota actualizada' });
+    this.mascotaService.updateMascota(mascota).subscribe(
+      () => {
+        this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Mascota actualizada' });
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al actualizar la mascota', life: 3000 });
+      }
+    );
   }
 
   onRowEditCancel(mascota: Mascota, index: number) {
@@ -88,13 +100,11 @@ export class MascotasComponent implements OnInit {
     delete this.clonedMascotas[mascota.id as number];
   }
 
-  // Para filtrar
   @ViewChild('mascotasTable') mascotasTable: Table | undefined;
   applyFilterGlobal($event:any, stringVal:string) {
     this.mascotasTable?.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
-  //Para ver detalles de mascota
   openView(mascota: Mascota) {
     this.selectedMascota = mascota;
     for (const cliente of this.clientes) {
@@ -111,7 +121,6 @@ export class MascotasComponent implements OnInit {
     this.viewMascotaDialog = true;
   }
 
-  //Para crear una nueva mascota
   openNew() {
     this.mascota = {nombre: '', edad: 0, raza: '', peso: 0, enfermedad: '', estado: '', fechaEntrada: '', fechaSalida: '', medicamento: '', foto: ''};
     this.submitted = false;
@@ -127,13 +136,30 @@ export class MascotasComponent implements OnInit {
   saveMascota() {
     this.submitted = true;
 
-    if (this.mascota.nombre?.trim()){
-        // Imagen por defecto
-      // this.product.image = 'product-placeholder.svg';
-      this.mascotaService.addMascota(this.mascota);
-      this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Mascota creada', life: 3000 });
-      this.mascotas.push(this.mascota);
-      this.newMascotaDialog = false;
+    if (this.mascota.nombre?.trim() && this.dueno) {
+      this.mascotaService.addMascota(this.mascota).subscribe(
+        (response: any) => {
+          this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Mascota creada', life: 3000 });
+          this.mascotas.push(this.mascota);
+          this.newMascotaDialog = false;
+
+          if (this.dueno.id !== undefined) {
+            this.ClienteService.addMascota(this.dueno.id, this.mascota).subscribe(
+              (response) => {
+                this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Mascota asignada al dueño', life: 3000 });
+              },
+              (error) => {
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al asignar la mascota al dueño', life: 3000 });
+              }
+            );
+          }
+        },
+        (error) => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear la mascota', life: 3000 });
+        }
+      );
+    } else {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor, complete el formulario correctamente.', life: 3000 });
     }
   }
 

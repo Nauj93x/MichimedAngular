@@ -28,6 +28,11 @@ export class ClienteService {
     return this.http.get<Mascota[]>('http://localhost:8090/clientes/mascotas/' + id);
   }
 
+  //Metodo para relacionar una Mascota
+  addMascota(id: number, mascota:Mascota){
+    return this.http.post('http://localhost:8090/clientes/' + id + '/mascotas', mascota);
+  }
+
   // Método para agregar una nueva cliente
   addCliente(cliente: Cliente) {
     this.http.post('http://localhost:8090/clientes/add', cliente).subscribe();

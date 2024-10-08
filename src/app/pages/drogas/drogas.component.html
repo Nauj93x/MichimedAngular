@@ -5,35 +5,35 @@
 
   <!-- PrimeNG Table con búsqueda, paginación y botón de importación -->
   <p-table #dt [value]="drogas" dataKey="id" [paginator]="true" [rows]="10" [globalFilterFields]="['id', 'nombre', 'precioCompra', 'precioVenta']">
-    
+
     <!-- Barra superior con botones y buscador -->
     <ng-template pTemplate="caption">
       <div class="flex">
         <button pButton label="Limpiar" class="p-button-outlined mr-2" icon="pi pi-filter-slash" (click)="clear(dt)"></button>
-        
+
         <!-- Botón para importar desde Excel -->
         <label class="p-button p-button-outlined p-button-success">
-          <i class="pi pi-upload"></i>
+          <i class="pi pi-upload mr-2"></i>
           <span>Importar desde Excel</span>
           <input type="file" (change)="cargarMedicamentos($event)" style="display: none;" accept=".xlsx" />
         </label>
-
+        
         <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Buscar en la tabla..." class="ml-auto" />
       </div>
     </ng-template>
-    
+
     <!-- Cabecera de la tabla -->
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
-        <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
-        <th pSortableColumn="precioCompra">Precio Compra <p-sortIcon field="precioCompra"></p-sortIcon></th>
-        <th pSortableColumn="precioVenta">Precio Venta <p-sortIcon field="precioVenta"></p-sortIcon></th>
-        <th pSortableColumn="uniDisp">Unidades Disponibles <p-sortIcon field="uniDisp"></p-sortIcon></th>
-        <th pSortableColumn="uniVend">Unidades Vendidas <p-sortIcon field="uniVend"></p-sortIcon></th>
+        <th pSortableColumn="id">ID <p-sortIcon class="inline-block" field="id"></p-sortIcon></th>
+        <th pSortableColumn="nombre">Nombre <p-sortIcon class="inline-block" field="nombre"></p-sortIcon></th>
+        <th pSortableColumn="precioCompra">Precio Compra <p-sortIcon class="inline-block" field="precioCompra"></p-sortIcon></th>
+        <th pSortableColumn="precioVenta">Precio Venta <p-sortIcon class="inline-block" field="precioVenta"></p-sortIcon></th>
+        <th pSortableColumn="uniDisp">Unidades Disponibles <p-sortIcon class="inline-block" field="uniDisp"></p-sortIcon></th>
+        <th pSortableColumn="uniVend">Unidades Vendidas <p-sortIcon class="inline-block" field="uniVend"></p-sortIcon></th>
       </tr>
     </ng-template>
-    
+
     <!-- Cuerpo de la tabla -->
     <ng-template pTemplate="body" let-droga>
       <tr>
@@ -45,7 +45,7 @@
         <td>{{ droga.uniVend }}</td>
       </tr>
     </ng-template>
-    
+
     <!-- Mensaje cuando no hay datos -->
     <ng-template pTemplate="emptymessage">
       <tr>

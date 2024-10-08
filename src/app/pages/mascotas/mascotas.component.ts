@@ -4,7 +4,7 @@ import { Mascota } from '../../model/mascota';
 import { MascotaService } from '../../services/mascota.service';
 import { Table } from 'primeng/table'
 import { Cliente } from 'src/app/model/cliente';
-import { ClienteService } from 'src/app/services/cliente.service';
+import { ClienteService } from '../../services/cliente.service';
 
 @Component({
   selector: 'app-mascotas',
@@ -27,6 +27,7 @@ export class MascotasComponent implements OnInit {
   statuses!: SelectItem[];
 
   clientes: Cliente[] = [];
+  selectedCliente: Cliente | null = null;
 
   clonedMascotas: { [s: string]: Mascota } = {};
 
@@ -35,6 +36,10 @@ export class MascotasComponent implements OnInit {
   ngOnInit(): void {
     this.mascotaService.getMascotas().subscribe(
       (mascotas) => this.mascotas = mascotas
+    );
+
+    this.ClienteService.getClientes().subscribe(
+      (clientes) => this.clientes = clientes
     );
 
     this.statuses = [
@@ -92,6 +97,17 @@ export class MascotasComponent implements OnInit {
   //Para ver detalles de mascota
   openView(mascota: Mascota) {
     this.selectedMascota = mascota;
+    for (const cliente of this.clientes) {
+      if (cliente.id !== undefined){
+      this.ClienteService.getClienteMascotas(cliente.id).subscribe(
+      (clienteMascotas) => {
+        const clienteMascota = clienteMascotas.find(cm => cm.id === this.selectedMascota.id);
+        if (clienteMascota) {
+        this.selectedCliente = cliente;
+        }
+      }
+      )};
+    }
     this.viewMascotaDialog = true;
   }
 
@@ -99,9 +115,7 @@ export class MascotasComponent implements OnInit {
   openNew() {
     this.mascota = {nombre: '', edad: 0, raza: '', peso: 0, enfermedad: '', estado: '', fechaEntrada: '', fechaSalida: '', medicamento: '', foto: ''};
     this.submitted = false;
-    this.ClienteService.getClientes().subscribe(
-      (clientes) => this.clientes = clientes
-    )
+    this.clientes = this.clientes
     this.newMascotaDialog = true;
   }
 

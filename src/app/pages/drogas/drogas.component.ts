@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
+import * as FileSaver from 'file-saver';
 import { DrogaService } from '../../services/drogas.service'; // Servicio para manejar la carga de medicamentos
 
 @Component({
@@ -10,13 +11,18 @@ import { DrogaService } from '../../services/drogas.service'; // Servicio para m
 export class DrogasComponent implements OnInit {
   drogas: any[] = [];
   errorMessage: string = '';
-
   @ViewChild('dt') table!: Table; // Referencia a la tabla de PrimeNG
 
   constructor(private drogaService: DrogaService) {}
 
   ngOnInit(): void {
-    this.drogas = []; // Inicializar la tabla vacía
+    // Al cargar el componente, recupera los datos del localStorage si existen
+    const storedDrogas = localStorage.getItem('drogas');
+    if (storedDrogas) {
+      this.drogas = JSON.parse(storedDrogas);
+    } else {
+      this.drogas = []; // Inicializar la tabla vacía
+    }
   }
 
   // Método para cargar medicamentos desde un archivo Excel
@@ -30,7 +36,20 @@ export class DrogasComponent implements OnInit {
 
     this.drogaService.cargarMedicamentos(file).subscribe(
       (data: any) => {
-        this.drogas = data;
+        // Verifica si ya hay datos en la tabla y solicita confirmación antes de sobrescribir
+        if (this.drogas.length > 0) {
+          const confirmOverwrite = confirm('Ya hay datos cargados, ¿quieres agregar solo las drogas nuevas o sobrescribirlas?');
+          
+          if (confirmOverwrite) {
+            this.agregarDrogasUnicas(data); // Agregar solo las drogas nuevas
+          } else {
+            this.drogas = data; // Sobrescribir con los nuevos datos
+          }
+        } else {
+          this.drogas = data;
+        }
+        
+        this.guardarDrogasEnLocalStorage();
         this.errorMessage = '';
       },
       (error) => {
@@ -39,12 +58,28 @@ export class DrogasComponent implements OnInit {
     );
   }
 
-  // Limpiar los filtros de la tabla y reiniciar los datos
-  clear(dt: Table) {
-    // Limpiar los filtros de la tabla
-    dt.clear();
+  // Método para guardar las drogas en localStorage
+  guardarDrogasEnLocalStorage(): void {
+    localStorage.setItem('drogas', JSON.stringify(this.drogas));
+  }
 
-    // Reiniciar la tabla de datos, puedes establecer el arreglo `drogas` a un estado vacío o restaurar los datos iniciales si lo deseas
-    this.drogas = []; // Reinicia los datos de la tabla
+  // Método para agregar solo las drogas nuevas
+  agregarDrogasUnicas(nuevasDrogas: any[]): void {
+    const drogasExistentesNombres = this.drogas.map(droga => droga.nombre);
+
+    nuevasDrogas.forEach(drogaNueva => {
+      if (!drogasExistentesNombres.includes(drogaNueva.nombre)) {
+        this.drogas.push(drogaNueva); // Agregar solo las drogas nuevas
+      }
+    });
+
+    this.guardarDrogasEnLocalStorage(); // Actualiza el localStorage con los nuevos datos
+  }
+
+  // **Limpiar datos de la tabla y localStorage**
+  clear(dt: Table) {
+    dt.clear(); // Limpiar los filtros de la tabla (esto ya funcionaba)
+    this.drogas = []; // Limpiar los datos de la tabla
+    localStorage.removeItem('drogas'); // Limpiar los datos del localStorage
   }
 }

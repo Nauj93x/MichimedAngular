@@ -13,7 +13,7 @@ export class SignInComponent {
   signInForm: FormGroup;
   @Output() formSubmit = new EventEmitter<void>();
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
     this.signInForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -24,7 +24,7 @@ export class SignInComponent {
     if (this.signInForm.valid) {
       const user: User = this.signInForm.value;
       this.http.post('http://localhost:8090/sign-in', user).subscribe(response => {
-        console.log(response)
+        this.router.navigate(['/mascotas']);
       });
       this.formSubmit.emit();
     }

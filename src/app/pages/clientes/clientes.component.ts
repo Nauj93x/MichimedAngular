@@ -3,6 +3,7 @@ import {ConfirmationService, MessageService } from 'primeng/api';
 import { Cliente } from 'src/app/model/cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { Table } from 'primeng/table'
+import { Mascota } from 'src/app/model/mascota';
 
 @Component({
   selector: 'app-clientes',
@@ -23,6 +24,8 @@ export class ClientesComponent implements OnInit {
   submitted: boolean = false;
 
   clonedClientes: { [s: string]: Cliente } = {};
+
+  mascotasCliente : Mascota[] = [];
 
   constructor(private clienteService: ClienteService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
 
@@ -70,6 +73,11 @@ export class ClientesComponent implements OnInit {
   //Para ver detalles de cliente
   openView(cliente: Cliente) {
     this.selectedCliente = cliente;
+    if (this.selectedCliente.id !== undefined) {
+      this.clienteService.getClienteMascotas(this.selectedCliente.id).subscribe(
+        (mascotas) => this.mascotasCliente = mascotas
+      );
+    }
     this.viewClienteDialog = true;
   }
 

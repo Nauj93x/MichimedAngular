@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Cliente } from '../model/cliente';  // Interfaz Cliente
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Mascota } from '../model/mascota';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,10 @@ export class ClienteService {
   // Método para obtener un cliente por su id
   getClienteById(id: number): Observable<Cliente> {
     return this.http.get<Cliente>('http://localhost:8090/clientes/' + id);
+  }
+
+  getClienteMascotas(id:number): Observable<Mascota[]> {
+    return this.http.get<Mascota[]>('http://localhost:8090/clientes/mascotas/' + id);
   }
 
   // Método para agregar una nueva cliente

@@ -6,9 +6,11 @@ import { ErrorComponent } from './pages/error/error.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { DrogasComponent } from './pages/drogas/drogas.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 const routes: Routes = [
   { path: 'sign-in', component: SignInComponent },
+  { path: 'sign-up', component: SignUpComponent },
   { path: 'mascotas', component: MascotasComponent },
   { path: 'clientes', component: ClientesComponent },
   { path: 'drogas', component: DrogasComponent },

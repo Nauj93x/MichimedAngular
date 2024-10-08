@@ -3,6 +3,8 @@ import {ConfirmationService, MessageService, SelectItem } from 'primeng/api';
 import { Mascota } from '../../model/mascota';
 import { MascotaService } from '../../services/mascota.service';
 import { Table } from 'primeng/table'
+import { Cliente } from 'src/app/model/cliente';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
   selector: 'app-mascotas',
@@ -24,9 +26,11 @@ export class MascotasComponent implements OnInit {
 
   statuses!: SelectItem[];
 
+  clientes: Cliente[] = [];
+
   clonedMascotas: { [s: string]: Mascota } = {};
 
-  constructor(private mascotaService: MascotaService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
+  constructor(private mascotaService: MascotaService, private messageService: MessageService, private confirmationService: ConfirmationService, private ClienteService: ClienteService) {}
 
   ngOnInit(): void {
     this.mascotaService.getMascotas().subscribe(
@@ -95,6 +99,9 @@ export class MascotasComponent implements OnInit {
   openNew() {
     this.mascota = {nombre: '', edad: 0, raza: '', peso: 0, enfermedad: '', estado: '', fechaEntrada: '', fechaSalida: '', medicamento: '', foto: ''};
     this.submitted = false;
+    this.ClienteService.getClientes().subscribe(
+      (clientes) => this.clientes = clientes
+    )
     this.newMascotaDialog = true;
   }
 

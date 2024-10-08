@@ -17,6 +17,7 @@ import { ErrorComponent } from './pages/error/error.component';
 import { DrogasComponent } from './pages/drogas/drogas.component';  // Asegúrate de que DrogasComponent esté creado
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 // Servicios (asegúrate de crear e importar el servicio si es necesario)
 import { DrogaService } from './services/drogas.service';  // Importa el servicio DrogaService
@@ -47,7 +48,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ErrorComponent,
     SignInComponent,
     ClientesComponent,
-    DrogasComponent  // Asegúrate de que DrogasComponent esté creado correctamente
+    DrogasComponent,
+    SignUpComponent  // Asegúrate de que DrogasComponent esté creado correctamente
   ],
   imports: [
     BrowserModule,

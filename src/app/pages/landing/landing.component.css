@@ -296,3 +296,9 @@ form input::placeholder{color: var(--text-secondary);}
   max-width: 60%; /* Establece un ancho máximo para que no se vuelva demasiado ancho */
   min-height: 150px; /* Establece una altura mínima para el elemento */
 }
+
+.primeng-input{
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+}

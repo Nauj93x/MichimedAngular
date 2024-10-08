@@ -205,19 +205,11 @@
       <small class="p-error" *ngIf="submitted && !mascota.foto">Foto is required.</small>
     </div>
     <div class="field mt-[1.70rem]">
-      <span class="p-float-label">
-        <p-dropdown [options]="clientes" inputId="dueno" appendTo="body" [(ngModel)]="clientes"
-          [style]="{ width: '100%' }" [filter]="true" filterPlaceholder="Buscar dueño...">
-          <ng-template pTemplate="selectedItem">
-        <span>{{ clientes ? clientes[0].nombre : 'Dueño' }}</span>
-          </ng-template>
-          <ng-template let-option pTemplate="item">
-        <span>{{ option.nombre }}</span>
-          </ng-template>
-        </p-dropdown>
-        <label for="dueno" class="mt-2">Dueño</label>
-      </span>
-      <small class="p-error" *ngIf="submitted && !mascota.foto">Dueño is required</small>
+      <select class="w-full">
+        <option value="" disabled selected class="text-gray-500">Dueño</option>
+        <option *ngFor="let dueno of clientes" [value]="dueno.id">{{dueno.nombre}}</option>
+      </select>
+      <small class="p-error" *ngIf="submitted && !mascota.foto">Foto is required.</small>
     </div>
   </ng-template>
 

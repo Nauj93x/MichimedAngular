@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
-import * as FileSaver from 'file-saver';
 import { DrogaService } from '../../services/drogas.service'; // Servicio para manejar la carga de medicamentos
 
 @Component({

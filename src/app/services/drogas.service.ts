@@ -20,9 +20,22 @@ export class DrogaService {
 
         // Procesar la primera hoja del archivo
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-        const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+        const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 }) as any[];
 
-        // Convertir la data a un formato más usable
+        // Validar las cabeceras del archivo Excel
+        const headers = jsonData[0]; // Primera fila (las cabeceras)
+
+        const expectedHeaders = ['Nombre', 'Precio Compra', 'Precio Venta', 'Unidades Disponibles', 'Unidades Vendidas'];
+
+        // Verificar que las cabeceras coincidan
+        const headersValid = this.validateHeaders(headers, expectedHeaders);
+
+        if (!headersValid) {
+          observer.error('El archivo Excel no tiene las columnas correctas.');
+          return;
+        }
+
+        // Convertir la data si las cabeceras son válidas
         const formattedData = this.convertData(jsonData);
         observer.next(formattedData);
         observer.complete();
@@ -35,6 +48,17 @@ export class DrogaService {
       reader.readAsArrayBuffer(file);
     });
   }
+
+ // Método para validar que las cabeceras sean las correctas
+private validateHeaders(headers: any[], expectedHeaders: string[]): boolean {
+  // Normalizar las cabeceras y las esperadas (pasarlas a minúsculas)
+  const normalizedHeaders = headers.map(header => header.toString().toLowerCase());
+  const normalizedExpectedHeaders = expectedHeaders.map(header => header.toLowerCase());
+
+  // Verificar que las cabeceras normalizadas incluyan todas las esperadas
+  return normalizedExpectedHeaders.every(header => normalizedHeaders.includes(header));
+}
+
 
   // Convertir los datos a un formato específico
   private convertData(data: any[]): any[] {

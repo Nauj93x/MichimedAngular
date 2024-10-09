@@ -114,11 +114,29 @@
 
 <app-footer></app-footer>
 
-<!-- Ver Mascotas de Cliente -->
-<p-dialog header="Buscar mis mascotas" [(visible)]="findMascotasDialog" [style]="{width: '30vw'}" [modal]="true">
+ <!-- Dialog para buscar mascotas -->
+ <p-dialog header="Buscar mis mascotas" [(visible)]="findMascotasDialog" [style]="{width: '30vw'}" [modal]="true">
   <div class="flex flex-column gap-2">
-    <label htmlFor="cedula">Ingrese su cédula</label>
+    <label for="cedula">Ingrese su cédula</label>
     <input pInputText class="primeng-input" id="cedula" [(ngModel)]="cedula" />
-    <button class="btn-2">Buscar</button>
+    <button class="btn-2" (click)="buscarMascota()">Buscar</button>
+  </div>
+
+<!-- Mostrar mascotas encontradas -->
+<div *ngIf="mascotas.length > 0">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+    <div *ngFor="let mascota of mascotas" class="mascota-card p-4 rounded-lg shadow-md bg-white">
+      <img [src]="mascota.foto" [alt]="mascota.nombre" class="block m-auto w-24 h-24 rounded-full object-cover mb-4" />
+      <ul class="data list-none p-0 text-center">
+        <li class="mb-2"><strong>Nombre: </strong><span>{{ mascota.nombre }}</span></li>
+        <li class="mb-2"><strong>Edad: </strong><span>{{ mascota.edad }} años</span></li>
+        <li class="mb-2"><strong>Raza: </strong><span>{{ mascota.raza }}</span></li>
+        <li class="mb-2"><strong>Peso: </strong><span>{{ mascota.peso }} kg</span></li>
+      </ul>
+    </div>
+  </div>
 </div>
-</p-dialog>
+
+
+<!-- Mensajes de notificación -->
+<p-toast></p-toast>

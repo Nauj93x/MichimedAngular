@@ -10,15 +10,13 @@ export class MascotaService {
   private mascotas: Mascota[] = [];
 
   constructor(
-    private http: HttpClient // Importa HttpClient
+    private http: HttpClient
   ) {}
 
-  // Método para obtener todas las mascotas
   getMascotas(): Observable<Mascota[]> {
     return this.http.get<Mascota[]>('http://localhost:8090/mascotas');
   }
 
-  // Método para obtener una mascota por su id
   getMascotaById(id: number): Observable<Mascota> {
     return this.http.get<Mascota>('http://localhost:8090/mascotas/' + id);
   }
@@ -28,13 +26,11 @@ export class MascotaService {
     this.http.post(`http://localhost:8090/mascotas/add/${idCliente}`, mascota).subscribe();
   }
 
-  // Método para actualizar una mascota existente
-  updateMascota(updatedMascota: Mascota) {
-    this.http.put('http://localhost:8090/mascotas/update', updatedMascota).subscribe();
+  updateMascota(updatedMascota: Mascota): Observable<any> {
+    return this.http.put<any>('http://localhost:8090/mascotas/update', updatedMascota);
   }
 
-  // Método para eliminar una mascota por su id
-  deleteMascota(id: number) {
-    this.http.delete('http://localhost:8090/mascotas/delete/' + id).subscribe();
+  deleteMascota(id: number): Observable<any> {
+    return this.http.delete<any>('http://localhost:8090/mascotas/delete/' + id);
   }
 }

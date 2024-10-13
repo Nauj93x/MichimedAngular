@@ -3,22 +3,53 @@
 <main id="content">
   <h1 class="mb-3 text-center text-3xl">Todos nuestros gatitos</h1>
   <p-toast></p-toast>
-  <p-table #mascotasTable [value]="mascotas" dataKey="id" [resizableColumns]="true" styleClass="p-datatable-sm"
-    [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+  <p-table
+    #mascotasTable
+    [value]="mascotas"
+    dataKey="id"
+    [resizableColumns]="true"
+    styleClass="p-datatable-sm"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
     currentPageReportTemplate="Mostrando {first} - {last} de los {totalRecords} gatitos"
-    [rowsPerPageOptions]="[10, 15, 50]" editMode="row"
-    [globalFilterFields]="['nombre', 'raza', 'edad', 'enfermedad', 'estado']" [tableStyle]="{ 'min-width': '90rem' }">
+    [rowsPerPageOptions]="[10, 15, 50]"
+    editMode="row"
+    [globalFilterFields]="['nombre', 'raza', 'edad', 'enfermedad', 'estado']"
+    [tableStyle]="{ 'min-width': '90rem' }"
+  >
     <ng-template pTemplate="caption">
       <div class="flex items-center">
         <span class="p-input-icon-left mr-auto">
           <i class="pi pi-search"></i>
-          <input class="py-3 pl-10 pr-3 w-96 font-normal" pInputText type="text"
-            (input)="applyFilterGlobal($event, 'contains')" placeholder="Buscar por el nombre del gatito..." />
+          <input
+            class="py-3 pl-10 pr-3 w-96 font-normal"
+            pInputText
+            type="text"
+            (input)="applyFilterGlobal($event, 'contains')"
+            placeholder="Buscar por el nombre del gatito..."
+          />
         </span>
-        <button type="button" pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"
-          (click)="exportExcel()" class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
-        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
-          (click)="openNew()"></button>
+        <button
+          type="button"
+          pButton
+          pRipple
+          label="Export"
+          icon="pi pi-upload"
+          class="p-button-help"
+          (click)="exportExcel()"
+          class="p-button-success mr-2"
+          pTooltip="XLS"
+          tooltipPosition="bottom"
+        ></button>
+        <button
+          pButton
+          pRipple
+          label="New"
+          icon="pi pi-plus"
+          class="p-button-success mr-2"
+          (click)="openNew()"
+        ></button>
       </div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -46,12 +77,22 @@
         <th style="width: 10%" pResizableColumn>Acciones</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-mascota let-editing="editing" let-ri="rowIndex">
+    <ng-template
+      pTemplate="body"
+      let-mascota
+      let-editing="editing"
+      let-ri="rowIndex"
+    >
       <tr [pEditableRow]="mascota">
         <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input class="primeng-input" pInputText type="text" [(ngModel)]="mascota.nombre" />
+              <input
+                class="primeng-input"
+                pInputText
+                type="text"
+                [(ngModel)]="mascota.nombre"
+              />
             </ng-template>
             <ng-template pTemplate="output">
               {{ mascota.nombre }}
@@ -61,7 +102,12 @@
         <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input class="primeng-input" pInputText type="text" [(ngModel)]="mascota.raza" />
+              <input
+                class="primeng-input"
+                pInputText
+                type="text"
+                [(ngModel)]="mascota.raza"
+              />
             </ng-template>
             <ng-template pTemplate="output">
               {{ mascota.raza }}
@@ -71,7 +117,12 @@
         <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input class="primeng-input" pInputText type="text" [(ngModel)]="mascota.edad" />
+              <input
+                class="primeng-input"
+                pInputText
+                type="text"
+                [(ngModel)]="mascota.edad"
+              />
             </ng-template>
             <ng-template pTemplate="output">
               {{ mascota.edad }} años
@@ -81,7 +132,12 @@
         <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input class="primeng-input" pInputText type="text" [(ngModel)]="mascota.peso" />
+              <input
+                class="primeng-input"
+                pInputText
+                type="text"
+                [(ngModel)]="mascota.peso"
+              />
             </ng-template>
             <ng-template pTemplate="output">
               {{ mascota.peso }} kg
@@ -91,7 +147,12 @@
         <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input class="primeng-input" pInputText type="text" [(ngModel)]="mascota.enfermedad" />
+              <input
+                class="primeng-input"
+                pInputText
+                type="text"
+                [(ngModel)]="mascota.enfermedad"
+              />
             </ng-template>
             <ng-template pTemplate="output">
               {{ mascota.enfermedad }}
@@ -101,36 +162,91 @@
         <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <p-dropdown [options]="statuses" inputId="estado" appendTo="body" [(ngModel)]="mascota.estado"
-                [style]="{ width: '100%' }">
+              <p-dropdown
+                [options]="statuses"
+                inputId="estado"
+                appendTo="body"
+                [(ngModel)]="mascota.estado"
+                [style]="{ width: '100%' }"
+              >
                 <ng-template pTemplate="selectedItem">
-                  <p-tag [value]="mascota.estado" [severity]="getSeverity(mascota.estado)"></p-tag>
+                  <p-tag
+                    [value]="mascota.estado"
+                    [severity]="getSeverity(mascota.estado)"
+                  ></p-tag>
                 </ng-template>
                 <ng-template let-option pTemplate="item">
-                  <p-tag [value]="option.label" [severity]="getSeverity(option.label)"></p-tag>
+                  <p-tag
+                    [value]="option.label"
+                    [severity]="getSeverity(option.label)"
+                  ></p-tag>
                 </ng-template>
               </p-dropdown>
             </ng-template>
             <ng-template pTemplate="output">
-              <p-tag [value]="mascota.estado" [severity]="getSeverity(mascota.estado)"></p-tag>
+              <p-tag
+                [value]="mascota.estado"
+                [severity]="getSeverity(mascota.estado)"
+              ></p-tag>
             </ng-template>
           </p-cellEditor>
         </td>
         <td>
-          <img [src]="mascota.foto" [alt]="mascota.nombre" width="100"
-            class="shadow-4 w-10 h-10 rounded-full object-cover img-fluid" />
+          <img
+            [src]="mascota.foto"
+            [alt]="mascota.nombre"
+            width="100"
+            class="shadow-4 w-10 h-10 rounded-full object-cover img-fluid"
+          />
         </td>
         <td>
-          <button *ngIf="!editing" pButton pRipple type="button" icon="pi pi-eye" (click)="openView(mascota)"
-            class="p-button-rounded p-button-text"></button>
-          <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
-            (click)="onRowEditInit(mascota)" class="p-button-rounded p-button-text"></button>
-          <button *ngIf="!editing" pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-            (click)="deleteMascota(mascota.id, mascota.nombre)"></button>
-          <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
-            (click)="onRowEditSave(mascota)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
-          <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
-            (click)="onRowEditCancel(mascota, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+          <button
+            *ngIf="!editing"
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-eye"
+            (click)="openView(mascota)"
+            class="p-button-rounded p-button-text"
+          ></button>
+          <button
+            *ngIf="!editing"
+            pButton
+            pRipple
+            type="button"
+            pInitEditableRow
+            icon="pi pi-pencil"
+            (click)="onRowEditInit(mascota)"
+            class="p-button-rounded p-button-text"
+          ></button>
+          <button
+            *ngIf="!editing"
+            pButton
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-warning"
+            (click)="deleteMascota(mascota.id, mascota.nombre)"
+          ></button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pSaveEditableRow
+            icon="pi pi-check"
+            (click)="onRowEditSave(mascota)"
+            class="p-button-rounded p-button-text p-button-success mr-2"
+          ></button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pCancelEditableRow
+            icon="pi pi-times"
+            (click)="onRowEditCancel(mascota, ri)"
+            class="p-button-rounded p-button-text p-button-danger"
+          ></button>
         </td>
       </tr>
     </ng-template>
@@ -143,53 +259,101 @@
 </main>
 
 <!-- Add Mascota -->
-<p-dialog [(visible)]="newMascotaDialog" [style]="{ width: '450px' }" header="Añadir Mascota" [modal]="true"
-  styleClass="p-fluid">
+<p-dialog
+  [(visible)]="newMascotaDialog"
+  [style]="{ width: '450px' }"
+  header="Añadir Mascota"
+  [modal]="true"
+  styleClass="p-fluid"
+>
   <ng-template pTemplate="content">
     <div class="field mt-[1.20rem]">
       <span class="p-float-label">
-        <input class="primeng-input" type="text" pInputText id="nombre" [(ngModel)]="mascota.nombre" required
-          autofocus />
+        <input
+          class="primeng-input"
+          type="text"
+          pInputText
+          id="nombre"
+          [(ngModel)]="mascota.nombre"
+          required
+          autofocus
+        />
         <label htmlFor="nombre">Nombre</label>
       </span>
-      <small class="p-error" *ngIf="submitted && !mascota.nombre">Nombre is required.</small>
+      <small class="p-error" *ngIf="submitted && !mascota.nombre"
+        >Nombre is required.</small
+      >
     </div>
     <div class="field mt-[1.70rem]">
       <span class="p-float-label">
-        <input class="primeng-input" type="text" pInputText id="raza" [(ngModel)]="mascota.raza" required autofocus />
+        <input
+          class="primeng-input"
+          type="text"
+          pInputText
+          id="raza"
+          [(ngModel)]="mascota.raza"
+          required
+          autofocus
+        />
         <label htmlFor="raza">Raza</label>
       </span>
     </div>
     <div class="formgrid flex mt-[1.70rem]">
       <div class="field primeng-col mr-3">
         <span class="p-float-label">
-          <p-inputNumber class="primeng-input" id="edad" [(ngModel)]="mascota.edad"></p-inputNumber>
+          <p-inputNumber
+            class="primeng-input"
+            id="edad"
+            [(ngModel)]="mascota.edad"
+          ></p-inputNumber>
           <label htmlFor="edad">Edad</label>
         </span>
       </div>
       <div class="field col primeng-col ml-3">
         <span class="p-float-label">
-          <p-inputNumber class="primeng-input" id="peso" [(ngModel)]="mascota.peso"></p-inputNumber>
+          <p-inputNumber
+            class="primeng-input"
+            id="peso"
+            [(ngModel)]="mascota.peso"
+          ></p-inputNumber>
           <label htmlFor="peso">Peso</label>
         </span>
       </div>
     </div>
     <div class="field mt-[1.70rem]">
       <span class="p-float-label">
-        <input class="primeng-input" type="text" pInputText id="enfermedad" [(ngModel)]="mascota.enfermedad" required
-          autofocus />
+        <input
+          class="primeng-input"
+          type="text"
+          pInputText
+          id="enfermedad"
+          [(ngModel)]="mascota.enfermedad"
+          required
+          autofocus
+        />
         <label htmlFor="enfermedad">Enfermedad</label>
       </span>
     </div>
     <div class="field mt-[1.70rem]">
       <span class="p-float-label">
-        <p-dropdown [options]="statuses" inputId="estado" appendTo="body" [(ngModel)]="mascota.estado"
-          [style]="{ width: '100%' }">
+        <p-dropdown
+          [options]="statuses"
+          inputId="estado"
+          appendTo="body"
+          [(ngModel)]="mascota.estado"
+          [style]="{ width: '100%' }"
+        >
           <ng-template pTemplate="selectedItem">
-            <p-tag [value]="mascota.estado" [severity]="getSeverity(mascota.estado)"></p-tag>
+            <p-tag
+              [value]="mascota.estado"
+              [severity]="getSeverity(mascota.estado)"
+            ></p-tag>
           </ng-template>
           <ng-template let-option pTemplate="item">
-            <p-tag [value]="option.label" [severity]="getSeverity(option.label)"></p-tag>
+            <p-tag
+              [value]="option.label"
+              [severity]="getSeverity(option.label)"
+            ></p-tag>
           </ng-template>
         </p-dropdown>
         <label for="estado">Estado</label>
@@ -197,7 +361,15 @@
     </div>
     <div class="field mt-[1.70rem]">
       <span class="p-float-label">
-        <input class="primeng-input" type="url" pInputText id="foto" [(ngModel)]="mascota.foto" required autofocus />
+        <input
+          class="primeng-input"
+          type="url"
+          pInputText
+          id="foto"
+          [(ngModel)]="mascota.foto"
+          required
+          autofocus
+        />
         <label htmlFor="foto">Foto</label>
       </span>
     </div>
@@ -206,31 +378,83 @@
       <!-- <small class="p-error" *ngIf="submitted && !selectedCliente">Dueño is required.</small> -->
     </div>
   </ng-template>
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancelar"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Guardar"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="saveMascota()"
+    ></button>
+  </ng-template>
 
   <ng-template pTemplate="footer">
-    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveMascota()"></button>
+    <button
+      pButton
+      pRipple
+      label="Cancel"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Save"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="saveMascota()"
+    ></button>
   </ng-template>
 </p-dialog>
 
 <!-- View Mascota -->
-<p-dialog [(visible)]="viewMascotaDialog" [style]="{ width: '450px' }" [modal]="true" styleClass="p-fluid">
+<p-dialog
+  [(visible)]="viewMascotaDialog"
+  [style]="{ width: '450px' }"
+  [modal]="true"
+  styleClass="p-fluid"
+>
   <ng-template pTemplate="header">
     <span class="text-xl font-bold" [innerText]="selectedMascota.nombre"></span>
   </ng-template>
   <ng-template pTemplate="content">
-    <img [src]="selectedMascota.foto" [alt]="selectedMascota.nombre"
-      class="block m-auto w-32 h-32 rounded-full object-cover" />
+    <img
+      [src]="selectedMascota.foto"
+      [alt]="selectedMascota.nombre"
+      class="block m-auto w-32 h-32 rounded-full object-cover"
+    />
     <ul class="data">
       <li>Edad: <span [innerText]="selectedMascota.edad + ' años'"></span></li>
       <li>Raza: <span [innerText]="selectedMascota.raza"></span></li>
       <li>Peso: <span [innerText]="selectedMascota.peso + ' kg'"></span></li>
-      <li>Enfermedad: <span [innerText]="selectedMascota.enfermedad"></span></li>
+      <li>
+        Enfermedad: <span [innerText]="selectedMascota.enfermedad"></span>
+      </li>
       <li>Estado: <span [innerText]="selectedMascota.estado"></span></li>
-      <li>Fecha de entrada: <span [innerText]="selectedMascota.fechaEntrada"></span></li>
-      <li>Fecha de salida: <span [innerText]="selectedMascota.fechaSalida"></span></li>
-      <li>Droga asignada: <span [innerText]="selectedMascota.medicamento"></span></li>
-      <li>Cliente: <span [innerText]="selectedCliente?.nombre">Nombre del cliente</span>
+      <li>
+        Fecha de entrada:
+        <span [innerText]="selectedMascota.fechaEntrada"></span>
+      </li>
+      <li>
+        Fecha de salida: <span [innerText]="selectedMascota.fechaSalida"></span>
+      </li>
+      <li>
+        Droga asignada: <span [innerText]="selectedMascota.medicamento"></span>
+      </li>
+      <li>
+        Cliente:
+        <span [innerText]="selectedCliente?.nombre">Nombre del cliente</span>
+      </li>
     </ul>
   </ng-template>
 </p-dialog>

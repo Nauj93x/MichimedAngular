@@ -130,7 +130,9 @@ export class MascotasComponent implements OnInit {
     if (this.mascota.nombre?.trim()){
         // Imagen por defecto
       // this.product.image = 'product-placeholder.svg';
-      this.mascotaService.addMascota(this.mascota);
+      if (this.mascota.cliente && this.mascota.cliente.id !== undefined) {
+        this.mascotaService.addMascota(this.mascota, this.mascota.cliente.id);
+      }
       this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Mascota creada', life: 3000 });
       this.mascotas.push(this.mascota);
       this.newMascotaDialog = false;

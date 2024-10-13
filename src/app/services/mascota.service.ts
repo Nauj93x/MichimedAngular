@@ -24,8 +24,8 @@ export class MascotaService {
   }
 
   // Método para agregar una nueva mascota
-  addMascota(mascota: Mascota) {
-    this.http.post('http://localhost:8090/mascotas/add', mascota).subscribe();
+  addMascota(mascota: Mascota, idCliente: number) {
+    this.http.post(`http://localhost:8090/mascotas/add/${idCliente}`, mascota).subscribe();
   }
 
   // Método para actualizar una mascota existente

@@ -202,11 +202,7 @@
       </span>
     </div>
     <div class="field mt-[1.70rem]">
-      <!-- <p-dropdown [options]="clientes" [(ngModel)]="selectedCliente" optionLabel="name" [showClear]="true" placeholder="Select a City"></p-dropdown> -->
-      <select class="w-full">
-        <option value="" disabled selected class="text-gray-500">Dueño</option>
-        <option *ngFor="let dueno of clientes" [value]="dueno.id">{{dueno.nombre}}</option>
-      </select>
+      <p-dropdown [options]="clientes" [(ngModel)]="mascota.cliente" optionLabel="nombre" [showClear]="true"></p-dropdown>
       <!-- <small class="p-error" *ngIf="submitted && !selectedCliente">Dueño is required.</small> -->
     </div>
   </ng-template>

@@ -35,6 +35,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ImageModule } from 'primeng/image';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { VetrinariosComponent } from './pages/vetrinarios/vetrinarios.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     SignInComponent,
     ClientesComponent,
     DrogasComponent,
-    SignUpComponent  // Asegúrate de que DrogasComponent esté creado correctamente
+    SignUpComponent,
+    VetrinariosComponent  // Asegúrate de que DrogasComponent esté creado correctamente
   ],
   imports: [
     BrowserModule,

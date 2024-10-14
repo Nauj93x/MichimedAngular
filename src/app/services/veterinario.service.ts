@@ -31,8 +31,8 @@ export class VeterinarioService {
       return this.http.get<Veterinario>('http://localhost:8090/veterinarios/' + id);
     }
 
-    addVeterinario(cliente: Veterinario) {
-      this.http.post('http://localhost:8090/veterinarios/add', cliente).subscribe();
+    addVeterinario(veterinario: Veterinario) {
+      this.http.post('http://localhost:8090/veterinarios/add', veterinario).subscribe();
     }
 
     updateVeterinario(updatedCliente: Veterinario) {

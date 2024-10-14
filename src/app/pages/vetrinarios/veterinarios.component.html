@@ -1,0 +1,261 @@
+<app-layout></app-layout>
+
+<main id="content">
+  <h1 class="mb-3 text-center text-3xl">Todos nuestros veterinarios</h1>
+  <p-toast></p-toast>
+  <p-table
+    #veterinariosTable
+    [value]="veterinarios"
+    dataKey="id"
+    [resizableColumns]="true"
+    styleClass="p-datatable-sm"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Mostrando {first} - {last} de los {totalRecords} veterinarios"
+    [rowsPerPageOptions]="[10, 15, 50]"
+    editMode="row"
+    [globalFilterFields]="['cedula', 'nombre']"
+    [tableStyle]="{ 'min-width': '90rem' }"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex items-center">
+        <span class="p-input-icon-left mr-auto">
+          <i class="pi pi-search"></i>
+          <input
+            class="py-3 pl-10 pr-3 w-96 font-normal"
+            pInputText
+            type="text"
+            (input)="applyFilterGlobal($event, 'contains')"
+            placeholder="Buscar por el nombre del veterinario..."
+          />
+        </span>
+        <button
+          pButton
+          pRipple
+          label="New"
+          icon="pi pi-plus"
+          class="p-button-success mr-2"
+          (click)="openNew()"
+        ></button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 30%" pSortableColumn="nombre" pResizableColumn>
+          Nombre <p-sortIcon class="inline-block" field="nombre"></p-sortIcon>
+        </th>
+        <th style="width: 30%" pSortableColumn="cedula" pResizableColumn>
+          Cedula <p-sortIcon class="inline-block" field="cedula"></p-sortIcon>
+        </th>
+        <th style="width: 30%" pSortableColumn="especialidad" pResizableColumn>
+          Especialidad <p-sortIcon class="inline-block" field="especialidad"></p-sortIcon>
+        </th>
+        <th style="width: 10%" pResizableColumn>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-veterinario let-editing="editing" let-ri="rowIndex">
+      <tr [pEditableRow]="veterinario">
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                class="primeng-input"
+                pInputText
+                type="text"
+                [(ngModel)]="veterinario.nombre"
+              />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ veterinario.nombre }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          {{ veterinario.cedula }}
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                class="primeng-input"
+                pInputText
+                type="text"
+                [(ngModel)]="veterinario.especialidad"
+              />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ veterinario.especialidad }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <button
+            *ngIf="!editing"
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-eye"
+            (click)="openView(veterinario)"
+            class="p-button-rounded p-button-text"
+          ></button>
+          <button
+            *ngIf="!editing"
+            pButton
+            pRipple
+            type="button"
+            pInitEditableRow
+            icon="pi pi-pencil"
+            (click)="onRowEditInit(veterinario)"
+            class="p-button-rounded p-button-text"
+          ></button>
+          <button
+            *ngIf="!editing"
+            pButton
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-warning"
+            (click)="deleteVeterinario(veterinario.id, veterinario.nombre)"
+          ></button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pSaveEditableRow
+            icon="pi pi-check"
+            (click)="onRowEditSave(veterinario)"
+            class="p-button-rounded p-button-text p-button-success mr-2"
+          ></button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pCancelEditableRow
+            icon="pi pi-times"
+            (click)="onRowEditCancel(veterinario, ri)"
+            class="p-button-rounded p-button-text p-button-danger"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">No se encontraron veterinarios.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <!-- Add Veterinario -->
+  <p-dialog
+    [(visible)]="newVeterinarioDialog"
+    [style]="{ width: '450px' }"
+    header="Añadir Veterinario"
+    [modal]="true"
+    styleClass="p-fluid"
+  >
+    <ng-template pTemplate="content">
+      <div class="field mt-[1.20rem]">
+        <span class="p-float-label">
+          <input
+            class="primeng-input"
+            type="text"
+            pInputText
+            id="nombre"
+            [(ngModel)]="veterinario.nombre"
+            required
+            autofocus
+          />
+          <label htmlFor="nombre">Nombre</label>
+        </span>
+        <small class="p-error" *ngIf="submitted && !veterinario.nombre">Nombre is required.</small>
+      </div>
+      <div class="field mt-[1.70rem]">
+        <span class="p-float-label">
+          <input
+            class="primeng-input"
+            type="text"
+            pInputText
+            id="cedula"
+            [(ngModel)]="veterinario.cedula"
+            required
+            autofocus
+          />
+          <label htmlFor="cedula">Cedula</label>
+        </span>
+        <small class="p-error" *ngIf="submitted && !veterinario.cedula">Cedula is required.</small>
+      </div>
+      <div class="field mt-[1.70rem]">
+        <span class="p-float-label">
+          <input
+            class="primeng-input"
+            type="text"
+            pInputText
+            id="especialidad"
+            [(ngModel)]="veterinario.especialidad"
+            required
+            autofocus
+          />
+          <label htmlFor="especialidad">Especialidad</label>
+        </span>
+        <small class="p-error" *ngIf="submitted && !veterinario.especialidad">Especialidad is required.</small>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+      <button
+        pButton
+        pRipple
+        label="Cancel"
+        icon="pi pi-times"
+        class="p-button-text"
+        (click)="hideDialog()"
+      ></button>
+      <button
+        pButton
+        pRipple
+        label="Save"
+        icon="pi pi-check"
+        class="p-button-text"
+        (click)="saveVeterinario()"
+      ></button>
+    </ng-template>
+  </p-dialog>
+
+  <!-- View Veterinario -->
+  <p-dialog
+    [(visible)]="viewVeterinarioDialog"
+    [style]="{ width: '450px' }"
+    [modal]="true"
+    styleClass="p-fluid"
+  >
+    <ng-template pTemplate="header">
+      <span class="text-xl font-bold" [innerText]="selectedVeterinario.nombre"></span>
+    </ng-template>
+    <ng-template pTemplate="content">
+      <ul class="data">
+        <li>Nombre: <span [innerText]="selectedVeterinario.nombre"></span></li>
+        <li>Cedula: <span [innerText]="selectedVeterinario.cedula"></span></li>
+        <li>Especialidad: <span [innerText]="selectedVeterinario.especialidad"></span></li>
+      </ul>
+      <h2 class="align-self-center text-xl font-bold mt-4">Mascotas:</h2>
+      <div class="w-full grid grid-cols-2 gap-4 mt-3 h-auto">
+        <div
+          class="flex flex-col items-center"
+          *ngFor="let mascota of mascotasVeterinario"
+        >
+          <h3 [innerText]="mascota.nombre"></h3>
+          <img
+            class="shadow-4 w-20 h-20 rounded-full object-cover img-fluid mt-2"
+            [src]="mascota.foto"
+            alt="fotoMascota"
+          />
+        </div>
+      </div>
+    </ng-template>
+  </p-dialog>
+
+  <!-- Confirmación de eliminación -->
+  <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+</main>

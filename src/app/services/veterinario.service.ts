@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Veterinario } from '../model/veterinario';  // Interfaz Veterinario
+import { Veterinario } from '../model/veterinario';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { MascotaService } from './mascota.service';  // Para obtener las mascotas de un veterinario
 import { Mascota } from '../model/mascota';           // Interfaz Mascota
 
@@ -10,41 +12,37 @@ export class VeterinarioService {
 
   private veterinarios: Veterinario[] = [];
 
-  constructor(private mascotaService: MascotaService) {
-    // Obtener mascotas a través del servicio de mascotas
-    const mascotas1: Mascota[] = [this.mascotaService.getMascotaById(1), this.mascotaService.getMascotaById(2)].filter(mascota => mascota != null) as Mascota[];
-    const mascotas2: Mascota[] = [this.mascotaService.getMascotaById(3)].filter(mascota => mascota != null) as Mascota[];
+  constructor(
+    private http: HttpClient // Importa HttpClient
+  ) {}
 
-    // Inicializar veterinarios
-    this.veterinarios = [
-      {
-        id: 1,
-        cedula: '1234567890',
-        nombre: 'Dr. Juan Martínez',
-        contrasena: 'password123',
-        especialidad: 'Cardiología',
-        urlFoto: 'url-de-la-foto-vet1.jpg',
-        mascotas: mascotas1  // Relacionamos el veterinario con las mascotas
-      },
-      {
-        id: 2,
-        cedula: '0987654321',
-        nombre: 'Dra. Ana Pérez',
-        contrasena: 'password456',
-        especialidad: 'Dermatología',
-        urlFoto: 'url-de-la-foto-vet2.jpg',
-        mascotas: mascotas2  // Relacionamos el veterinario con las mascotas
-      }
-    ];
-  }
 
   // Método para obtener todos los veterinarios
-  getVeterinarios(): Veterinario[] {
-    return this.veterinarios;
+  getVeterinarios(): Observable<Veterinario[]> {
+    return this.http.get<Veterinario[]>('http://localhost:8090/veterinarios');
   }
 
-  // Método para obtener un veterinario por su id
-  getVeterinarioById(id: number): Veterinario | undefined {
-    return this.veterinarios.find(veterinario => veterinario.id === id);
-  }
+  getVeterinarioMascotas(id: number): Observable<Mascota[]> {
+    return this.http.get<Mascota[]>(
+      'http://localhost:8090/veterinarios/mascotas/' + id
+    );}
+
+    getVeterinarioById(id: number): Observable<Veterinario> {
+      return this.http.get<Veterinario>('http://localhost:8090/veterinarios/' + id);
+    }
+
+    addVeterinario(cliente: Veterinario) {
+      this.http.post('http://localhost:8090/veterinarios/add', cliente).subscribe();
+    }
+
+    updateVeterinario(updatedCliente: Veterinario) {
+      this.http
+        .put('http://localhost:8090/vetrinarios/update', updatedCliente)
+        .subscribe();
+    }
+
+    deleteVeterinario(id: number) {
+      this.http.delete('http://localhost:8090/veterinarios/delete/' + id).subscribe();
+    }
 }
+

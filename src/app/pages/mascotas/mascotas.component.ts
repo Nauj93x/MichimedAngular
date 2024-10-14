@@ -27,8 +27,6 @@ export class MascotasComponent implements OnInit {
   statuses!: SelectItem[];
 
   clientes: Cliente[] = [];
-  selectedCliente: Cliente | null = null;
-  dueno!: Cliente;
 
   clonedMascotas: { [s: string]: Mascota } = {};
 
@@ -141,9 +139,7 @@ export class MascotasComponent implements OnInit {
   openNew() {
     this.mascota = {
       nombre: '',
-      edad: 0,
       raza: '',
-      peso: 0,
       enfermedad: '',
       estado: '',
       fechaEntrada: '',
@@ -164,7 +160,7 @@ export class MascotasComponent implements OnInit {
   saveMascota() {
     this.submitted = true;
 
-    if (this.mascota.nombre?.trim()){
+    if (this.mascota.nombre?.trim() && this.mascota.edad && this.mascota.peso && this.mascota.cliente) {
         // Imagen por defecto
       // this.product.image = 'product-placeholder.svg';
       if (this.mascota.cliente && this.mascota.cliente.id !== undefined) {

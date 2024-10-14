@@ -3,9 +3,9 @@ import { Cliente } from "./cliente";
 export interface Mascota {
     id?: number;
     nombre: string;
-    edad: number;
+    edad?: number;
     raza: string;
-    peso: number;
+    peso?: number;
     enfermedad: string;
     estado: string;
     fechaEntrada: string;

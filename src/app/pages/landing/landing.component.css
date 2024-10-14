@@ -297,12 +297,6 @@ form input::placeholder{color: var(--text-secondary);}
   min-height: 150px; /* Establece una altura mínima para el elemento */
 }
 
-.primeng-input{
-  padding: 0.75rem;
-  border: 1px solid #ced4da;
-  border-radius: 6px;
-}
-
 .mascota-card {
   max-width: 250px; /* Ajusta el ancho máximo de las tarjetas */
   margin: 10px auto; /* Centra las tarjetas con un margen alrededor */

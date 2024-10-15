@@ -100,7 +100,7 @@
               <input pInputText type="text" [(ngModel)]="mascota.raza" />
             </ng-template>
             <ng-template pTemplate="output">
-              {{ mascota.raza }}
+              {{ mascota.raza || "N/A" }}
             </ng-template>
           </p-cellEditor>
         </td>
@@ -130,7 +130,7 @@
               <input pInputText type="text" [(ngModel)]="mascota.enfermedad" />
             </ng-template>
             <ng-template pTemplate="output">
-              {{ mascota.enfermedad }}
+              {{ mascota.enfermedad || "N/A" }}
             </ng-template>
           </p-cellEditor>
         </td>
@@ -275,7 +275,7 @@
       <div class="field primeng-col mr-3">
         <span class="p-float-label">
           <p-inputNumber id="edad" [(ngModel)]="mascota.edad"></p-inputNumber>
-          <label htmlFor="edad">Edad</label>
+          <label htmlFor="edad">Edad (años)</label>
         </span>
         <small class="p-error" *ngIf="submitted && !mascota.edad"
           >Edad is required.</small
@@ -284,7 +284,7 @@
       <div class="field col primeng-col ml-3">
         <span class="p-float-label">
           <p-inputNumber id="peso" [(ngModel)]="mascota.peso"></p-inputNumber>
-          <label htmlFor="peso">Peso</label>
+          <label htmlFor="peso">Peso (kg)</label>
         </span>
         <small class="p-error" *ngIf="submitted && !mascota.peso"
           >Peso is required.</small
@@ -417,10 +417,11 @@
     />
     <ul class="data">
       <li>Edad: <span [innerText]="selectedMascota.edad + ' años'"></span></li>
-      <li>Raza: <span [innerText]="selectedMascota.raza"></span></li>
+      <li>Raza: <span [innerText]="selectedMascota.raza || 'N/A'"></span></li>
       <li>Peso: <span [innerText]="selectedMascota.peso + ' kg'"></span></li>
       <li>
-        Enfermedad: <span [innerText]="selectedMascota.enfermedad"></span>
+        Enfermedad:
+        <span [innerText]="selectedMascota.enfermedad || 'N/A'"></span>
       </li>
       <li>Estado: <span [innerText]="selectedMascota.estado"></span></li>
       <li>

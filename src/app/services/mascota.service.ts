@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { Cliente } from '../model/cliente';
 
 @Injectable({
   providedIn: 'root',
@@ -31,8 +32,11 @@ export class MascotaService {
           console.error('Error fetching mascotas state:', error);
           return throwError(error);
         })
-      );
-  }
+      );}
+      getClienteByMascotaId(id: number): Observable<Cliente> {
+        return this.http.get<Cliente>('http://localhost:8090/mascotas/cliente/' + id);
+      }
+
 
   // Método para agregar una nueva mascota
   addMascota(mascota: Mascota, idCliente: number) {

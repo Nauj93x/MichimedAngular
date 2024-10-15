@@ -19,6 +19,7 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { VeterinariosComponent } from './pages/veterinarios/veterinarios.component';
+import { SuministrarTratamientosComponent } from './pages/suministrar-tratamientos/suministrar-tratamientos.component';
 
 // Servicios (asegúrate de crear e importar el servicio si es necesario)
 import { DrogaService } from './services/drogas.service';  // Importa el servicio DrogaService
@@ -36,7 +37,8 @@ import { DialogModule } from 'primeng/dialog';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ImageModule } from 'primeng/image';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-
+import { FileUploadModule } from 'primeng/fileupload';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 
 @NgModule({
@@ -52,7 +54,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ClientesComponent,
     DrogasComponent,
     SignUpComponent,
-    VeterinariosComponent // Asegúrate de que DrogasComponent esté creado correctamente
+    VeterinariosComponent,
+    SuministrarTratamientosComponent // Asegúrate de que DrogasComponent esté creado correctamente
   ],
   imports: [
     BrowserModule,
@@ -72,7 +75,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     DialogModule,
     InputNumberModule,
     ImageModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    FileUploadModule,
+    MultiSelectModule
   ],
   providers: [
     DrogaService   // Añade el servicio DrogaService en los providers si es necesario

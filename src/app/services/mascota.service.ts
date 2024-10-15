@@ -8,7 +8,6 @@ import { Cliente } from '../model/cliente';
   providedIn: 'root',
 })
 export class MascotaService {
-  private mascotas: Mascota[] = [];
 
   constructor(
     private http: HttpClient

@@ -133,6 +133,11 @@ export class MascotasComponent implements OnInit {
 
   openView(mascota: Mascota) {
     this.selectedMascota = mascota;
+    this.mascotaService
+      .getClienteByMascotaId(this.selectedMascota.id!)
+      .subscribe(
+        (cliente) => (this.selectedMascota.cliente = cliente)
+      );
     this.viewMascotaDialog = true;
   }
 
@@ -141,7 +146,7 @@ export class MascotasComponent implements OnInit {
       nombre: '',
       raza: '',
       enfermedad: '',
-      estado: '',
+      estado: 'En tratamiento',
       fechaEntrada: '',
       fechaSalida: '',
       medicamento: '',
@@ -161,8 +166,8 @@ export class MascotasComponent implements OnInit {
     this.submitted = true;
 
     if (this.mascota.nombre?.trim() && this.mascota.edad && this.mascota.peso && this.mascota.cliente) {
-        // Imagen por defecto
-      // this.product.image = 'product-placeholder.svg';
+      // Imagen por defecto
+      this.mascota.foto = 'https://i.postimg.cc/CMRjCsMX/default-cat-image.jpg';
       if (this.mascota.cliente && this.mascota.cliente.id !== undefined) {
         this.mascotaService.addMascota(this.mascota, this.mascota.cliente.id);
       }

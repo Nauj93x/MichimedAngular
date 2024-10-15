@@ -19,6 +19,7 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { VeterinariosComponent } from './pages/veterinarios/veterinarios.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SuministrarTratamientosComponent } from './pages/suministrar-tratamientos/suministrar-tratamientos.component';
 
 // Servicios (asegúrate de crear e importar el servicio si es necesario)
@@ -37,6 +38,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ImageModule } from 'primeng/image';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ChartModule } from 'primeng/chart';
 import { FileUploadModule } from 'primeng/fileupload';
 import { MultiSelectModule } from 'primeng/multiselect';
 
@@ -55,7 +57,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     DrogasComponent,
     SignUpComponent,
     VeterinariosComponent,
-    SuministrarTratamientosComponent // Asegúrate de que DrogasComponent esté creado correctamente
+    DashboardComponent,
+    SuministrarTratamientosComponent
   ],
   imports: [
     BrowserModule,
@@ -76,6 +79,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     InputNumberModule,
     ImageModule,
     ConfirmDialogModule,
+    ChartModule,
     FileUploadModule,
     MultiSelectModule
   ],

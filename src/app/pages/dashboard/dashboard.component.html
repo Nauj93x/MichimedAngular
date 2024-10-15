@@ -1,0 +1,71 @@
+<app-layout></app-layout>
+
+<main id="content">
+  <h1 class="mb-3 text-center text-3xl">Panel</h1>
+  <div class="grid grid-flow-col grid-cols-2 gap-5 h-60 mt-10">
+    <div class="graph-container rounded-3xl content-center">
+      <div class="grid grid-flow-col h-full">
+        <ul class="flex flex-col items-center justify-end content-center">
+          <li class="flex flex-col w-3/4 justify-center">
+            <h3 class="text-3xl text-[#7FA1C3] font-light -mb-0">
+              En tratamiento
+            </h3>
+            <p class="font-thin text-md text-[#b0c1d1]">
+              {{ enTratamiento }} mascotas
+            </p>
+          </li>
+          <li class="flex flex-col w-3/4 justify-center">
+            <h3 class="text-3xl text-[#D0B8A8] font-light mb-0">Tratadas</h3>
+            <p class="font-thin text-md text-[#c9bcb3] mb-8">
+              {{ tratadas }} mascotas
+            </p>
+          </li>
+        </ul>
+        <!-- Mostrar solo cuando los datos están listos -->
+        <div
+          class="flex justify-self-center justify-center items-center w-full h-auto"
+          *ngIf="isDataLoaded"
+        >
+          <p-chart
+            type="doughnut"
+            [data]="data"
+            [options]="options"
+            class="w-6/12"
+          ></p-chart>
+        </div>
+      </div>
+    </div>
+    <div class="graph-container rounded-3xl content-center">
+      <div class="grid grid-flow-col h-full">
+        <ul class="flex flex-col items-center justify-end content-center">
+          <li class="flex flex-col w-3/4 justify-center">
+            <h3 class="text-3xl text-[#7FA1C3] font-light -mb-0">
+              En tratamiento
+            </h3>
+            <p class="font-thin text-md text-[#b0c1d1]">
+              {{ enTratamiento }} mascotas
+            </p>
+          </li>
+          <li class="flex flex-col w-3/4 justify-center">
+            <h3 class="text-3xl text-[#D0B8A8] font-light mb-0">Tratadas</h3>
+            <p class="font-thin text-md text-[#c9bcb3] mb-8">
+              {{ tratadas }} mascotas
+            </p>
+          </li>
+        </ul>
+        <!-- Mostrar solo cuando los datos están listos -->
+        <div
+          class="flex justify-self-center justify-center items-center w-full h-auto"
+          *ngIf="isDataLoaded"
+        >
+          <p-chart
+            type="doughnut"
+            [data]="data"
+            [options]="options"
+            class="w-6/12"
+          ></p-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

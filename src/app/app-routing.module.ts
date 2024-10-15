@@ -8,6 +8,7 @@ import { ClientesComponent } from './pages/clientes/clientes.component';
 import { DrogasComponent } from './pages/drogas/drogas.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { VeterinariosComponent } from './pages/veterinarios/veterinarios.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SuministrarTratamientosComponent } from './pages/suministrar-tratamientos/suministrar-tratamientos.component';
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'mascotas', component: MascotasComponent },
   { path: 'clientes', component: ClientesComponent },
   { path: 'drogas', component: DrogasComponent },
-  { path: 'veterinarios', component: VeterinariosComponent },
+  { path: 'admin/veterinarios', component: VeterinariosComponent },
+  { path: 'admin/dashboard', component: DashboardComponent },
   { path: 'suministrar-tratamiento', component: SuministrarTratamientosComponent },
   { path: '', component: LandingComponent },
   { path: '**', component: ErrorComponent}

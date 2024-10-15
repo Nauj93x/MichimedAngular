@@ -18,6 +18,7 @@ import { DrogasComponent } from './pages/drogas/drogas.component';  // Asegúrat
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { VeterinariosComponent } from './pages/veterinarios/veterinarios.component';
 
 // Servicios (asegúrate de crear e importar el servicio si es necesario)
 import { DrogaService } from './services/drogas.service';  // Importa el servicio DrogaService
@@ -35,7 +36,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ImageModule } from 'primeng/image';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { VetrinariosComponent } from './pages/vetrinarios/vetrinarios.component';
+
 
 
 @NgModule({
@@ -51,7 +52,7 @@ import { VetrinariosComponent } from './pages/vetrinarios/vetrinarios.component'
     ClientesComponent,
     DrogasComponent,
     SignUpComponent,
-    VetrinariosComponent  // Asegúrate de que DrogasComponent esté creado correctamente
+    VeterinariosComponent // Asegúrate de que DrogasComponent esté creado correctamente
   ],
   imports: [
     BrowserModule,

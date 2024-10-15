@@ -1,27 +1,23 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
 import { DrogaService } from '../../services/drogas.service'; // Servicio para manejar la carga de medicamentos
-
+import { Droga } from 'src/app/model/droga';
 @Component({
   selector: 'app-drogas',
   templateUrl: './drogas.component.html',
   styleUrls: ['./drogas.component.css']
 })
 export class DrogasComponent implements OnInit {
-  drogas: any[] = [];
+  drogas: Droga[] = [];
   errorMessage: string = '';
   @ViewChild('dt') table!: Table; // Referencia a la tabla de PrimeNG
 
   constructor(private drogaService: DrogaService) {}
 
   ngOnInit(): void {
-    // Al cargar el componente, recupera los datos del localStorage si existen
-    const storedDrogas = localStorage.getItem('drogas');
-    if (storedDrogas) {
-      this.drogas = JSON.parse(storedDrogas);
-    } else {
-      this.drogas = []; // Inicializar la tabla vacía
-    }
+    this.drogaService.getDrogas().subscribe((data) => {
+      this.drogas = data;
+    });
   }
 
   // Método para cargar medicamentos desde un archivo Excel
@@ -38,17 +34,19 @@ export class DrogasComponent implements OnInit {
         // Verifica si ya hay datos en la tabla y solicita confirmación antes de sobrescribir
         if (this.drogas.length > 0) {
           const confirmOverwrite = confirm('Ya hay datos cargados, ¿quieres agregar solo las drogas nuevas o sobrescribirlas?');
-          
+
           if (confirmOverwrite) {
-            this.agregarDrogasUnicas(data); // Agregar solo las drogas nuevas
+            // this.agregarDrogasUnicas(data); // Agregar solo las drogas nuevas
+            this.drogas = data;
           } else {
             this.drogas = data; // Sobrescribir con los nuevos datos
           }
         } else {
           this.drogas = data;
         }
-        
-        this.guardarDrogasEnLocalStorage();
+
+        this.drogaService.addDrogas(this.drogas); // Guardar los datos en el servidor
+        // this.guardarDrogasEnLocalStorage();
         this.errorMessage = '';
       },
       (error) => {

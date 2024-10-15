@@ -20,6 +20,7 @@ import { ClientesComponent } from './pages/clientes/clientes.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { VeterinariosComponent } from './pages/veterinarios/veterinarios.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { SuministrarTratamientosComponent } from './pages/suministrar-tratamientos/suministrar-tratamientos.component';
 
 // Servicios (asegúrate de crear e importar el servicio si es necesario)
 import { DrogaService } from './services/drogas.service';  // Importa el servicio DrogaService
@@ -38,7 +39,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ImageModule } from 'primeng/image';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ChartModule } from 'primeng/chart';
-
+import { FileUploadModule } from 'primeng/fileupload';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 
 @NgModule({
@@ -55,7 +57,8 @@ import { ChartModule } from 'primeng/chart';
     DrogasComponent,
     SignUpComponent,
     VeterinariosComponent,
-    DashboardComponent // Asegúrate de que DrogasComponent esté creado correctamente
+    DashboardComponent,
+    SuministrarTratamientosComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,9 @@ import { ChartModule } from 'primeng/chart';
     InputNumberModule,
     ImageModule,
     ConfirmDialogModule,
-    ChartModule
+    ChartModule,
+    FileUploadModule,
+    MultiSelectModule
   ],
   providers: [
     DrogaService   // Añade el servicio DrogaService en los providers si es necesario

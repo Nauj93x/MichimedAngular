@@ -7,7 +7,7 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { DrogasComponent } from './pages/drogas/drogas.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
-import { VetrinariosComponent } from './pages/vetrinarios/veterinarios.component';
+import { VeterinariosComponent } from './pages/veterinarios/veterinarios.component';
 
 const routes: Routes = [
   { path: 'sign-in', component: SignInComponent },
@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'mascotas', component: MascotasComponent },
   { path: 'clientes', component: ClientesComponent },
   { path: 'drogas', component: DrogasComponent },
-  { path: 'veterinarios', component: VetrinariosComponent },
+  { path: 'veterinarios', component: VeterinariosComponent },
   { path: '', component: LandingComponent },
   { path: '**', component: ErrorComponent}
 ];

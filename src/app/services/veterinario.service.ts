@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Veterinario } from '../model/veterinario';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { MascotaService } from './mascota.service';  // Para obtener las mascotas de un veterinario
 import { Mascota } from '../model/mascota';           // Interfaz Mascota
 
@@ -31,13 +31,17 @@ export class VeterinarioService {
       return this.http.get<Veterinario>('http://localhost:8090/veterinarios/' + id);
     }
 
-    addVeterinario(veterinario: Veterinario) {
-      this.http.post('http://localhost:8090/veterinarios/add', veterinario).subscribe();
+    addVeterinario(veterinario: Veterinario): Observable<Veterinario> {
+        return this.http.post<Veterinario>('http://localhost:8090/veterinarios/add', veterinario).pipe(
+            tap(response => {
+                console.log('Response from API:', response); // Log the response
+            })
+        );
     }
 
     updateVeterinario(updatedCliente: Veterinario) {
       this.http
-        .put('http://localhost:8090/vetrinarios/update', updatedCliente)
+        .put('http://localhost:8090/veterinarios/update', updatedCliente)
         .subscribe();
     }
 

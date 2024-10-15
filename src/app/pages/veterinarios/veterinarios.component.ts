@@ -6,13 +6,13 @@ import { Veterinario } from 'src/app/model/veterinario';
 import { VeterinarioService } from 'src/app/services/veterinario.service';
 
 @Component({
-  selector: 'app-vetrinarios',
+  selector: 'app-veterinarios',
   templateUrl: './veterinarios.component.html',
   styleUrls: ['./veterinarios.component.css'],
   providers: [MessageService, ConfirmationService]
 
 })
-export class VetrinariosComponent implements OnInit {
+export class VeterinariosComponent implements OnInit {
   newVeterinarioDialog: boolean = false;
   viewVeterinarioDialog: boolean = false;
 
@@ -98,13 +98,19 @@ export class VetrinariosComponent implements OnInit {
   saveVeterinario() {
     this.submitted = true;
 
-    if (this.veterinario && this.veterinario.nombre?.trim()
+    console.log(this.veterinario);
+
+    if (this.veterinario.nombre?.trim()
         && this.veterinario.cedula?.trim()
         && this.veterinario.especialidad?.trim()) {
-      this.veterinarioService.addVeterinario(this.veterinario);
-      this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'veterinario creado', life: 3000 });
-      this.veterinarios.push(this.veterinario);
-      this.newVeterinarioDialog = false;
+      this.veterinarioService.addVeterinario(this.veterinario).subscribe(response => {
+        console.log('Veterinario added:', response); // Log the added veterinarian
+        this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'veterinario creado', life: 3000 });
+        this.veterinarios.push(response); // Use the response to update the list
+        this.newVeterinarioDialog = false; // Close the dialog
+        this.viewVeterinarioDialog = false; // Close the view dialog
+        location.reload(); // Reload the page
+      });
     }
   }
 

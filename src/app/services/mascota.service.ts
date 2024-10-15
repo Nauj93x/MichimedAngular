@@ -33,6 +33,7 @@ export class MascotaService {
           return throwError(error);
         })
       );}
+
       getClienteByMascotaId(id: number): Observable<Cliente> {
         return this.http.get<Cliente>('http://localhost:8090/mascotas/cliente/' + id);
       }

@@ -10,6 +10,7 @@ import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
 import { VeterinariosComponent } from './pages/panel/veterinarios/veterinarios.component';
 import { DashboardComponent } from './pages/panel/dashboard/dashboard.component';
 import { SuministrarTratamientosComponent } from './pages/panel/suministrar-tratamientos/suministrar-tratamientos.component';
+import { HistorialMedicoComponent } from './pages/panel/historial-medico/historial-medico.component';
 
 const routes: Routes = [
   { path: 'sign-in', component: SignInComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'admin/veterinarios', component: VeterinariosComponent },
   { path: 'admin/dashboard', component: DashboardComponent },
   { path: 'suministrar-tratamiento', component: SuministrarTratamientosComponent },
+  { path: 'historial-medico', component: HistorialMedicoComponent },
   { path: '', component: LandingComponent },
   { path: '**', component: ErrorComponent}
 ];

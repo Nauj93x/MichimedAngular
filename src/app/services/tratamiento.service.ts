@@ -5,12 +5,12 @@ import { VeterinarioService } from './veterinario.service';  // Servicio para ob
 import { DrogaService } from './drogas.service';  // Servicio para obtener drogas
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HistorialMedicoDTO } from '../model/historial-medico-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TratamientoService {
-  private tratamientos: Tratamiento[] = [];
 
   constructor(
     private http: HttpClient // Importa HttpClient
@@ -24,5 +24,9 @@ export class TratamientoService {
 
   addTratamiento(tratamiento: Tratamiento) {
     this.http.post('http://localhost:8090/tratamientos/add', tratamiento).subscribe();
+  }
+
+  getHistorialMedicoByMascotaId(mascotaId: number): Observable<HistorialMedicoDTO[]> {
+    return this.http.get<HistorialMedicoDTO[]>(`http://localhost:8090/tratamientos/historial-medico/${mascotaId}`);
   }
 }

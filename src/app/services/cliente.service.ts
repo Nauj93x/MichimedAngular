@@ -29,12 +29,6 @@ export class ClienteService {
     return this.http.get<Cliente>('http://localhost:8090/clientes/' + id);
   }
 
-  // Método para obtener las mascotas de un cliente por su id
-  getClienteMascotas(clienteId: number): Observable<Mascota[]> {
-    // Aquí haces la llamada HTTP a tu backend para obtener las mascotas
-    return this.http.get<Mascota[]>(`http://localhost:8090/clientes/${clienteId}/mascotas`);
-  }
-
   // Método para agregar un nuevo cliente
   addCliente(cliente: Cliente) {
     this.http.post('http://localhost:8090/clientes/add', cliente).subscribe();

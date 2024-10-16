@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, MessageService, SelectItem } from 'primeng/api';
-import { Mascota } from '../../model/mascota';
-import { MascotaService } from '../../services/mascota.service';
+import { Mascota } from '../../../model/mascota';
+import { MascotaService } from '../../../services/mascota.service';
 import { Table } from 'primeng/table';
 import { Cliente } from 'src/app/model/cliente';
-import { ClienteService } from '../../services/cliente.service';
+import { ClienteService } from '../../../services/cliente.service';
 
 @Component({
   selector: 'app-mascotas',

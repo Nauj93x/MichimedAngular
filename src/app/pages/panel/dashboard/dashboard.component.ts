@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { MascotaService } from '../../services/mascota.service';
+import { MascotaService } from '../../../services/mascota.service';
 
 @Component({
   selector: 'app-dashboard',

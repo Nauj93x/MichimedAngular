@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MascotasComponent } from './pages/mascotas/mascotas.component';
+import { MascotasComponent } from './pages/panel/mascotas/mascotas.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { ErrorComponent } from './pages/error/error.component';
-import { SignInComponent } from './pages/sign-in/sign-in.component';
-import { ClientesComponent } from './pages/clientes/clientes.component';
-import { DrogasComponent } from './pages/drogas/drogas.component';
-import { SignUpComponent } from './pages/sign-up/sign-up.component';
-import { VeterinariosComponent } from './pages/veterinarios/veterinarios.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { SuministrarTratamientosComponent } from './pages/suministrar-tratamientos/suministrar-tratamientos.component';
+import { SignInComponent } from './pages/auth/sign-in/sign-in.component';
+import { ClientesComponent } from './pages/panel/clientes/clientes.component';
+import { DrogasComponent } from './pages/panel/drogas/drogas.component';
+import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
+import { VeterinariosComponent } from './pages/panel/veterinarios/veterinarios.component';
+import { DashboardComponent } from './pages/panel/dashboard/dashboard.component';
+import { SuministrarTratamientosComponent } from './pages/panel/suministrar-tratamientos/suministrar-tratamientos.component';
 
 const routes: Routes = [
   { path: 'sign-in', component: SignInComponent },

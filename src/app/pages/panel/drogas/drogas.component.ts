@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
-import { DrogaService } from '../../services/drogas.service'; // Servicio para manejar la carga de medicamentos
+import { DrogaService } from '../../../services/drogas.service'; // Servicio para manejar la carga de medicamentos
 import { Droga } from 'src/app/model/droga';
 @Component({
   selector: 'app-drogas',

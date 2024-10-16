@@ -1,32 +1,35 @@
 import { Component } from '@angular/core';
-import { ClienteService } from '../../services/cliente.service'; // Asegúrate de importar el servicio
-import { Mascota } from '../../model/mascota'; // Asegúrate de importar el modelo Mascota
-import { MessageService } from 'primeng/api'; // Para el popup de notificaciones
+import { ClienteService } from '../../services/cliente.service'; 
+import { Mascota } from '../../model/mascota'; 
+import { MessageService } from 'primeng/api'; 
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css'],
-  providers: [MessageService] // Asegúrate de inyectar el servicio de mensajes
+  providers: [MessageService]
 })
 export class LandingComponent {
-
   findMascotasDialog: boolean = false;
   viewMascotaDialog: boolean = false;
   selectedMascota: Mascota | null = null;
   cedula: string = '';
   mascotas: Mascota[] = [];
-  clientes: any[] = []; // Asegúrate de tener una lista de clientes
+  clientes: any[] = [];
 
   constructor(private clienteService: ClienteService, private messageService: MessageService) {
-    // Obtén los clientes al iniciar el componente
-    this.clienteService.getClientes().subscribe((clientes: any[]) => {
-      this.clientes = clientes;
-      console.log('Clientes cargados:', this.clientes); // Verifica que se están cargando correctamente los clientes
-    });
+    this.clienteService.getClientes().subscribe(
+      (clientes: any[]) => {
+        this.clientes = clientes;
+        console.log('Clientes cargados:', this.clientes); 
+      },
+      (error) => {
+        console.error('Error al cargar los clientes:', error);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al cargar los clientes.' });
+      }
+    );
   }
 
-    // Función para determinar la severidad del estado
   getSeverity(status: string): string {
     switch (status) {
       case 'En tratamiento':
@@ -38,34 +41,35 @@ export class LandingComponent {
     }
   }
 
-  // Función para abrir el diálogo con más detalles de la mascota
   openView(mascota: Mascota): void {
     this.selectedMascota = mascota;
-    this.viewMascotaDialog = true; // Muestra el diálogo
+    this.viewMascotaDialog = true;
   }
 
   buscarMascota() {
-    const cedulaTrimmed = this.cedula.trim(); // Eliminar espacios en blanco
-
+    const cedulaTrimmed = this.cedula.trim();
+  
     if (!cedulaTrimmed) {
       this.messageService.add({ severity: 'warn', summary: 'Advertencia', detail: 'Por favor ingresa una cédula válida' });
       return;
     }
-
-    this.mascotas = []; // Reinicia la lista de mascotas
+  
+    this.mascotas = [];
     let clienteEncontrado = false;
 
-    // Depuración: Verificar la cédula ingresada
     console.log('Cédula ingresada:', cedulaTrimmed);
-
+  
     for (const cliente of this.clientes) {
-      // Depuración: Mostrar la cédula del cliente
       console.log('Cédula del cliente:', cliente.cedula);
 
       if (cliente.cedula && cliente.cedula === cedulaTrimmed) {
         clienteEncontrado = true;
+        console.log('Cliente encontrado:', cliente);
+
         this.clienteService.getClienteMascotas(cliente.id).subscribe(
           (clienteMascotas: Mascota[]) => {
+            console.log('Mascotas encontradas:', clienteMascotas); 
+
             if (clienteMascotas.length > 0) {
               this.mascotas = clienteMascotas;
             } else {
@@ -73,13 +77,16 @@ export class LandingComponent {
             }
           },
           (error) => {
+            console.error('Error al obtener mascotas:', error);
             this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al buscar las mascotas del cliente.' });
           }
         );
+        break; // Cliente encontrado, no es necesario seguir iterando
       }
     }
 
     if (!clienteEncontrado) {
+      console.log('Cliente no encontrado con esa cédula.');
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se encontró un cliente con la cédula ingresada.' });
     }
   }

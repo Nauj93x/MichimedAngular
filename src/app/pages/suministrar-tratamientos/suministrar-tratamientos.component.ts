@@ -3,6 +3,7 @@ import { MessageService } from 'primeng/api';
 import { Droga } from 'src/app/model/droga';
 import { Mascota } from 'src/app/model/mascota';
 import { Tratamiento } from 'src/app/model/tratamiento';
+import { Veterinario } from 'src/app/model/veterinario';
 import { DrogaService } from 'src/app/services/drogas.service';
 import { MascotaService } from 'src/app/services/mascota.service';
 import { TratamientoService } from 'src/app/services/tratamiento.service';
@@ -19,6 +20,7 @@ export class SuministrarTratamientosComponent implements OnInit {
   mascotas: Mascota[] = [];
   drogas: Droga[] = [];
   nombreVeterinario = '';
+  veterinario: Veterinario = {nombre: '', contrasena: '', especialidad: '', cedula: '', urlFoto: ''};
 
   tratamiento: Tratamiento = {fecha: ''};
 
@@ -44,6 +46,7 @@ export class SuministrarTratamientosComponent implements OnInit {
       .getVeterinarioById(veterinarioId).subscribe((veterinario) => {
         this.tratamiento.veterinario = veterinario;
         this.nombreVeterinario = veterinario.nombre;
+        this.veterinario = veterinario;
       });
   }
 
@@ -58,7 +61,7 @@ export class SuministrarTratamientosComponent implements OnInit {
     this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Tratamiento creado', life: 3000 });
 
 
-    this.tratamiento = {fecha: ''};
+    this.tratamiento = {fecha: '', veterinario: this.veterinario};
   }
 
 }

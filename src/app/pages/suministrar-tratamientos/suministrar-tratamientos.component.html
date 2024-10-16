@@ -1,0 +1,55 @@
+<app-layout></app-layout>
+
+<main id="content">
+  <p-toast></p-toast>
+  <h1 class="mb-4 text-3xl">Agregar tratamiento</h1>
+
+  <div class="w-1/4">
+    <div class="field mt-[1rem]">
+      <label for="mascotas">Mascota</label>
+      <p-dropdown
+        inputId="mascotas"
+        [options]="mascotas"
+        optionLabel="nombre"
+        [showClear]="true"
+        [(ngModel)]="tratamiento.mascota"
+        [filter]="true"
+        filterBy="nombre"
+        class="block w-full"
+      ></p-dropdown>
+    </div>
+
+    <div class="field mt-[1rem]">
+      <label htmlFor="veterinario">Veterinario</label>
+      <input
+        type="text"
+        pInputText
+        id="veterinario"
+        [(ngModel)]="nombreVeterinario"
+        placeholder="Juan Angarita"
+        autofocus
+        disabled
+        class="block w-full"
+      />
+    </div>
+
+    <div class="field mt-[1rem] mb-6">
+      <label for="drogas">Drogas</label>
+      <p-multiSelect
+        [options]="drogas"
+        [(ngModel)]="tratamiento.drogas"
+        optionLabel="nombre"
+        [showClear]="true"
+        class="block w-full"
+      ></p-multiSelect>
+    </div>
+
+    <p-button
+      label="Registrar tratamiento"
+      [rounded]="true"
+      severity="secondary"
+      class="w-full"
+      (click)="saveTratamiento()"
+    ></p-button>
+  </div>
+</main>

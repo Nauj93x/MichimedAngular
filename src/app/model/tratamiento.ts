@@ -3,9 +3,9 @@ import { Veterinario } from './veterinario';
 import { Mascota } from './mascota';
 
 export interface Tratamiento {
-  id: number | null;
+  id?: number;
   fecha: string;
-  mascota: Mascota | null;
-  veterinario: Veterinario | null;
+  mascota?: Mascota;
+  veterinario?: Veterinario;
   drogas?: Droga[];
 }

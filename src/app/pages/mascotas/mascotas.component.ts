@@ -27,8 +27,6 @@ export class MascotasComponent implements OnInit {
   statuses!: SelectItem[];
 
   clientes: Cliente[] = [];
-  selectedCliente: Cliente | null = null;
-  dueno!: Cliente;
 
   clonedMascotas: { [s: string]: Mascota } = {};
 
@@ -135,17 +133,20 @@ export class MascotasComponent implements OnInit {
 
   openView(mascota: Mascota) {
     this.selectedMascota = mascota;
+    this.mascotaService
+      .getClienteByMascotaId(this.selectedMascota.id!)
+      .subscribe(
+        (cliente) => (this.selectedMascota.cliente = cliente)
+      );
     this.viewMascotaDialog = true;
   }
 
   openNew() {
     this.mascota = {
       nombre: '',
-      edad: 0,
       raza: '',
-      peso: 0,
       enfermedad: '',
-      estado: '',
+      estado: 'En tratamiento',
       fechaEntrada: '',
       fechaSalida: '',
       medicamento: '',
@@ -164,19 +165,15 @@ export class MascotasComponent implements OnInit {
   saveMascota() {
     this.submitted = true;
 
-    if (this.mascota.nombre?.trim() && this.dueno) {
-      this.mascotaService
-        .addMascota(this.mascota)
-        .subscribe((response: any) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: '¡Exitoso!',
-            detail: 'Mascota creada',
-            life: 3000,
-          });
-          this.mascotas.push(this.mascota);
-          this.newMascotaDialog = false;
-        });
+    if (this.mascota.nombre?.trim() && this.mascota.edad && this.mascota.peso && this.mascota.cliente) {
+      // Imagen por defecto
+      this.mascota.foto = 'https://i.postimg.cc/CMRjCsMX/default-cat-image.jpg';
+      if (this.mascota.cliente && this.mascota.cliente.id !== undefined) {
+        this.mascotaService.addMascota(this.mascota, this.mascota.cliente.id);
+      }
+      this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Mascota creada', life: 3000 });
+      this.mascotas.push(this.mascota);
+      this.newMascotaDialog = false;
     }
   }
 

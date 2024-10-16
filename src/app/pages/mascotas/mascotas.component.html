@@ -87,12 +87,7 @@
         <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input
-                class="primeng-input"
-                pInputText
-                type="text"
-                [(ngModel)]="mascota.nombre"
-              />
+              <input pInputText type="text" [(ngModel)]="mascota.nombre" />
             </ng-template>
             <ng-template pTemplate="output">
               {{ mascota.nombre }}
@@ -102,27 +97,17 @@
         <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input
-                class="primeng-input"
-                pInputText
-                type="text"
-                [(ngModel)]="mascota.raza"
-              />
+              <input pInputText type="text" [(ngModel)]="mascota.raza" />
             </ng-template>
             <ng-template pTemplate="output">
-              {{ mascota.raza }}
+              {{ mascota.raza || "N/A" }}
             </ng-template>
           </p-cellEditor>
         </td>
         <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input
-                class="primeng-input"
-                pInputText
-                type="text"
-                [(ngModel)]="mascota.edad"
-              />
+              <input pInputText type="text" [(ngModel)]="mascota.edad" />
             </ng-template>
             <ng-template pTemplate="output">
               {{ mascota.edad }} años
@@ -132,12 +117,7 @@
         <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input
-                class="primeng-input"
-                pInputText
-                type="text"
-                [(ngModel)]="mascota.peso"
-              />
+              <input pInputText type="text" [(ngModel)]="mascota.peso" />
             </ng-template>
             <ng-template pTemplate="output">
               {{ mascota.peso }} kg
@@ -147,15 +127,10 @@
         <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input
-                class="primeng-input"
-                pInputText
-                type="text"
-                [(ngModel)]="mascota.enfermedad"
-              />
+              <input pInputText type="text" [(ngModel)]="mascota.enfermedad" />
             </ng-template>
             <ng-template pTemplate="output">
-              {{ mascota.enfermedad }}
+              {{ mascota.enfermedad || "N/A" }}
             </ng-template>
           </p-cellEditor>
         </td>
@@ -270,7 +245,6 @@
     <div class="field mt-[1.20rem]">
       <span class="p-float-label">
         <input
-          class="primeng-input"
           type="text"
           pInputText
           id="nombre"
@@ -287,7 +261,6 @@
     <div class="field mt-[1.70rem]">
       <span class="p-float-label">
         <input
-          class="primeng-input"
           type="text"
           pInputText
           id="raza"
@@ -301,29 +274,26 @@
     <div class="formgrid flex mt-[1.70rem]">
       <div class="field primeng-col mr-3">
         <span class="p-float-label">
-          <p-inputNumber
-            class="primeng-input"
-            id="edad"
-            [(ngModel)]="mascota.edad"
-          ></p-inputNumber>
-          <label htmlFor="edad">Edad</label>
+          <p-inputNumber id="edad" [(ngModel)]="mascota.edad"></p-inputNumber>
+          <label htmlFor="edad">Edad (años)</label>
         </span>
+        <small class="p-error" *ngIf="submitted && !mascota.edad"
+          >Edad is required.</small
+        >
       </div>
       <div class="field col primeng-col ml-3">
         <span class="p-float-label">
-          <p-inputNumber
-            class="primeng-input"
-            id="peso"
-            [(ngModel)]="mascota.peso"
-          ></p-inputNumber>
-          <label htmlFor="peso">Peso</label>
+          <p-inputNumber id="peso" [(ngModel)]="mascota.peso"></p-inputNumber>
+          <label htmlFor="peso">Peso (kg)</label>
         </span>
+        <small class="p-error" *ngIf="submitted && !mascota.peso"
+          >Peso is required.</small
+        >
       </div>
     </div>
     <div class="field mt-[1.70rem]">
       <span class="p-float-label">
         <input
-          class="primeng-input"
           type="text"
           pInputText
           id="enfermedad"
@@ -362,7 +332,6 @@
     <div class="field mt-[1.70rem]">
       <span class="p-float-label">
         <input
-          class="primeng-input"
           type="url"
           pInputText
           id="foto"
@@ -375,17 +344,18 @@
     </div>
     <div class="field mt-[1.70rem]">
       <span class="p-float-label">
-        <select class="w-full" [(ngModel)]="dueno">
-          <option value="" disabled selected class="text-gray-500">
-            Dueño
-          </option>
-          <option *ngFor="let dueno of clientes" [ngValue]="dueno">
-            {{ dueno.nombre }}
-          </option>
-        </select>
-        <label htmlFor="dueno">Dueño</label>
+        <p-dropdown
+          inputId="clientes"
+          [options]="clientes"
+          [(ngModel)]="mascota.cliente"
+          optionLabel="nombre"
+          [showClear]="true"
+          [filter]="true"
+          filterBy="nombre"
+        ></p-dropdown>
+        <label for="clientes">Dueño</label>
       </span>
-      <small class="p-error" *ngIf="submitted && !dueno"
+      <small class="p-error" *ngIf="submitted && !mascota.cliente"
         >Dueño is required.</small
       >
     </div>
@@ -447,10 +417,11 @@
     />
     <ul class="data">
       <li>Edad: <span [innerText]="selectedMascota.edad + ' años'"></span></li>
-      <li>Raza: <span [innerText]="selectedMascota.raza"></span></li>
+      <li>Raza: <span [innerText]="selectedMascota.raza || 'N/A'"></span></li>
       <li>Peso: <span [innerText]="selectedMascota.peso + ' kg'"></span></li>
       <li>
-        Enfermedad: <span [innerText]="selectedMascota.enfermedad"></span>
+        Enfermedad:
+        <span [innerText]="selectedMascota.enfermedad || 'N/A'"></span>
       </li>
       <li>Estado: <span [innerText]="selectedMascota.estado"></span></li>
       <li>
@@ -465,7 +436,9 @@
       </li>
       <li>
         Cliente:
-        <span [innerText]="selectedCliente?.nombre">Nombre del cliente</span>
+        <span [innerText]="selectedMascota.cliente?.nombre"
+          >Nombre del cliente</span
+        >
       </li>
     </ul>
   </ng-template>

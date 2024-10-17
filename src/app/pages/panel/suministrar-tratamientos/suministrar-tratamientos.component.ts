@@ -36,16 +36,19 @@ export class SuministrarTratamientosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Carga las mascotas en tratamiento
     this.mascotaService
       .getMascotas()
       .subscribe((mascotas) => {
         this.mascotas = mascotas.filter(mascota => mascota.estado === 'En tratamiento');
       });
 
+      // Carga las dorgas disponibles
     this.drogaService
       .getDrogas()
       .subscribe((drogas) => (this.drogas = drogas));
 
+      // Carga los datos de veterinario si el ususario no es admin
     if (this.isAdmin) {
       this.veterinarioService.getVeterinarios().subscribe((veterinarios)  => (this.veterinarios = veterinarios));
     }else{
@@ -60,15 +63,18 @@ export class SuministrarTratamientosComponent implements OnInit {
   }
 
   saveTratamiento(): void {
+    // Formatea la fecha actual
     const date = new Date();
     const formattedDate = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getFullYear()).slice(-2)}`;
     this.tratamiento.fecha = formattedDate;
     console.log(this.tratamiento);
 
+    // Guarda el tratamiento
     this.tratamientoService.addTratamiento(this.tratamiento);
 
     this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Tratamiento creado', life: 3000 });
 
+    // Reinicia el tratamieno si el user no es admin
     if(!this.isAdmin){
       this.tratamiento = {fecha: '', veterinario: this.veterinario};
     }

@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Obtiene el estado de las mascotas
     this.mascotaService.getMascotasState().subscribe(
       (estado: { "En tratamiento": number; "Tratado": number }) => {
         console.log('Estado de mascotas recibido:', estado);
@@ -40,6 +41,7 @@ export class DashboardComponent implements OnInit {
       }
     );
 
+    // Obtiene los tratamientos por mes
     this.tratamientoService.getTratamientosPorMes().subscribe(
       (data: { [key: string]: number }) => {
         this.labels = Object.keys(data);
@@ -52,6 +54,7 @@ export class DashboardComponent implements OnInit {
       }
     );
 
+    // Obtiene Drogas
     this.drogaService.getDrogas().subscribe(
       (drogas) => {
         this.drogas = drogas;

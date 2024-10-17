@@ -6,8 +6,8 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
   styleUrls: ['./lines-chart.component.css']
 })
 export class LinesChartComponent implements OnChanges {
-  @Input() labels: string[] = [];
-  @Input() dataValues: number[] = [];
+  @Input() labels: string[] = []; // Etiquetas del gráfico
+  @Input() dataValues: number[] = []; // Valores del gráfico
   data: any;
   options: any;
 
@@ -15,6 +15,7 @@ export class LinesChartComponent implements OnChanges {
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');
 
+    // Configuración de las opciones del gráfico
     this.options = {
       plugins: {
         legend: {
@@ -27,12 +28,12 @@ export class LinesChartComponent implements OnChanges {
       scales: {
         x: {
           ticks: {
-            color: textColor
+            color: textColor // Color etiquetas eje x
           }
         },
         y: {
           ticks: {
-            color: textColor
+            color: textColor // Color etiquetas eje y
           }
         }
       }
@@ -40,12 +41,14 @@ export class LinesChartComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    // Actualiza los datos del gráfico cuando cambia el valor de las etiquetas o valores
     if (changes['labels'] || changes['dataValues']) {
       this.updateChartData();
     }
   }
 
   updateChartData() {
+    // Actualiza los datos del gráfico
     this.data = {
       labels: this.labels,
       datasets: [

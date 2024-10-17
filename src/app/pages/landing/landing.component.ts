@@ -21,6 +21,7 @@ export class LandingComponent {
   tratamientos: HistorialMedicoDTO[] = [];
 
   constructor(private clienteService: ClienteService, private messageService: MessageService, private tratamientoService: TratamientoService) {
+    // Carga los clientes al incializar el componente
     this.clienteService.getClientes().subscribe(
       (clientes: any[]) => {
         this.clientes = clientes;
@@ -33,6 +34,7 @@ export class LandingComponent {
   }
 
   getSeverity(status: string): string {
+    // Retorna la severidad del estado del tratamiento
     switch (status) {
       case 'En tratamiento':
         return 'info';
@@ -44,6 +46,7 @@ export class LandingComponent {
   }
 
   buscarMascota() {
+    // Busca la mascota por su cedula
     const cedulaTrimmed = this.cedula.trim();
 
     if (!cedulaTrimmed) {
@@ -91,6 +94,7 @@ export class LandingComponent {
   }
 
   verTratamientos(idMascota: number) {
+    // Obtiene y muestra los tratamientos de una mascota
     this.tratamientoService
         .getHistorialMedicoByMascotaId(idMascota)
         .subscribe((tratamientos) => {
@@ -104,6 +108,7 @@ export class LandingComponent {
   }
 
   ngAfterViewInit() {
+    // Inicializa el carrusel
     const carousel = document.querySelector('.carousel') as HTMLElement;
     const slides = document.querySelectorAll('.slide') as NodeListOf<HTMLElement>;
     let currentSlide = 0;

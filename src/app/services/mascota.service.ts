@@ -21,6 +21,7 @@ export class MascotaService {
     return this.http.get<Mascota>('http://localhost:8090/mascotas/' + id);
   }
 
+  // Obtiene el estado de las mascotas
   getMascotasState(): Observable<{ "En tratamiento": number; "Tratado": number }> {
     return this.http
       .get<{ "En tratamiento": number; "Tratado": number }>(
@@ -46,6 +47,7 @@ export class MascotaService {
       .subscribe();
   }
 
+  // Método para actualizar una mascota existente
   updateMascota(updatedMascota: Mascota): Observable<any> {
     return this.http.put<any>(
       'http://localhost:8090/mascotas/update',
@@ -53,6 +55,7 @@ export class MascotaService {
     );
   }
 
+  // Elimina una mascota por su ID
   deleteMascota(id: number): Observable<any> {
     return this.http.delete<any>('http://localhost:8090/mascotas/delete/' + id);
   }

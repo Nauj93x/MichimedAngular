@@ -47,6 +47,7 @@ export class HistorialMedicoComponent implements OnInit {
   }
 
   findHistorialMedico(): void {
+    // Obtiene el historial médico de la mascota seleccionada
     if (this.selectedMascota) {
       this.tratamientoService
         .getHistorialMedicoByMascotaId(this.selectedMascota.id!)

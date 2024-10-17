@@ -1,7 +1,8 @@
-import { Table } from 'primeng/table'
+import { Table } from 'primeng/table';
+import { Router } from '@angular/router';
 import { Mascota } from 'src/app/model/mascota';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Veterinario } from 'src/app/model/veterinario';
 import { VeterinarioService } from 'src/app/services/veterinario.service';
 
@@ -9,8 +10,7 @@ import { VeterinarioService } from 'src/app/services/veterinario.service';
   selector: 'app-veterinarios',
   templateUrl: './veterinarios.component.html',
   styleUrls: ['./veterinarios.component.css'],
-  providers: [MessageService, ConfirmationService]
-
+  providers: [MessageService, ConfirmationService],
 })
 export class VeterinariosComponent implements OnInit {
   newVeterinarioDialog: boolean = false;
@@ -24,16 +24,20 @@ export class VeterinariosComponent implements OnInit {
 
   submitted: boolean = false;
 
-  clonedVeterinarios: { [s: string]: Veterinario} = {};
+  clonedVeterinarios: { [s: string]: Veterinario } = {};
 
-  mascotasVeterinario : Mascota[] = [];
-
-  constructor(private veterinarioService: VeterinarioService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
+  mascotasVeterinario: Mascota[] = [];
+  constructor(
+    private veterinarioService: VeterinarioService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.veterinarioService.getVeterinarios().subscribe(
-      (veterinarios) => this.veterinarios = veterinarios
-    );
+    this.veterinarioService
+      .getVeterinarios()
+      .subscribe((veterinarios) => (this.veterinarios = veterinarios));
   }
 
   deleteVeterinario(id: number, nombre: string): void {
@@ -44,9 +48,16 @@ export class VeterinariosComponent implements OnInit {
       accept: () => {
         this.veterinarioService.deleteVeterinario(id);
         //Agregar nuevamente validación para eliminar veterinario de la lista
-        this.veterinarios = this.veterinarios.filter(veterinario => veterinario.id !== id);
-        this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'veterinario eliminado', life: 3000 });
-      }
+        this.veterinarios = this.veterinarios.filter(
+          (veterinario) => veterinario.id !== id
+        );
+        this.messageService.add({
+          severity: 'success',
+          summary: '¡Exitoso!',
+          detail: 'veterinario eliminado',
+          life: 3000,
+        });
+      },
     });
   }
 
@@ -57,11 +68,16 @@ export class VeterinariosComponent implements OnInit {
   onRowEditSave(veterinario: Veterinario) {
     //PENDIENTE: Agregar validaciones para actualizar veterinario
     this.veterinarioService.updateVeterinario(veterinario);
-    this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'veterinario actualizado' });
+    this.messageService.add({
+      severity: 'success',
+      summary: '¡Exitoso!',
+      detail: 'veterinario actualizado',
+    });
   }
 
   onRowEditCancel(veterinario: Veterinario, index: number) {
-    this.veterinarios[index] = this.clonedVeterinarios[veterinario.id as number];
+    this.veterinarios[index] =
+      this.clonedVeterinarios[veterinario.id as number];
     delete this.clonedVeterinarios[veterinario.id as number];
   }
 
@@ -76,16 +92,25 @@ export class VeterinariosComponent implements OnInit {
   openView(veterinario: Veterinario) {
     this.selectedVeterinario = veterinario;
     this.viewVeterinarioDialog = true;
-    if (this.selectedVeterinario.id !== undefined && this.selectedVeterinario.id !== null) {
-      this.veterinarioService.getVeterinarioMascotas(this.selectedVeterinario.id).subscribe(
-        (mascotas) => this.mascotasVeterinario = mascotas
-      );
+    if (
+      this.selectedVeterinario.id !== undefined &&
+      this.selectedVeterinario.id !== null
+    ) {
+      this.veterinarioService
+        .getVeterinarioMascotas(this.selectedVeterinario.id)
+        .subscribe((mascotas) => (this.mascotasVeterinario = mascotas));
     }
   }
 
   //Para crear una nueva veterinario
   openNew() {
-    this.veterinario = {cedula: '', nombre: '', especialidad: '', contrasena: '', urlFoto:''};
+    this.veterinario = {
+      cedula: '',
+      nombre: '',
+      especialidad: '',
+      contrasena: '',
+      urlFoto: '',
+    };
     this.submitted = false;
     this.newVeterinarioDialog = true;
   }
@@ -100,17 +125,26 @@ export class VeterinariosComponent implements OnInit {
 
     console.log(this.veterinario);
 
-    if (this.veterinario.nombre?.trim()
-        && this.veterinario.cedula?.trim()
-        && this.veterinario.especialidad?.trim()) {
-      this.veterinarioService.addVeterinario(this.veterinario).subscribe(response => {
-        console.log('Veterinario added:', response); // Log the added veterinarian
-        this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'veterinario creado', life: 3000 });
-        this.veterinarios.push(response); // Use the response to update the list
-        this.newVeterinarioDialog = false; // Close the dialog
-        this.viewVeterinarioDialog = false; // Close the view dialog
-        location.reload(); // Reload the page
-      });
+    if (
+      this.veterinario.nombre?.trim() &&
+      this.veterinario.cedula?.trim() &&
+      this.veterinario.especialidad?.trim()
+    ) {
+      this.veterinarioService
+        .addVeterinario(this.veterinario)
+        .subscribe((response) => {
+          console.log('Veterinario added:', response); // Log the added veterinarian
+          this.messageService.add({
+            severity: 'success',
+            summary: '¡Exitoso!',
+            detail: 'veterinario creado',
+            life: 3000,
+          });
+          this.veterinarios.push(response); // Use the response to update the list
+          this.newVeterinarioDialog = false; // Close the dialog
+          this.viewVeterinarioDialog = false; // Close the view dialog
+          location.reload(); // Reload the page
+        });
     }
   }
 
@@ -119,4 +153,7 @@ export class VeterinariosComponent implements OnInit {
     this.submitted = false; // Reset the submitted flag
   }
 
+  verHistorialMedico(mascotaId: number) {
+    this.router.navigate(['/historial-medico', mascotaId]);
+  }
 }

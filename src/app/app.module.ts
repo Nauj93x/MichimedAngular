@@ -46,6 +46,7 @@ import { TimelineModule } from 'primeng/timeline';
 import { CardModule } from 'primeng/card';
 import { CircularDiagramComponent } from './components/circular-diagram/circular-diagram.component';
 import { LinesChartComponent } from './components/lines-chart/lines-chart.component';
+import { DrogasAuxTableComponent } from './components/drogas-aux-table/drogas-aux-table.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { LinesChartComponent } from './components/lines-chart/lines-chart.compon
     SuministrarTratamientosComponent,
     HistorialMedicoComponent,
     CircularDiagramComponent,
-    LinesChartComponent
+    LinesChartComponent,
+    DrogasAuxTableComponent
   ],
   imports: [
     BrowserModule,

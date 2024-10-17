@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private mascotaService: MascotaService,
     private tratamientoService: TratamientoService,
+    private drogaService: DrogaService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -50,5 +51,15 @@ export class DashboardComponent implements OnInit {
         console.error('Error al obtener los tratamientos por mes:', error);
       }
     );
+
+    this.drogaService.getDrogas().subscribe(
+      (drogas) => {
+        this.drogas = drogas;
+        this.isDataLoaded = true;
+      },
+      (error) => {
+        console.error('Error al obtener las drogas:', error);
+      }
+    )
   }
 }

@@ -48,13 +48,16 @@
 
     <div class="field mt-[1rem] mb-6">
       <label for="drogas">Drogas</label>
-      <p-multiSelect
+      <p-dropdown
+        inputId="drogas"
         [options]="drogas"
-        [(ngModel)]="tratamiento.drogas"
         optionLabel="nombre"
         [showClear]="true"
+        [(ngModel)]="tratamiento.droga"
+        [filter]="true"
+        filterBy="nombre"
         class="block w-full"
-      ></p-multiSelect>
+      ></p-dropdown>
     </div>
 
     <p-button

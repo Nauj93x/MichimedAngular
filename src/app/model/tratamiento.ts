@@ -7,5 +7,5 @@ export interface Tratamiento {
   fecha: string;
   mascota?: Mascota;
   veterinario?: Veterinario;
-  drogas?: Droga[];
+  droga?: Droga;
 }

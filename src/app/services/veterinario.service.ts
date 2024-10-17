@@ -5,6 +5,7 @@ import { Observable, tap } from 'rxjs';
 import { MascotaService } from './mascota.service';  // Para obtener las mascotas de un veterinario
 import { Mascota } from '../model/mascota';           // Interfaz Mascota
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +17,10 @@ export class VeterinarioService {
     private http: HttpClient // Importa HttpClient
   ) {}
 
+
+  getVeterinariosActivos() :Observable<String>{
+    return this.http.get<String>('http://localhost:8090/veterinarios/activos')
+  }
 
   // Método para obtener todos los veterinarios
   getVeterinarios(): Observable<Veterinario[]> {

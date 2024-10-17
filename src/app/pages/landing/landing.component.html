@@ -125,31 +125,32 @@
   </div>
 
   <!-- Mostrar mascotas encontradas -->
-  <div *ngIf="mascotas.length > 0">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-      <div
-        *ngFor="let mascota of mascotas"
-        class="mascota-card p-4 rounded-lg shadow-md bg-white"
-      >
+  <div *ngIf="mascotas.length > 0" class="flex flex-wrap justify-center gap-4">
+    <p-card
+      *ngFor="let mascota of mascotas"
+      [header]="mascota.nombre"
+      [style]="{ width: '360px' }"
+    >
+      <div class="flex justify-center">
         <img
-          [src]="mascota.foto"
+          class="object-cover rounded-full shadow-2 mb-4"
           [alt]="mascota.nombre"
-          class="block m-auto w-24 h-24 rounded-full object-cover mb-4"
+          [src]="mascota.foto"
+          width="200"
         />
-        <ul class="data list-none p-0 text-center">
-          <li class="mb-2">
-            <strong>Nombre: </strong><span>{{ mascota.nombre }}</span>
-          </li>
-          <li class="mb-2">
-            <strong>Edad: </strong><span>{{ mascota.edad }} años</span>
-          </li>
-          <li class="mb-2">
-            <strong>Raza: </strong><span>{{ mascota.raza }}</span>
-          </li>
-          <li class="mb-2">
-            <strong>Peso: </strong><span>{{ mascota.peso }} kg</span>
-          </li>
-        </ul>
+      </div>
+      <ul class="data list-none p-0 text-center">
+        <li class="mb-2">
+          <strong>Edad: </strong><span>{{ mascota.edad }} años</span>
+        </li>
+        <li class="mb-2">
+          <strong>Raza: </strong><span>{{ mascota.raza }}</span>
+        </li>
+        <li class="mb-2">
+          <strong>Peso: </strong><span>{{ mascota.peso }} kg</span>
+        </li>
+      </ul>
+      <div class="flex justify-center">
         <p-button
           label="Ver tratamientos"
           [rounded]="true"
@@ -157,7 +158,7 @@
           (click)="verTratamientos(mascota.id!)"
         ></p-button>
       </div>
-    </div>
+    </p-card>
   </div>
 </p-dialog>
 

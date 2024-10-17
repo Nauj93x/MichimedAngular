@@ -23,7 +23,7 @@ export class ProfitComponent implements OnInit {
 
   calcularGanancias() {
     this.ganancias = this.drogas.reduce((total, droga) => {
-      const gananciaDroga = (droga.precioVenta * droga.uniVend) - (droga.precioCompra * droga.uniVend);
+      const gananciaDroga = (droga.precioVenta * droga.uniVend) - (droga.precioCompra * (droga.uniVend + droga.uniDisp));
       this.gananciasPorDroga[droga.nombre] = gananciaDroga;
       return total + gananciaDroga;
     }, 0);

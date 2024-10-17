@@ -21,9 +21,9 @@ export class MascotaService {
     return this.http.get<Mascota>('http://localhost:8090/mascotas/' + id);
   }
 
-  getMascotasState(): Observable<{ tratadas: number; enTratamiento: number }> {
+  getMascotasState(): Observable<{ "En tratamiento": number; "Tratado": number }> {
     return this.http
-      .get<{ tratadas: number; enTratamiento: number }>(
+      .get<{ "En tratamiento": number; "Tratado": number }>(
         'http://localhost:8090/mascotas/estado'
       )
       .pipe(
@@ -31,7 +31,8 @@ export class MascotaService {
           console.error('Error fetching mascotas state:', error);
           return throwError(error);
         })
-      );}
+      );
+  }
 
       getClienteByMascotaId(id: number): Observable<Cliente> {
         return this.http.get<Cliente>('http://localhost:8090/mascotas/cliente/' + id);

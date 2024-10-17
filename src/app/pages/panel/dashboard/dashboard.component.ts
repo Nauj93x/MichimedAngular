@@ -29,10 +29,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.mascotaService.getMascotasState().subscribe(
-      (estado: { tratadas: number; enTratamiento: number }) => {
+      (estado: { "En tratamiento": number; "Tratado": number }) => {
         console.log('Estado de mascotas recibido:', estado);
-        this.enTratamiento = estado.enTratamiento;
-        this.tratadas = estado.tratadas;
+        this.enTratamiento = estado["En tratamiento"];
+        this.tratadas = estado["Tratado"];
         this.isDataLoaded = true;
       },
       (error) => {

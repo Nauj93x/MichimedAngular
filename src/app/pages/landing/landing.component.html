@@ -184,14 +184,13 @@
           width="200"
         />
       </div>
-      <h4>Drogas asignadas</h4>
-      <ul *ngIf="tratamiento.nombresDrogas">
-        <li *ngFor="let droga of tratamiento.nombresDrogas">
-          {{ droga }}
-        </li>
-      </ul>
-      <p *ngIf="tratamiento.nombresDrogas.length == 0">
-        No tiene drogas asignadas
+      <h4>Drogas asignada</h4>
+      <p>
+        {{
+          tratamiento.nombreDroga
+            ? tratamiento.nombreDroga
+            : "No tiene droga asignada"
+        }}
       </p>
     </p-card>
   </div>

@@ -61,7 +61,14 @@ export class SuministrarTratamientosComponent implements OnInit {
     const date = new Date();
     const formattedDate = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getFullYear()).slice(-2)}`;
     this.tratamiento.fecha = formattedDate;
-    console.log(this.tratamiento);
+
+    if(this.tratamiento.droga?.uniDisp === 0){
+      this.messageService.add({ severity: 'error', summary: '¡Error!', detail: 'No hay unidades disponibles de la droga seleccionada', life: 3000 });
+      return;
+    }
+
+    this.tratamiento.droga!.uniDisp -= 1;
+    this.tratamiento.droga!.uniVend += 1;
 
     this.tratamientoService.addTratamiento(this.tratamiento);
 

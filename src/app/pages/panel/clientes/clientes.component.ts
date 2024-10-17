@@ -12,6 +12,9 @@ import { Mascota } from 'src/app/model/mascota';
   providers: [MessageService, ConfirmationService]
 })
 export class ClientesComponent implements OnInit {
+
+  loading: boolean = true;
+
   newClienteDialog: boolean = false;
   viewClienteDialog: boolean = false;
 
@@ -31,7 +34,10 @@ export class ClientesComponent implements OnInit {
 
   ngOnInit(): void {
     this.clienteService.getClientes().subscribe(
-      (clientes) => this.clientes = clientes
+      (clientes) => {
+        this.clientes = clientes;
+        this.loading = false;
+      }
     );
   }
 

@@ -13,6 +13,9 @@ import { ClienteService } from '../../../services/cliente.service';
   providers: [MessageService, ConfirmationService],
 })
 export class MascotasComponent implements OnInit {
+
+  loading: boolean = true;
+
   newMascotaDialog: boolean = false;
   viewMascotaDialog: boolean = false;
 
@@ -41,7 +44,10 @@ export class MascotasComponent implements OnInit {
     // Carga mascotas y clientes
     this.mascotaService
       .getMascotas()
-      .subscribe((mascotas) => (this.mascotas = mascotas));
+      .subscribe((mascotas) => {
+        this.mascotas = mascotas
+        this.loading = false;
+      });
 
     this.ClienteService.getClientes().subscribe(
       (clientes) => (this.clientes = clientes)

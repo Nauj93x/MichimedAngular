@@ -13,6 +13,9 @@ import { VeterinarioService } from 'src/app/services/veterinario.service';
   providers: [MessageService, ConfirmationService],
 })
 export class VeterinariosComponent implements OnInit {
+
+  loading: boolean = true;
+
   newVeterinarioDialog: boolean = false;
   viewVeterinarioDialog: boolean = false;
 
@@ -37,7 +40,10 @@ export class VeterinariosComponent implements OnInit {
   ngOnInit(): void {
     this.veterinarioService
       .getVeterinarios()
-      .subscribe((veterinarios) => (this.veterinarios = veterinarios));
+      .subscribe((veterinarios) => {
+        this.veterinarios = veterinarios
+        this.loading = false;
+      });
   }
 
   deleteVeterinario(id: number, nombre: string): void {

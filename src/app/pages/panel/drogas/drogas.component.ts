@@ -8,6 +8,7 @@ import { Droga } from 'src/app/model/droga';
   styleUrls: ['./drogas.component.css']
 })
 export class DrogasComponent implements OnInit {
+  loading: boolean = true;
   drogas: Droga[] = [];
   errorMessage: string = '';
   @ViewChild('dt') table!: Table; // Referencia a la tabla de PrimeNG
@@ -17,6 +18,7 @@ export class DrogasComponent implements OnInit {
   ngOnInit(): void {
     this.drogaService.getDrogas().subscribe((data) => {
       this.drogas = data;
+      this.loading = false;
     });
   }
 

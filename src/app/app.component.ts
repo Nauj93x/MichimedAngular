@@ -16,6 +16,6 @@ export class AppComponent implements OnInit {
     // Simula la carga de datos
     setTimeout(() => {
       this.loadingService.hide();
-    }, 2000); // Simula un retraso de 2 segundos
+    }, 0); // Simula un retraso de 2 segundos
   }
 }

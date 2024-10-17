@@ -38,7 +38,9 @@ export class SuministrarTratamientosComponent implements OnInit {
   ngOnInit(): void {
     this.mascotaService
       .getMascotas()
-      .subscribe((mascotas) => (this.mascotas = mascotas));
+      .subscribe((mascotas) => {
+        this.mascotas = mascotas.filter(mascota => mascota.estado === 'En tratamiento');
+      });
 
     this.drogaService
       .getDrogas()

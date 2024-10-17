@@ -8,17 +8,17 @@ import { DrogaService } from 'src/app/services/drogas.service';
   styleUrls: ['./drogas-aux-table.component.css']
 })
 export class DrogasAuxTableComponent implements OnInit {
-  drogas: Droga[] = [];
+  drogas: Droga[] = []; //Arreglo para almacenar las drogas
 
   constructor(private drogaService: DrogaService) {}
 
   ngOnInit() {
     this.drogaService.getDrogas().subscribe((data) => {
-      this.drogas = data;
+      this.drogas = data; // Asigna los datos obtenidos al arreglo de drogas
     });
   }
 
-  getDisponibilidad(uniDisp: number): string {
+  getDisponibilidad(uniDisp: number): string { //Retorna un estado basada en la cantidad disponibles
     if (uniDisp <= 2) {
       return 'Reabastecer';
     } else if (uniDisp < 5) {
@@ -31,7 +31,7 @@ export class DrogasAuxTableComponent implements OnInit {
   }
 
   getDisponibilidadClass(uniDisp: number): string {
-    if (uniDisp <= 2) {
+    if (uniDisp <= 2) { //Return clase de css 
       return 'reabastecer';
     } else if (uniDisp < 5) {
       return 'escaso';

@@ -19,9 +19,11 @@ export class SignUpComponent {
     private router: Router,
     private messageService: MessageService
   ) {
+    // Inicializa el formulario con validaciones
     this.signUpForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      // Campos de email y contraseñas con validaciones
+      email: ['', [Validators.required, Validators.email]], 
+      password: ['', [Validators.required]], 
     });
   }
 
@@ -30,6 +32,7 @@ export class SignUpComponent {
       const user = this.signUpForm.value;
       this.http.post('http://localhost:8090/sign-up', user).subscribe(
         response => {
+          // Navega a la página de inicio de sesión si la solicitud es exitosa
           this.router.navigate(['/sign-in']);
           this.messageService.add({
             severity: 'success',
@@ -38,6 +41,7 @@ export class SignUpComponent {
           });
         },
         (error: HttpErrorResponse) => {
+          // Muestra un mensaje de error en caso de fallo
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
@@ -46,6 +50,7 @@ export class SignUpComponent {
         }
       );
     } else {
+      // Mensaje de advertencia si el formulario es invalido
       this.messageService.add({
         severity: 'warn',
         summary: 'Invalid Form',

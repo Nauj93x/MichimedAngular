@@ -8,9 +8,9 @@ import { DrogaService } from 'src/app/services/drogas.service';
   styleUrls: ['./profit.component.css']
 })
 export class ProfitComponent implements OnInit {
-  drogas: Droga[] = [];
-  ganancias: number = 0;
-  gananciasPorDroga: { [key: string]: number } = {};
+  drogas: Droga[] = []; // Almacenar las drogas
+  ganancias: number = 0; // Total ganancias
+  gananciasPorDroga: { [key: string]: number } = {}; // Ganancias por cada droga
 
   constructor(private drogaService: DrogaService) {}
 
@@ -22,9 +22,10 @@ export class ProfitComponent implements OnInit {
   }
 
   calcularGanancias() {
+    // Calcula las ganancias totales y por cada droga
     this.ganancias = this.drogas.reduce((total, droga) => {
-      const gananciaDroga = (droga.precioVenta * droga.uniVend) - (droga.precioCompra * droga.uniVend);
-      this.gananciasPorDroga[droga.nombre] = gananciaDroga;
+      const gananciaDroga = (droga.precioVenta * droga.uniVend) - (droga.precioCompra * (droga.uniVend + droga.uniDisp));
+      this.gananciasPorDroga[droga.nombre] = gananciaDroga; // Almacena la ganancia por droga
       return total + gananciaDroga;
     }, 0);
   }

@@ -36,6 +36,7 @@ export class ClientesComponent implements OnInit {
   }
 
   deleteCliente(id: number, nombre: string): void {
+    // Confirma y elimina un cliente
     this.confirmationService.confirm({
       message: '¿Estas seguro que quieres eliminar a ' + nombre + '?',
       header: 'Confirmar eliminación',

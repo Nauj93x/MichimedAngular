@@ -16,7 +16,7 @@ export class LayoutComponent implements OnInit {
 
     ngOnInit(): void {
       const adminStatus = localStorage.getItem('admin');
-      this.isAdmin = adminStatus === 'true';
+      this.isAdmin = adminStatus === 'true'; // Verifica si el usuario es administrador
 
       if (!this.isAdmin) {
         const veterinarioId = Number(localStorage.getItem('idVeterinario'));

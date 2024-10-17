@@ -22,6 +22,7 @@ import { VeterinariosComponent } from './pages/panel/veterinarios/veterinarios.c
 import { DashboardComponent } from './pages/panel/dashboard/dashboard.component';
 import { SuministrarTratamientosComponent } from './pages/panel/suministrar-tratamientos/suministrar-tratamientos.component';
 import { HistorialMedicoComponent } from './pages/panel/historial-medico/historial-medico.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 // Servicios (asegúrate de crear e importar el servicio si es necesario)
 import { DrogaService } from './services/drogas.service';  // Importa el servicio DrogaService
@@ -70,7 +71,8 @@ import { ProfitComponent } from './components/profit/profit.component';
     CircularDiagramComponent,
     LinesChartComponent,
     DrogasAuxTableComponent,
-    ProfitComponent
+    ProfitComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LoadingService } from './services/loading.service';
 
 @Component({
   selector: 'app-root',
-  template: '<router-outlet />',
+  templateUrl: './app.component.html',
+
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  loading$ = this.loadingService.loading$;
+
+  constructor(private loadingService: LoadingService) {}
+
+  ngOnInit() {
+    this.loadingService.show();
+    // Simula la carga de datos
+    setTimeout(() => {
+      this.loadingService.hide();
+    }, 2000); // Simula un retraso de 2 segundos
+  }
 }

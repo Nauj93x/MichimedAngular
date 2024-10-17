@@ -38,6 +38,7 @@ export class MascotasComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Carga mascotas y clientes
     this.mascotaService
       .getMascotas()
       .subscribe((mascotas) => (this.mascotas = mascotas));
@@ -53,6 +54,7 @@ export class MascotasComponent implements OnInit {
   }
 
   deleteMascota(id: number, nombre: string): void {
+    // Confirma y elimina una mascota
     this.confirmationService.confirm({
       message: '¿Estas seguro que quieres eliminar a ' + nombre + '?',
       header: 'Confirmar eliminación',
@@ -84,6 +86,7 @@ export class MascotasComponent implements OnInit {
   }
 
   getSeverity(status: string) {
+    // Retorna estado mascota
     switch (status) {
       case 'En tratamiento':
         return 'info';
@@ -99,6 +102,7 @@ export class MascotasComponent implements OnInit {
   }
 
   onRowEditSave(mascota: Mascota) {
+    // Guarda cambios de una fila editada
     this.mascotaService.updateMascota(mascota).subscribe(
       () => {
         this.messageService.add({
@@ -119,6 +123,7 @@ export class MascotasComponent implements OnInit {
   }
 
   onRowEditCancel(mascota: Mascota, index: number) {
+    // Cancela la deición
     this.mascotas[index] = this.clonedMascotas[mascota.id as number];
     delete this.clonedMascotas[mascota.id as number];
   }
@@ -142,6 +147,7 @@ export class MascotasComponent implements OnInit {
   }
 
   openNew() {
+    // Abrir dialogo ver detalles mascota
     this.mascota = {
       nombre: '',
       raza: '',
@@ -163,6 +169,7 @@ export class MascotasComponent implements OnInit {
   }
 
   saveMascota() {
+    // Guardar una nueva mascota
     this.submitted = true;
 
     if (this.mascota.nombre?.trim() && this.mascota.edad && this.mascota.peso && this.mascota.cliente) {

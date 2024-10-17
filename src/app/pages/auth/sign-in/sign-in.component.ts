@@ -12,8 +12,8 @@ import { MessageService } from 'primeng/api';
   providers: [MessageService]
 })
 export class SignInComponent {
-  signInForm: FormGroup;
-  @Output() formSubmit = new EventEmitter<void>();
+  signInForm: FormGroup; // Formulario de inicio de sesión
+  @Output() formSubmit = new EventEmitter<void>(); // Evento emitido al enviar formulario
 
   constructor(
     private fb: FormBuilder,
@@ -22,6 +22,7 @@ export class SignInComponent {
     private messageService: MessageService
   ) {
     this.signInForm = this.fb.group({
+      // Inicializa el formulario con validaciones
       cedula: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
@@ -36,15 +37,16 @@ export class SignInComponent {
           if(response.admin){
             localStorage.setItem('admin', 'true');
             localStorage.setItem('idAdmin', response.id.toString());
-            this.router.navigate(['/admin/dashboard']);
+            this.router.navigate(['/admin/dashboard']); // Navega al dashboard de administrador
           }else{
             localStorage.setItem('admin', 'false');
             localStorage.setItem('idVeterinario', response.id.toString());
-            this.router.navigate(['/mascotas']);
+            this.router.navigate(['/mascotas']); // Navega a la pág de mascotas
           }
           this.formSubmit.emit();
         },
         (error: HttpErrorResponse) => {
+          // Muestra un mensaje de error en caso de fallo
           this.messageService.add({
             severity: 'error',
             summary: 'Error',

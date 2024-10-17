@@ -1,19 +1,51 @@
 .reabastecer {
-  color: red;
+  padding-top:2px;
+  padding-bottom:2px;
+  padding-left: 10px;
+  padding-right: 10px ;
+  border-radius: 40px;
+  border: solid 2px;
+  border-color: rgb(227, 92, 92);
+  color:rgb(227, 92, 92);
+  background: #f4eded;
   font-weight: bold;
 }
 
 .escaso {
-  color: orange;
+  padding-top:2px;
+  padding-bottom:2px;
+  padding-left: 10px;
+  padding-right: 10px ;
+  border-radius: 40px;
+  border: solid 2px;
+  border-color: rgb(192, 152, 121);
+  color:rgb(192, 152, 121);
+  background: #f2eeeb;
   font-weight: bold;
 }
 
 .abundante {
-  color: green;
+  padding-top:2px;
+  padding-bottom:2px;
+  padding-left: 10px;
+  padding-right: 10px ;
+  border-radius: 40px;
+  border: solid 2px;
+  border-color: rgb(96, 155, 96);
+  color:rgb(96, 155, 96);
+  background: #edf2eb;
   font-weight: bold;
 }
 
 .normal {
-  color: black;
-  font-weight: normal;
+  padding-top:2px;
+  padding-bottom:2px;
+  padding-left: 10px;
+  padding-right: 10px ;
+  border-radius: 40px;
+  border: solid 2px;
+  border-color: rgb(10,10,10);
+  color:rgb(10,10,10);
+  background: #fdfdfd;
+  font-weight: bold;
 }

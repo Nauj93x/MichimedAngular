@@ -1,0 +1,19 @@
+.reabastecer {
+  color: red;
+  font-weight: bold;
+}
+
+.escaso {
+  color: orange;
+  font-weight: bold;
+}
+
+.abundante {
+  color: green;
+  font-weight: bold;
+}
+
+.normal {
+  color: black;
+  font-weight: normal;
+}

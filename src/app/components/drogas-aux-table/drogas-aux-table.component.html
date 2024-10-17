@@ -41,6 +41,7 @@
           Unidades Disponibles
           <p-sortIcon class="inline-block" field="uniDisp"></p-sortIcon>
         </th>
+        <th pResizableColumn>Disponibilidad</th>
         <th pSortableColumn="uniVend">
           Unidades Vendidas
           <p-sortIcon class="inline-block" field="uniVend"></p-sortIcon>
@@ -56,6 +57,11 @@
         <td>{{ droga.precioCompra }}</td>
         <td>{{ droga.precioVenta }}</td>
         <td>{{ droga.uniDisp }}</td>
+        <td>
+          <span [ngClass]="getDisponibilidadClass(droga.uniDisp)">
+            {{ getDisponibilidad(droga.uniDisp) }}
+          </span>
+        </td>
         <td>{{ droga.uniVend }}</td>
       </tr>
     </ng-template>
@@ -63,7 +69,7 @@
     <!-- Mensaje cuando no hay datos -->
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="6">No se encontraron medicamentos</td>
+        <td colspan="7">No se encontraron medicamentos</td>
       </tr>
     </ng-template>
   </p-table>

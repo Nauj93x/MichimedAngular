@@ -131,12 +131,13 @@ export class VeterinariosComponent implements OnInit {
   saveVeterinario() {
     this.submitted = true;
 
-    console.log(this.veterinario);
+    this.veterinario.urlFoto = '/assets/img/User.png';
 
     if (
       this.veterinario.nombre?.trim() &&
       this.veterinario.cedula?.trim() &&
-      this.veterinario.especialidad?.trim()
+      this.veterinario.especialidad?.trim() &&
+      this.veterinario.contrasena?.trim()
     ) {
       this.veterinarioService
         .addVeterinario(this.veterinario)

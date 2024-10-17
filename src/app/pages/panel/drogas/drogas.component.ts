@@ -35,20 +35,28 @@ export class DrogasComponent implements OnInit {
       (data: any) => {
         // Verifica si ya hay datos en la tabla y solicita confirmación antes de sobrescribir
         if (this.drogas.length > 0) {
-          const confirmOverwrite = confirm('Ya hay datos cargados, ¿quieres agregar solo las drogas nuevas o sobrescribirlas?');
-
-          if (confirmOverwrite) {
-            // this.agregarDrogasUnicas(data); // Agregar solo las drogas nuevas
-            this.drogas = data;
-          } else {
-            this.drogas = data; // Sobrescribir con los nuevos datos
-          }
+          this.agregarDrogasUnicas(data); // Agregar solo las drogas nuevas
         } else {
           this.drogas = data;
         }
 
-        this.drogaService.addDrogas(this.drogas); // Guardar los datos en el servidor
-        // this.guardarDrogasEnLocalStorage();
+        // Guardar las drogas en el servidor
+        this.drogaService.addDrogas(this.drogas).subscribe(
+          () => {
+            // Una vez guardadas, vuelve a cargar las drogas desde el servidor para tener los IDs actualizados
+            this.drogaService.getDrogas().subscribe(
+              (drogasActualizadas: any) => {
+                this.drogas = drogasActualizadas;
+              },
+              (error) => {
+                this.errorMessage = 'Error al obtener las drogas actualizadas.';
+              }
+            );
+          },
+          (error) => {
+            this.errorMessage = 'Error al guardar las drogas en el servidor.';
+          }
+        );
         this.errorMessage = '';
       },
       (error) => {
@@ -63,16 +71,15 @@ export class DrogasComponent implements OnInit {
   }
 
   // Método para agregar solo las drogas nuevas
-  agregarDrogasUnicas(nuevasDrogas: any[]): void {
-    const drogasExistentesNombres = this.drogas.map(droga => droga.nombre);
+  agregarDrogasUnicas(nuevasDrogas: any[]) {
+    // Usar un set para evitar duplicados
+    const drogasExistentes = new Set(this.drogas.map(droga => droga.nombre)); // Asumiendo que 'nombre' es el identificador de la droga
 
-    nuevasDrogas.forEach(drogaNueva => {
-      if (!drogasExistentesNombres.includes(drogaNueva.nombre)) {
-        this.drogas.push(drogaNueva); // Agregar solo las drogas nuevas
-      }
-    });
+    // Filtrar las nuevas drogas que no están ya en la lista
+    const drogasUnicas = nuevasDrogas.filter(nuevaDroga => !drogasExistentes.has(nuevaDroga.nombre));
 
-    this.guardarDrogasEnLocalStorage(); // Actualiza el localStorage con los nuevos datos
+    // Agregar las drogas únicas a la lista actual
+    this.drogas = [...this.drogas, ...drogasUnicas];
   }
 
   // **Limpiar datos de la tabla y localStorage**

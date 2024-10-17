@@ -18,10 +18,9 @@ export class DrogaService {
     return this.http.get<Droga[]>('http://localhost:8090/drogas');
   }
 
-  addDrogas(drogas: Droga[]) {
-    this.http
-      .post<Droga[]>('http://localhost:8090/drogas/add', drogas)
-      .subscribe();
+  addDrogas(drogas: Droga[]) :  Observable<Droga[]> {
+    return this.http
+      .post<Droga[]>('http://localhost:8090/drogas/add', drogas);
   }
 
   // Método para procesar el archivo Excel en el cliente usando la librería XLSX
@@ -91,12 +90,10 @@ export class DrogaService {
   // Convertir los datos a un formato específico
   private convertData(data: any[]): any[] {
     const formattedData: any[] = [];
-    let idCounter = 1;
     for (let i = 1; i < data.length; i++) {
       const row = data[i];
       if (row && row.length > 0) {
         formattedData.push({
-          id: idCounter++,
           nombre: row[0],
           precioCompra: row[1],
           precioVenta: row[2],

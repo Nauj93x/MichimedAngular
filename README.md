@@ -1,27 +1,53 @@
-# MichimedAngular
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/84d660c7-4e9f-4802-ba09-81799a014311" alt="Logo Michimed" width="350">
+</p>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.15.
+# MichiMed Cat Clinic - Angular
 
-## Development server
+![](https://github.com/adrianrrruiz/MichiMed/blob/main/MichiMed.gif)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Descripción
+MichiMed Cat Clinic es una landing page para una clínica veterinaria especializada en gatos. La página presenta los servicios de la clínica, ofrece opciones de servicios en línea y proporciona un formulario de contacto para los clientes.
 
-## Code scaffolding
+## Tecnologías utilizadas
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+<img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E">
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Instalación
+1. Clona este repositorio:
+```bash
+  git clone https://github.com/tu-usuario/MichiMed.git
+```
+2. Navega al directorio del proyecto:
+```bash
+  cd MichiMed
+```
+3. Abre el archivo `index.html` en tu navegador web
 
-## Build
+## Uso
+La landing page está diseñada para ser intuitiva y fácil de usar:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Navega por las diferentes secciones usando el menú en la parte superior
+- Explora los servicios en línea y presenciales ofrecidos
+- Utiliza el formulario de contacto para enviar consultas
 
-## Running unit tests
+## Características
+- Diseño responsivo y moderno
+- Sección de hero con carrusel de imágenes
+- Servicios en línea:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  - Seguimiento del estado de la mascota
+  - Acceso a registros médicos
+  - Registro de clientes
+  - Gestión para veterinarios
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Galería de servicios adicionales (Corte de uñas, Hospitalización, Limpieza)
+- Formulario de contacto
+- Información de contacto y redes sociales
+## Autores
+- [@adrianrrruiz](https://www.github.com/adrianrrruiz)
+- [@carlosmejia10](https://www.github.com/carlosmejia10)
+- [@Nauj93x](https://www.github.com/Nauj93x)
+## Estado del proyecto
+En desarrollo - Versión 1.0

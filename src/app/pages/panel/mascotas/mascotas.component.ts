@@ -184,6 +184,11 @@ export class MascotasComponent implements OnInit {
       if (this.mascota.cliente && this.mascota.cliente.id !== undefined) {
         this.mascotaService.addMascota(this.mascota, this.mascota.cliente.id);
       }
+      // Formatea la fecha actual
+      const date = new Date();
+      const formattedDate = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getFullYear()).slice(-2)}`;
+      this.mascota.fechaEntrada = formattedDate;
+      this.mascota.medicamento = 'N/A';
       this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Mascota creada', life: 3000 });
       this.mascotas.push(this.mascota);
       this.newMascotaDialog = false;

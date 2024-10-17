@@ -15,17 +15,9 @@
   >
     <!-- Barra superior con botones y buscador -->
     <ng-template pTemplate="caption">
-      <div class="flex">
-        <button
-          pButton
-          label="Limpiar"
-          class="p-button-outlined mr-2"
-          icon="pi pi-filter-slash"
-          (click)="clear(dt)"
-        ></button>
-
+      <div class="flex item">
         <!-- Botón para importar desde Excel -->
-        <label class="p-button p-button-outlined p-button-success">
+        <label class="p-button p-button-outlined p-button-success mr-6">
           <i class="pi pi-upload mr-2"></i>
           <span>Importar desde Excel</span>
           <input

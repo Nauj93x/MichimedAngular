@@ -31,13 +31,15 @@
   <section id="online-services">
     <h2>Servicios en Línea</h2>
     <p>
-      Ofrecemos una variedad de servicios en línea para ayudarte a gestionar
-      la salud de tu mascota. Puedes usar estos servicios para revisar el
-      estado de tu mascota hospitalizada, ver el historial médico de tu
-      mascota, crear una cuenta para gestionar la salud de tu mascota, o ver
-      y gestionar mascotas hospitalizadas si eres veterinario.
+      Ofrecemos una variedad de servicios en línea para ayudarte a gestionar la
+      salud de tu mascota. Puedes usar estos servicios para revisar el estado de
+      tu mascota hospitalizada, ver el historial médico de tu mascota, crear una
+      cuenta para gestionar la salud de tu mascota, o ver y gestionar mascotas
+      hospitalizadas si eres veterinario.
     </p>
-    <button (click)="showFindMascotasDialog()" class="btn-2">Ver mis mascotas</button>
+    <button (click)="showFindMascotasDialog()" class="btn-2">
+      Ver mis mascotas
+    </button>
   </section>
   <section class="service-grid">
     <div class="service-item">
@@ -62,14 +64,9 @@
       <p>Crea una cuenta para gestionar la salud de tu mascota.</p>
     </div>
     <div class="service-item">
-      <img
-        src="../assets/icons/person-2.svg"
-        alt="Gestión para Veterinarios"
-      />
+      <img src="../assets/icons/person-2.svg" alt="Gestión para Veterinarios" />
       <h3>Gestión de Veterinarios</h3>
-      <p>
-        Para veterinarios que gestionan mascotas hospitalizadas.
-      </p>
+      <p>Para veterinarios que gestionan mascotas hospitalizadas.</p>
     </div>
   </section>
   <section id="additional-services">
@@ -107,36 +104,98 @@
       <input type="text" placeholder="Asunto" required />
       <h3>Mensaje</h3>
       <textarea class="Mensaje" type="text" required></textarea>
-      <button type="submit"  class="btn-3">Enviar</button>
+      <button type="submit" class="btn-3">Enviar</button>
     </form>
   </section>
 </main>
 
 <app-footer></app-footer>
 
- <!-- Dialog para buscar mascotas -->
- <p-dialog header="Buscar mis mascotas" [(visible)]="findMascotasDialog" [style]="{width: '30vw'}" [modal]="true">
+<!-- Dialog para buscar mascotas -->
+<p-dialog
+  header="Buscar mis mascotas"
+  [(visible)]="findMascotasDialog"
+  [style]="{ width: '30vw' }"
+  [modal]="true"
+>
   <div class="flex flex-column gap-2">
     <label for="cedula">Ingrese su cédula</label>
     <input pInputText class="primeng-input" id="cedula" [(ngModel)]="cedula" />
     <button class="btn-2" (click)="buscarMascota()">Buscar</button>
   </div>
 
-<!-- Mostrar mascotas encontradas -->
-<div *ngIf="mascotas.length > 0">
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-    <div *ngFor="let mascota of mascotas" class="mascota-card p-4 rounded-lg shadow-md bg-white">
-      <img [src]="mascota.foto" [alt]="mascota.nombre" class="block m-auto w-24 h-24 rounded-full object-cover mb-4" />
-      <ul class="data list-none p-0 text-center">
-        <li class="mb-2"><strong>Nombre: </strong><span>{{ mascota.nombre }}</span></li>
-        <li class="mb-2"><strong>Edad: </strong><span>{{ mascota.edad }} años</span></li>
-        <li class="mb-2"><strong>Raza: </strong><span>{{ mascota.raza }}</span></li>
-        <li class="mb-2"><strong>Peso: </strong><span>{{ mascota.peso }} kg</span></li>
-      </ul>
+  <!-- Mostrar mascotas encontradas -->
+  <div *ngIf="mascotas.length > 0">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+      <div
+        *ngFor="let mascota of mascotas"
+        class="mascota-card p-4 rounded-lg shadow-md bg-white"
+      >
+        <img
+          [src]="mascota.foto"
+          [alt]="mascota.nombre"
+          class="block m-auto w-24 h-24 rounded-full object-cover mb-4"
+        />
+        <ul class="data list-none p-0 text-center">
+          <li class="mb-2">
+            <strong>Nombre: </strong><span>{{ mascota.nombre }}</span>
+          </li>
+          <li class="mb-2">
+            <strong>Edad: </strong><span>{{ mascota.edad }} años</span>
+          </li>
+          <li class="mb-2">
+            <strong>Raza: </strong><span>{{ mascota.raza }}</span>
+          </li>
+          <li class="mb-2">
+            <strong>Peso: </strong><span>{{ mascota.peso }} kg</span>
+          </li>
+        </ul>
+        <p-button
+          label="Ver tratamientos"
+          [rounded]="true"
+          severity="secondary"
+          (click)="verTratamientos(mascota.id!)"
+        ></p-button>
+      </div>
     </div>
   </div>
-</div>
+</p-dialog>
 
+<!-- Dialog para ver tratamientos -->
+<p-dialog
+  header="Historial Médico"
+  [(visible)]="viewTratamientosMascotaDialog"
+  [style]="{ width: '50vw' }"
+  [modal]="true"
+>
+  <!-- Mostrar tratamientos encontrados -->
+  <div class="flex flex-wrap justify-center gap-4">
+    <p-card
+      *ngFor="let tratamiento of tratamientos"
+      [header]="tratamiento.fecha"
+      [subheader]="'Tratado por: ' + tratamiento.nombreVeterinario"
+      [style]="{ width: '360px' }"
+    >
+      <div class="flex justify-center">
+        <img
+          class="object-cover rounded-full shadow-2 mb-4"
+          [alt]="tratamiento.nombreVeterinario"
+          [src]="tratamiento.urlFotoVeterinario"
+          width="200"
+        />
+      </div>
+      <h4>Drogas asignadas</h4>
+      <ul *ngIf="tratamiento.nombresDrogas">
+        <li *ngFor="let droga of tratamiento.nombresDrogas">
+          {{ droga }}
+        </li>
+      </ul>
+      <p *ngIf="tratamiento.nombresDrogas.length == 0">
+        No tiene drogas asignadas
+      </p>
+    </p-card>
+  </div>
+</p-dialog>
 
 <!-- Mensajes de notificación -->
 <p-toast></p-toast>

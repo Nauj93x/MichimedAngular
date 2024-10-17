@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { ClienteService } from '../../services/cliente.service'; 
-import { Mascota } from '../../model/mascota'; 
-import { MessageService } from 'primeng/api'; 
+import { ClienteService } from '../../services/cliente.service';
+import { Mascota } from '../../model/mascota';
+import { MessageService } from 'primeng/api';
+import { TratamientoService } from 'src/app/services/tratamiento.service';
+import { HistorialMedicoDTO } from 'src/app/model/historial-medico-dto';
 
 @Component({
   selector: 'app-landing',
@@ -11,17 +13,17 @@ import { MessageService } from 'primeng/api';
 })
 export class LandingComponent {
   findMascotasDialog: boolean = false;
-  viewMascotaDialog: boolean = false;
+  viewTratamientosMascotaDialog: boolean = false;
   selectedMascota: Mascota | null = null;
   cedula: string = '';
   mascotas: Mascota[] = [];
   clientes: any[] = [];
+  tratamientos: HistorialMedicoDTO[] = [];
 
-  constructor(private clienteService: ClienteService, private messageService: MessageService) {
+  constructor(private clienteService: ClienteService, private messageService: MessageService, private tratamientoService: TratamientoService) {
     this.clienteService.getClientes().subscribe(
       (clientes: any[]) => {
         this.clientes = clientes;
-        console.log('Clientes cargados:', this.clientes); 
       },
       (error) => {
         console.error('Error al cargar los clientes:', error);
@@ -41,35 +43,23 @@ export class LandingComponent {
     }
   }
 
-  openView(mascota: Mascota): void {
-    this.selectedMascota = mascota;
-    this.viewMascotaDialog = true;
-  }
-
   buscarMascota() {
     const cedulaTrimmed = this.cedula.trim();
-  
+
     if (!cedulaTrimmed) {
       this.messageService.add({ severity: 'warn', summary: 'Advertencia', detail: 'Por favor ingresa una cédula válida' });
       return;
     }
-  
+
     this.mascotas = [];
     let clienteEncontrado = false;
 
-    console.log('Cédula ingresada:', cedulaTrimmed);
-  
     for (const cliente of this.clientes) {
-      console.log('Cédula del cliente:', cliente.cedula);
-
       if (cliente.cedula && cliente.cedula === cedulaTrimmed) {
         clienteEncontrado = true;
-        console.log('Cliente encontrado:', cliente);
 
         this.clienteService.getClienteMascotas(cliente.id).subscribe(
           (clienteMascotas: Mascota[]) => {
-            console.log('Mascotas encontradas:', clienteMascotas); 
-
             if (clienteMascotas.length > 0) {
               this.mascotas = clienteMascotas;
             } else {
@@ -93,6 +83,24 @@ export class LandingComponent {
 
   showFindMascotasDialog() {
     this.findMascotasDialog = true;
+  }
+
+  showTratamientosMascotaDialog(){
+    this.findMascotasDialog = false;
+    this.viewTratamientosMascotaDialog = true;
+  }
+
+  verTratamientos(idMascota: number) {
+    this.tratamientoService
+        .getHistorialMedicoByMascotaId(idMascota)
+        .subscribe((tratamientos) => {
+          if(tratamientos.length === 0){
+            this.messageService.add({ severity: 'info', summary: 'Información', detail: 'No se encontraron tratamientos para la mascota seleccionada', life: 3000 });
+          }else{
+            this.tratamientos = tratamientos;
+            this.showTratamientosMascotaDialog();
+          }
+        });
   }
 
   ngAfterViewInit() {

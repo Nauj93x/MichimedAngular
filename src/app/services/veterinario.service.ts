@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Veterinario } from '../model/veterinario';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
 import { MascotaService } from './mascota.service';  // Para obtener las mascotas de un veterinario
 import { Mascota } from '../model/mascota';           // Interfaz Mascota
 
@@ -18,8 +19,14 @@ export class VeterinarioService {
   ) {}
 
 
-  getVeterinariosActivos() :Observable<String>{
-    return this.http.get<String>('http://localhost:8090/veterinarios/activos')
+  getVeterinariosActivos(): Observable<{ activos: number; total: number }> {
+    return this.http.get<{ VETERINARIOS_ACTIVOS: number; TOTAL_VETERINARIOS: number }>('http://localhost:8090/veterinarios/estadisticas')
+      .pipe(
+        map(response => ({
+          activos: response.VETERINARIOS_ACTIVOS,
+          total: response.TOTAL_VETERINARIOS
+        }))
+      );
   }
 
   // Método para obtener todos los veterinarios

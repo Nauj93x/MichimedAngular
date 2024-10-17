@@ -1,0 +1,189 @@
+<div class="grid grid-flow-col grid-cols-2 grid-rows-1 gap-5 mt-10 items-start">
+  <div class="graph-container rounded-3xl content-center p-3">
+    <div class="grid grid-flow-col h-full content-center items-center">
+      <ul class="flex flex-col items-center content-center mt-2">
+        <li class="flex flex-col w-3/4 justify-center content-center">
+          <h3 class="text-3xl text-[#7FA1C3] font-light mb-0">Activos</h3>
+          <p class="font-thin text-md text-[#b0c1d1]">
+            {{ veterinariosActivos }} veterinarios
+          </p>
+        </li>
+        <li class="flex flex-col w-3/4 justify-center">
+          <h3 class="text-3xl text-[#D0B8A8] font-light mb-0">Inactivos</h3>
+          <p class="font-thin text-md text-[#c9bcb3] mb-8">
+            {{ veterinariosInactivos }} veterinarios
+          </p>
+        </li>
+      </ul>
+      <!-- Mostrar solo cuando los datos están listos -->
+      <app-circular-diagram
+        class="flex justify-self-center justify-center items-center w-full h-auto"
+        *ngIf="isDataLoaded"
+        [data1]="veterinariosActivos"
+        [data2]="veterinariosInactivos"
+      ></app-circular-diagram>
+      <!-- Mostrar el loader mientras los datos se cargan -->
+    </div>
+  </div>
+  <div
+    *ngIf="isDataLoaded"
+    class="graph-container rounded-3xl content-center p-3 flex flex-row items-center justify-center"
+  >
+    <div class="flex flex-row items-center justify-center gap-4 p-2 h-full my-9">
+      <div class="flex items-center justify-center">
+        <p class="text-center m-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#F3C623"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-laurel-wreath-1"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M6.436 8a8.6 8.6 0 0 0 -.436 2.727c0 4.017 2.686 7.273 6 7.273s6 -3.256 6 -7.273a8.6 8.6 0 0 0 -.436 -2.727"
+            />
+            <path d="M14.5 21s-.682 -3 -2.5 -3s-2.5 3 -2.5 3" />
+            <path
+              d="M18.52 5.23c.292 1.666 -1.02 2.77 -1.02 2.77s-1.603 -.563 -1.895 -2.23c-.292 -1.666 1.02 -2.77 1.02 -2.77s1.603 .563 1.895 2.23"
+            />
+            <path
+              d="M21.094 12.14c-1.281 1.266 -3.016 .76 -3.016 .76s-.454 -1.772 .828 -3.04c1.28 -1.266 3.016 -.76 3.016 -.76s.454 1.772 -.828 3.04"
+            />
+            <path
+              d="M17.734 18.826c-1.5 -.575 -1.734 -2.19 -1.734 -2.19s1.267 -1.038 2.767 -.462c1.5 .575 1.733 2.19 1.733 2.19s-1.267 1.038 -2.767 .462"
+            />
+            <path
+              d="M6.267 18.826c1.5 -.575 1.733 -2.19 1.733 -2.19s-1.267 -1.038 -2.767 -.462c-1.5 .575 -1.733 2.19 -1.733 2.19s1.267 1.038 2.767 .462"
+            />
+            <path
+              d="M2.906 12.14c1.281 1.266 3.016 .76 3.016 .76s.454 -1.772 -.828 -3.04c-1.281 -1.265 -3.016 -.76 -3.016 -.76s-.454 1.772 .828 3.04"
+            />
+            <path
+              d="M5.48 5.23c-.292 1.666 1.02 2.77 1.02 2.77s1.603 -.563 1.895 -2.23c.292 -1.666 -1.02 -2.77 -1.02 -2.77s-1.603 .563 -1.895 2.23"
+            />
+            <path d="M11 9l1 -1v6" />
+          </svg>
+        </p>
+        <div>
+          <h3 class="text-2xl m-0">
+            {{ topTratamientos[0].VETERINARIO_NOMBRE }}
+          </h3>
+          <p class="m-0">{{ topTratamientos[0].DROGA_NOMBRE }}</p>
+          <p class="m-0">
+            Unidades: {{ topTratamientos[0].TOTAL_UNIDADES_VENDIDAS }}
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center justify-center">
+        <p class="text-center m-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#758694"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-laurel-wreath-2"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M6.436 8a8.6 8.6 0 0 0 -.436 2.727c0 4.017 2.686 7.273 6 7.273s6 -3.256 6 -7.273a8.6 8.6 0 0 0 -.436 -2.727"
+            />
+            <path d="M14.5 21s-.682 -3 -2.5 -3s-2.5 3 -2.5 3" />
+            <path
+              d="M18.52 5.23c.292 1.666 -1.02 2.77 -1.02 2.77s-1.603 -.563 -1.895 -2.23c-.292 -1.666 1.02 -2.77 1.02 -2.77s1.603 .563 1.895 2.23"
+            />
+            <path
+              d="M21.094 12.14c-1.281 1.266 -3.016 .76 -3.016 .76s-.454 -1.772 .828 -3.04c1.28 -1.266 3.016 -.76 3.016 -.76s.454 1.772 -.828 3.04"
+            />
+            <path
+              d="M17.734 18.826c-1.5 -.575 -1.734 -2.19 -1.734 -2.19s1.267 -1.038 2.767 -.462c1.5 .575 1.733 2.19 1.733 2.19s-1.267 1.038 -2.767 .462"
+            />
+            <path
+              d="M6.267 18.826c1.5 -.575 1.733 -2.19 1.733 -2.19s-1.267 -1.038 -2.767 -.462c-1.5 .575 -1.733 2.19 -1.733 2.19s1.267 1.038 2.767 .462"
+            />
+            <path
+              d="M2.906 12.14c1.281 1.266 3.016 .76 3.016 .76s.454 -1.772 -.828 -3.04c-1.281 -1.265 -3.016 -.76 -3.016 -.76s-.454 1.772 .828 3.04"
+            />
+            <path
+              d="M5.48 5.23c-.292 1.666 1.02 2.77 1.02 2.77s1.603 -.563 1.895 -2.23c.292 -1.666 -1.02 -2.77 -1.02 -2.77s-1.603 .563 -1.895 2.23"
+            />
+            <path
+              d="M10.6 8h2a1 1 0 0 1 1 1v1a1 1 0 0 1 -1 1h-1a1 1 0 0 0 -1 1v1a1 1 0 0 0 1 1h2"
+            />
+          </svg>
+        </p>
+        <div>
+          <h3 class="text-2xl m-0">
+            {{ topTratamientos[1].VETERINARIO_NOMBRE }}
+          </h3>
+          <p class="m-0">{{ topTratamientos[1].DROGA_NOMBRE }}</p>
+          <p class="m-0">
+            Unidades: {{ topTratamientos[1].TOTAL_UNIDADES_VENDIDAS }}
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center justify-center">
+        <p class="text-center m-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#A66E38"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-laurel-wreath-3"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M6.436 8a8.6 8.6 0 0 0 -.436 2.727c0 4.017 2.686 7.273 6 7.273s6 -3.256 6 -7.273a8.6 8.6 0 0 0 -.436 -2.727"
+            />
+            <path d="M14.5 21s-.682 -3 -2.5 -3s-2.5 3 -2.5 3" />
+            <path
+              d="M18.52 5.23c.292 1.666 -1.02 2.77 -1.02 2.77s-1.603 -.563 -1.895 -2.23c-.292 -1.666 1.02 -2.77 1.02 -2.77s1.603 .563 1.895 2.23"
+            />
+            <path
+              d="M21.094 12.14c-1.281 1.266 -3.016 .76 -3.016 .76s-.454 -1.772 .828 -3.04c1.28 -1.266 3.016 -.76 3.016 -.76s.454 1.772 -.828 3.04"
+            />
+            <path
+              d="M17.734 18.826c-1.5 -.575 -1.734 -2.19 -1.734 -2.19s1.267 -1.038 2.767 -.462c1.5 .575 1.733 2.19 1.733 2.19s-1.267 1.038 -2.767 .462"
+            />
+            <path
+              d="M6.267 18.826c1.5 -.575 1.733 -2.19 1.733 -2.19s-1.267 -1.038 -2.767 -.462c-1.5 .575 -1.733 2.19 -1.733 2.19s1.267 1.038 2.767 .462"
+            />
+            <path
+              d="M2.906 12.14c1.281 1.266 3.016 .76 3.016 .76s.454 -1.772 -.828 -3.04c-1.281 -1.265 -3.016 -.76 -3.016 -.76s-.454 1.772 .828 3.04"
+            />
+            <path
+              d="M5.48 5.23c-.292 1.666 1.02 2.77 1.02 2.77s1.603 -.563 1.895 -2.23c.292 -1.666 -1.02 -2.77 -1.02 -2.77s-1.603 .563 -1.895 2.23"
+            />
+            <path
+              d="M10.5 8h1.5a1.5 1.5 0 0 1 0 3h-1h1a1.5 1.5 0 0 1 0 3h-1.5"
+            />
+          </svg>
+        </p>
+        <div>
+          <h3 class="text-2xl m-0">
+            {{ topTratamientos[2].VETERINARIO_NOMBRE }}
+          </h3>
+          <p class="m-0">{{ topTratamientos[2].DROGA_NOMBRE }}</p>
+          <p class="m-0">
+            Unidades: {{ topTratamientos[2].TOTAL_UNIDADES_VENDIDAS }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

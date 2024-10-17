@@ -264,6 +264,7 @@
       <li>Email: <span [innerText]="selectedCliente.email"></span></li>
     </ul>
     <h2 class="align-self-center text-xl font-bold mt-4">Mascotas:</h2>
+    <p *ngIf="mascotasCliente.length == 0">Por el momento no tiene mascotas</p>
     <div class="w-full grid grid-cols-2 gap-4 mt-3 h-auto">
       <div
         class="flex flex-col items-center"

@@ -76,7 +76,7 @@ export class ClientesComponent implements OnInit {
     this.selectedCliente = cliente;
     if (this.selectedCliente.id !== undefined) {
       this.clienteService.getClienteMascotas(this.selectedCliente.id).subscribe(
-        (mascotas) => this.mascotasCliente = mascotas
+        (mascotas) => this.mascotasCliente = mascotas.filter(mascota => mascota.estado !== 'Eliminada')
       );
     }
     this.viewClienteDialog = true;

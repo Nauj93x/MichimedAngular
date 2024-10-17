@@ -214,6 +214,23 @@
           >Especialidad is required.</small
         >
       </div>
+      <div class="field mt-[1.70rem]">
+        <span class="p-float-label">
+          <input
+            class="primeng-input"
+            type="password"
+            pInputText
+            id="contrasena"
+            [(ngModel)]="veterinario.contrasena"
+            required
+            autofocus
+          />
+          <label htmlFor="contrasena">Contraseña</label>
+        </span>
+        <small class="p-error" *ngIf="submitted && !veterinario.contrasena"
+          >Contrasena is required.</small
+        >
+      </div>
     </ng-template>
 
     <ng-template pTemplate="footer">

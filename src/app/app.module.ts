@@ -49,6 +49,7 @@ import { CircularDiagramComponent } from './components/circular-diagram/circular
 import { LinesChartComponent } from './components/lines-chart/lines-chart.component';
 import { DrogasAuxTableComponent } from './components/drogas-aux-table/drogas-aux-table.component';
 import { ProfitComponent } from './components/profit/profit.component';
+import { VeterinariosDsComponent } from './components/veterinarios-ds/veterinarios-ds.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { ProfitComponent } from './components/profit/profit.component';
     LinesChartComponent,
     DrogasAuxTableComponent,
     ProfitComponent,
-    LoaderComponent
+    LoaderComponent,
+    VeterinariosDsComponent
   ],
   imports: [
     BrowserModule,

@@ -12,8 +12,8 @@ import {
   styleUrls: ['./circular-diagram.component.css'],
 })
 export class CircularDiagramComponent implements OnChanges {
-  @Input() enTratamiento: number = 0;
-  @Input() tratadas: number = 0;
+  @Input() data1: number = 0;
+  @Input() data2: number = 0;
   data: any;
   options: any;
 
@@ -23,7 +23,7 @@ export class CircularDiagramComponent implements OnChanges {
     this.data = {
       datasets: [
         {
-          data: [this.enTratamiento, this.tratadas], // Inicializa los datos
+          data: [this.data1, this.data2], // Inicializa los datos
           backgroundColor: ['#7FA1C3', '#D0B8A8'],
           borderWidth: 0,
           hoverBackgroundColor: ['#7FA1C3', '#D0B8A8'],
@@ -49,13 +49,13 @@ export class CircularDiagramComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['enTratamiento'] || changes['tratadas']) {
+    if (changes['data1'] || changes['data2']) {
       this.updateChartData();
     }
   }
 
   updateChartData() {
-    this.data.datasets[0].data = [this.enTratamiento, this.tratadas];
+    this.data.datasets[0].data = [this.data1, this.data2];
     this.cdr.detectChanges(); // Detecta cambios manualmente
   }
 }

@@ -27,8 +27,8 @@
         <app-circular-diagram
           class="flex justify-self-center justify-center items-center w-full h-auto"
           *ngIf="isDataLoaded"
-          [enTratamiento]="enTratamiento"
-          [tratadas]="tratadas"
+          [data1]="enTratamiento"
+          [data2]="tratadas"
         />
       </div>
     </div>
@@ -55,4 +55,5 @@
   <div>
     <app-profit></app-profit>
   </div>
+  <app-veterinarios-ds></app-veterinarios-ds>
 </main>

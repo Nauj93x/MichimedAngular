@@ -3,6 +3,7 @@ import { Tratamiento } from '../model/tratamiento';  // Interfaz Tratamiento
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HistorialMedicoDTO } from '../model/historial-medico-dto';
+import { TopTratamiento } from '../model/top-tratamiento';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,10 @@ export class TratamientoService {
   constructor(
     private http: HttpClient // Importa HttpClient
   ) {
+  }
+
+  getTop3(): Observable<TopTratamiento[]> {
+    return this.http.get<TopTratamiento[]>('http://localhost:8090/tratamientos/top-3');
   }
 
   // Método para obtener todos los tratamientos

@@ -98,7 +98,9 @@ export class VeterinariosComponent implements OnInit {
     ) {
       this.veterinarioService
         .getVeterinarioMascotas(this.selectedVeterinario.id)
-        .subscribe((mascotas) => (this.mascotasVeterinario = mascotas));
+        .subscribe((mascotas) => {
+          this.mascotasVeterinario = mascotas.filter(mascota => mascota.estado !== 'Eliminada');
+        });
     }
   }
 

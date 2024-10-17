@@ -243,15 +243,24 @@
     styleClass="p-fluid"
   >
     <ng-template pTemplate="header">
-      <span class="text-xl font-bold" [innerText]="selectedVeterinario.nombre"></span>
+      <span
+        class="text-xl font-bold"
+        [innerText]="selectedVeterinario.nombre"
+      ></span>
     </ng-template>
     <ng-template pTemplate="content">
       <ul class="data">
         <li>Nombre: <span [innerText]="selectedVeterinario.nombre"></span></li>
         <li>Cedula: <span [innerText]="selectedVeterinario.cedula"></span></li>
-        <li>Especialidad: <span [innerText]="selectedVeterinario.especialidad"></span></li>
+        <li>
+          Especialidad:
+          <span [innerText]="selectedVeterinario.especialidad"></span>
+        </li>
       </ul>
       <h2 class="align-self-center text-xl font-bold mt-4">Mascotas:</h2>
+      <p *ngIf="mascotasVeterinario.length == 0">
+        Por el momento no tiene mascotas asignadas
+      </p>
       <div class="w-full grid grid-cols-2 gap-4 mt-3 h-auto">
         <div
           class="flex flex-col items-center"

@@ -22,7 +22,7 @@ export class SignInComponent {
     private messageService: MessageService
   ) {
     this.signInForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      cedula: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
   }
@@ -30,17 +30,25 @@ export class SignInComponent {
   onSubmit(): void {
     if (this.signInForm.valid) {
       const user: User = this.signInForm.value;
-      this.http.post('http://localhost:8090/sign-in', user).subscribe(
+      this.http.post<{id:number,  admin: boolean }>('http://localhost:8090/sign-in', user).subscribe(
         response => {
-          console.log(response);
-          this.router.navigate(['/mascotas']);
+          localStorage.clear();
+          if(response.admin){
+            localStorage.setItem('admin', 'true');
+            localStorage.setItem('idAdmin', response.id.toString());
+            this.router.navigate(['/admin/dashboard']);
+          }else{
+            localStorage.setItem('admin', 'false');
+            localStorage.setItem('idVeterinario', response.id.toString());
+            this.router.navigate(['/mascotas']);
+          }
           this.formSubmit.emit();
         },
         (error: HttpErrorResponse) => {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: error.error.message || 'An error occurred during sign-in'
+            detail: error.error.message || 'Ha ocurrido un error durante el inicio de sesión'
           });
         }
       );

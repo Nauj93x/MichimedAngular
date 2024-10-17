@@ -10,7 +10,7 @@
     class="h-100 d-flex flex-column justify-content-between align-items-start"
   >
     <ul class="nav flex-column">
-      <li class="nav-item">
+      <li *ngIf="isAdmin" class="nav-item">
         <a href="/admin/dashboard" class="nav-link active"
           ><i class="bi bi-house me-3"></i>Panel</a
         >
@@ -20,7 +20,7 @@
           ><i class="bi bi-person-gear me-3"></i>Clientes</a
         >
       </li>
-      <li class="nav-item">
+      <li *ngIf="isAdmin" class="nav-item">
         <a href="/admin/veterinarios" class="nav-link"
           ><i class="bi bi-person-gear me-3"></i>Veterinarios</a
         >
@@ -56,6 +56,7 @@
   </nav>
 </aside>
 <header class="header-2">
-  <img src="/assets/img/User.png" alt="User photo" />
+  <p class="mb-0 mr-4">{{ "¡Bienvenid@ " + nombre + "!" }}</p>
+  <img [src]="urlProfile" class="rounded-full object-cover" alt="User photo" />
 </header>
 <!-- // -->

@@ -19,23 +19,15 @@
     </h1>
     <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
-        <label for="email" class="form-label w-100 text-start">Email</label>
+        <label for="cedula" class="form-label w-100 text-start">Cédula</label>
         <input
-          type="email"
-          id="email"
+          type="cedula"
+          id="cedula"
           class="form-control"
-          formControlName="email"
-          placeholder="Your email"
+          formControlName="cedula"
+          placeholder="Ingresa tu cédula"
           required
         />
-        <small
-          class="text-danger"
-          *ngIf="
-            signInForm.get('email')?.invalid && signInForm.get('email')?.touched
-          "
-        >
-          Please enter a valid email address.
-        </small>
       </div>
       <div class="mb-4">
         <label for="password" class="form-label w-100 text-start"
@@ -46,11 +38,11 @@
           id="password"
           class="form-control"
           formControlName="password"
-          placeholder="Your password"
+          placeholder="Ingresa tu contraseña"
           required
         />
       </div>
-      <button type="submit" class="btn-2 w-100">Sign in</button>
+      <button type="submit" class="btn-2 w-100">Ingresar</button>
     </form>
   </div>
 </main>

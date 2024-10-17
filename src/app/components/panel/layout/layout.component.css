@@ -2,6 +2,7 @@
   padding: 10px;
   display: flex;
   justify-content: end;
+  align-items: center;
 }
 
 .header-2 img {height: 40px;}

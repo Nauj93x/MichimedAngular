@@ -1,5 +1,4 @@
 export interface User {
-    email: string;
+    cedula: string;
     password: string;
   }
-  

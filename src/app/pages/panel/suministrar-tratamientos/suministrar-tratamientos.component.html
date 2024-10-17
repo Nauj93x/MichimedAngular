@@ -19,14 +19,27 @@
       ></p-dropdown>
     </div>
 
-    <div class="field mt-[1rem]">
+    <div *ngIf="isAdmin" class="field mt-[1rem]">
+      <label for="veterinarios">Veterinario</label>
+      <p-dropdown
+        inputId="veterinarios"
+        [options]="veterinarios"
+        optionLabel="nombre"
+        [showClear]="true"
+        [(ngModel)]="tratamiento.veterinario"
+        [filter]="true"
+        filterBy="nombre"
+        class="block w-full"
+      ></p-dropdown>
+    </div>
+
+    <div *ngIf="!isAdmin" class="field mt-[1rem]">
       <label htmlFor="veterinario">Veterinario</label>
       <input
         type="text"
         pInputText
         id="veterinario"
         [(ngModel)]="nombreVeterinario"
-        placeholder="Juan Angarita"
         autofocus
         disabled
         class="block w-full"

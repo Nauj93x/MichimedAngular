@@ -18,11 +18,14 @@ import { VeterinarioService } from 'src/app/services/veterinario.service';
 export class SuministrarTratamientosComponent implements OnInit {
 
   mascotas: Mascota[] = [];
+  veterinarios: Veterinario[] = [];
   drogas: Droga[] = [];
   nombreVeterinario = '';
   veterinario: Veterinario = {nombre: '', contrasena: '', especialidad: '', cedula: '', urlFoto: ''};
 
   tratamiento: Tratamiento = {fecha: ''};
+
+  isAdmin = localStorage.getItem('admin') === 'true';
 
   constructor(
     private mascotaService: MascotaService,
@@ -41,13 +44,17 @@ export class SuministrarTratamientosComponent implements OnInit {
       .getDrogas()
       .subscribe((drogas) => (this.drogas = drogas));
 
-    const veterinarioId = Number(localStorage.getItem('idVeterinario'));
-    this.veterinarioService
-      .getVeterinarioById(veterinarioId).subscribe((veterinario) => {
-        this.tratamiento.veterinario = veterinario;
-        this.nombreVeterinario = veterinario.nombre;
-        this.veterinario = veterinario;
-      });
+    if (this.isAdmin) {
+      this.veterinarioService.getVeterinarios().subscribe((veterinarios)  => (this.veterinarios = veterinarios));
+    }else{
+      const veterinarioId = Number(localStorage.getItem('idVeterinario'));
+      this.veterinarioService
+        .getVeterinarioById(veterinarioId).subscribe((veterinario) => {
+          this.tratamiento.veterinario = veterinario;
+          this.nombreVeterinario = veterinario.nombre;
+          this.veterinario = veterinario;
+        });
+    }
   }
 
   saveTratamiento(): void {
@@ -60,8 +67,9 @@ export class SuministrarTratamientosComponent implements OnInit {
 
     this.messageService.add({ severity: 'success', summary: '¡Exitoso!', detail: 'Tratamiento creado', life: 3000 });
 
-
-    this.tratamiento = {fecha: '', veterinario: this.veterinario};
+    if(!this.isAdmin){
+      this.tratamiento = {fecha: '', veterinario: this.veterinario};
+    }
   }
 
 }

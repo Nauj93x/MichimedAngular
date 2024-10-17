@@ -20,12 +20,14 @@ export class HistorialMedicoComponent implements OnInit {
   constructor(private mascotaService: MascotaService, private tratamientoService: TratamientoService, private veterinarioService: VeterinarioService , private messageService: MessageService) {}
 
   ngOnInit(): void {
+    // Carga las mascotas al inicializar
     this.mascotaService
       .getMascotas()
       .subscribe((mascotas) => (this.mascotas = mascotas));
   }
 
   findHistorialMedico(): void {
+    // Obtiene el historial médico de la mascota seleccionada
     if (this.selectedMascota) {
       this.tratamientoService
         .getHistorialMedicoByMascotaId(this.selectedMascota.id!)

@@ -44,6 +44,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TimelineModule } from 'primeng/timeline';
 import { CardModule } from 'primeng/card';
+import { CircularDiagramComponent } from './components/circular-diagram/circular-diagram.component';
+import { LinesChartComponent } from './components/lines-chart/lines-chart.component';
 
 
 @NgModule({
@@ -62,7 +64,9 @@ import { CardModule } from 'primeng/card';
     VeterinariosComponent,
     DashboardComponent,
     SuministrarTratamientosComponent,
-    HistorialMedicoComponent
+    HistorialMedicoComponent,
+    CircularDiagramComponent,
+    LinesChartComponent
   ],
   imports: [
     BrowserModule,

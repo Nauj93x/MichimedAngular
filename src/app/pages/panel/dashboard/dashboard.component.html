@@ -1,13 +1,12 @@
 <app-layout></app-layout>
-
 <main id="content">
   <h1 class="mb-3 text-center text-3xl">Panel</h1>
-  <div class="grid grid-flow-col grid-cols-2 gap-5 h-60 mt-10">
-    <div class="graph-container rounded-3xl content-center">
-      <div class="grid grid-flow-col h-full">
-        <ul class="flex flex-col items-center justify-end content-center">
-          <li class="flex flex-col w-3/4 justify-center">
-            <h3 class="text-3xl text-[#7FA1C3] font-light -mb-0">
+  <div class="grid grid-flow-col grid-cols-2 grid-rows-1 gap-5 mt-10 items-start">
+    <div class="graph-container rounded-3xl content-center  p-3">
+      <div class="grid grid-flow-col h-full content-center items-center">
+        <ul class="flex flex-col items-center content-center mt-2">
+          <li class="flex flex-col w-3/4 justify-center content-center">
+            <h3 class="text-3xl text-[#7FA1C3] font-light mb-0">
               En tratamiento
             </h3>
             <p class="font-thin text-md text-[#b0c1d1]">
@@ -22,49 +21,28 @@
           </li>
         </ul>
         <!-- Mostrar solo cuando los datos están listos -->
-        <div
+        <app-circular-diagram
           class="flex justify-self-center justify-center items-center w-full h-auto"
           *ngIf="isDataLoaded"
-        >
-          <p-chart
-            type="doughnut"
-            [data]="data"
-            [options]="options"
-            class="w-6/12"
-          ></p-chart>
-        </div>
+          [enTratamiento]="enTratamiento"
+          [tratadas]="tratadas"
+        />
       </div>
     </div>
-    <div class="graph-container rounded-3xl content-center">
-      <div class="grid grid-flow-col h-full">
-        <ul class="flex flex-col items-center justify-end content-center">
-          <li class="flex flex-col w-3/4 justify-center">
-            <h3 class="text-3xl text-[#7FA1C3] font-light -mb-0">
-              En tratamiento
-            </h3>
-            <p class="font-thin text-md text-[#b0c1d1]">
-              {{ enTratamiento }} mascotas
-            </p>
-          </li>
-          <li class="flex flex-col w-3/4 justify-center">
-            <h3 class="text-3xl text-[#D0B8A8] font-light mb-0">Tratadas</h3>
-            <p class="font-thin text-md text-[#c9bcb3] mb-8">
-              {{ tratadas }} mascotas
-            </p>
-          </li>
-        </ul>
+    <div class="graph-container rounded-3xl content-center justify-center">
+      <div class="grid grid-flow-col h-full items-center">
         <!-- Mostrar solo cuando los datos están listos -->
-        <div
-          class="flex justify-self-center justify-center items-center w-full h-auto"
-          *ngIf="isDataLoaded"
-        >
-          <p-chart
-            type="doughnut"
-            [data]="data"
-            [options]="options"
-            class="w-6/12"
-          ></p-chart>
-        </div>
+        <app-lines-chart
+        class="w-9/12 h-auto my-2 mx-4"
+        *ngIf="isDataLoaded"
+        [labels]="labels"
+        [dataValues]="dataValues"
+        ></app-lines-chart>
+        <div class="flex flex-col items-center content-center mt-2 w-20">
+          <h3 class="text-3xl text-[#7FA1C3] font-light mb-0">
+            Cantidad de tratamientos Suministrados
+          </h3>
+      </div>
       </div>
     </div>
   </div>

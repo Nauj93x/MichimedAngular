@@ -29,4 +29,8 @@ export class TratamientoService {
   getHistorialMedicoByMascotaId(mascotaId: number): Observable<HistorialMedicoDTO[]> {
     return this.http.get<HistorialMedicoDTO[]>(`http://localhost:8090/tratamientos/historial-medico/${mascotaId}`);
   }
+
+  getTratamientosPorMes(): Observable<any> {
+    return this.http.get<any>('http://localhost:8090/tratamientos/tratamientos-por-mes');
+  }
 }

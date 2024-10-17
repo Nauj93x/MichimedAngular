@@ -1,5 +1,10 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { MascotaService } from '../../../services/mascota.service';
+import { Component, OnInit } from '@angular/core';
+import { MascotaService } from 'src/app/services/mascota.service';
+import { TratamientoService } from 'src/app/services/tratamiento.service';
+import { ChangeDetectorRef } from '@angular/core';
+import { Tratamiento } from 'src/app/model/tratamiento';
+import { DrogaService } from 'src/app/services/drogas.service';
+import { Droga } from 'src/app/model/droga';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,13 +12,19 @@ import { MascotaService } from '../../../services/mascota.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  drogas: Droga[] = [];
+  tratamientos: Tratamiento[] = [];
   enTratamiento: number = 0;
   tratadas: number = 0;
-  data: any;
-  options: any;
-  isDataLoaded: boolean = false;  // Control de datos
+  labels: string[] = [];
+  dataValues: number[] = [];
+  isDataLoaded: boolean = false; // Control de datos
 
-  constructor(private mascotaService: MascotaService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private mascotaService: MascotaService,
+    private tratamientoService: TratamientoService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.mascotaService.getMascotasState().subscribe(
@@ -21,8 +32,6 @@ export class DashboardComponent implements OnInit {
         console.log('Estado de mascotas recibido:', estado);
         this.enTratamiento = estado.enTratamiento;
         this.tratadas = estado.tratadas;
-
-        this.updateChart();
         this.isDataLoaded = true;
       },
       (error) => {
@@ -30,51 +39,16 @@ export class DashboardComponent implements OnInit {
       }
     );
 
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-
-    this.data = {
-
-      datasets: [
-        {
-          data: [0, 0], // Inicializa los datos
-          backgroundColor: [
-            '#7FA1C3', '#D0B8A8'
-          ],
-          borderWidth: 0,
-          hoverBackgroundColor: [
-            '#7FA1C3', '#D0B8A8'
-          ],
-        },
-      ],
-    };
-
-    // Opciones del gráfico, incluyendo la leyenda a la izquierda y el punto en forma de círculo
-    this.options = {
-      cutout: '70%',
-      plugins: {
-        legend: {
-          position: 'left',  // Posicionamos las etiquetas a la izquierda
-          labels: {
-            color: textColor,
-            usePointStyle: true,  // Usamos los puntos en forma de círculo
-            pointStyle: 'circle',  // Especificamos que sean círculos
-            padding: 0,  // Espacio entre las leyendas (opcional, afecta solo entre labels)
-          },
-        },
+    this.tratamientoService.getTratamientosPorMes().subscribe(
+      (data: { [key: string]: number }) => {
+        this.labels = Object.keys(data);
+        this.dataValues = Object.values(data);
+        this.isDataLoaded = true;
+        this.cdr.detectChanges(); // Detecta cambios manualmente
       },
-      // Layout que controla el padding general del gráfico
-      layout: {
-        padding: 0,
-        margin: 0
+      (error) => {
+        console.error('Error al obtener los tratamientos por mes:', error);
       }
-    };
-  }
-
-  updateChart() {
-    if (this.data && this.data.datasets) {
-      this.data.datasets[0].data = [this.enTratamiento, this.tratadas];
-      this.cdr.detectChanges();
-    }
+    );
   }
 }

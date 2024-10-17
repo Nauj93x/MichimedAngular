@@ -63,6 +63,22 @@ export class SuministrarTratamientosComponent implements OnInit {
   }
 
   saveTratamiento(): void {
+
+    if(!this.tratamiento.mascota){
+      this.messageService.add({ severity: 'warn', summary: '¡Error!', detail: 'Selecciona una mascota', life: 3000 });
+      return;
+    }
+
+    if(!this.tratamiento.veterinario){
+      this.messageService.add({ severity: 'warn', summary: '¡Error!', detail: 'Selecciona un veterinario', life: 3000 });
+      return;
+    }
+
+    if(!this.tratamiento.droga){
+      this.messageService.add({ severity: 'warn', summary: '¡Error!', detail: 'Selecciona una droga', life: 3000 });
+      return;
+    }
+
     // Formatea la fecha actual
     const date = new Date();
     const formattedDate = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getFullYear()).slice(-2)}`;

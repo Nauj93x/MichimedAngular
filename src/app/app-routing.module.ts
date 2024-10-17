@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'admin/dashboard', component: DashboardComponent },
   { path: 'suministrar-tratamiento', component: SuministrarTratamientosComponent },
   { path: 'historial-medico', component: HistorialMedicoComponent },
+  { path: 'historial-medico/:id', component: HistorialMedicoComponent },
   { path: '', component: LandingComponent },
   { path: '**', component: ErrorComponent}
 ];

@@ -49,12 +49,18 @@
           Cedula <p-sortIcon class="inline-block" field="cedula"></p-sortIcon>
         </th>
         <th style="width: 30%" pSortableColumn="especialidad" pResizableColumn>
-          Especialidad <p-sortIcon class="inline-block" field="especialidad"></p-sortIcon>
+          Especialidad
+          <p-sortIcon class="inline-block" field="especialidad"></p-sortIcon>
         </th>
         <th style="width: 10%" pResizableColumn>Acciones</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-veterinario let-editing="editing" let-ri="rowIndex">
+    <ng-template
+      pTemplate="body"
+      let-veterinario
+      let-editing="editing"
+      let-ri="rowIndex"
+    >
       <tr [pEditableRow]="veterinario">
         <td>
           <p-cellEditor>
@@ -169,7 +175,9 @@
           />
           <label htmlFor="nombre">Nombre</label>
         </span>
-        <small class="p-error" *ngIf="submitted && !veterinario.nombre">Nombre is required.</small>
+        <small class="p-error" *ngIf="submitted && !veterinario.nombre"
+          >Nombre is required.</small
+        >
       </div>
       <div class="field mt-[1.70rem]">
         <span class="p-float-label">
@@ -184,7 +192,9 @@
           />
           <label htmlFor="cedula">Cedula</label>
         </span>
-        <small class="p-error" *ngIf="submitted && !veterinario.cedula">Cedula is required.</small>
+        <small class="p-error" *ngIf="submitted && !veterinario.cedula"
+          >Cedula is required.</small
+        >
       </div>
       <div class="field mt-[1.70rem]">
         <span class="p-float-label">
@@ -199,7 +209,9 @@
           />
           <label htmlFor="especialidad">Especialidad</label>
         </span>
-        <small class="p-error" *ngIf="submitted && !veterinario.especialidad">Especialidad is required.</small>
+        <small class="p-error" *ngIf="submitted && !veterinario.especialidad"
+          >Especialidad is required.</small
+        >
       </div>
     </ng-template>
 
@@ -251,6 +263,14 @@
             [src]="mascota.foto"
             alt="fotoMascota"
           />
+          <button
+            pButton
+            pRipple
+            label="Ver Historial Médico"
+            icon="pi pi-book"
+            class="p-button-info mt-2"
+            (click)="mascota.id ? verHistorialMedico(mascota.id) : null"
+          ></button>
         </div>
       </div>
     </ng-template>

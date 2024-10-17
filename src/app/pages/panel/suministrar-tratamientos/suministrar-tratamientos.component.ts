@@ -84,6 +84,8 @@ export class SuministrarTratamientosComponent implements OnInit {
     // Reinicia el tratamieno si el user no es admin
     if(!this.isAdmin){
       this.tratamiento = {fecha: '', veterinario: this.veterinario};
+    }else{
+      this.tratamiento = {fecha: ''};
     }
   }
 

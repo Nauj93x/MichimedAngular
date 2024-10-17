@@ -1,8 +1,11 @@
 <app-layout></app-layout>
 <main id="content">
   <h1 class="mb-3 text-center text-3xl">Panel</h1>
-  <div class="grid grid-flow-col grid-cols-2 grid-rows-1 gap-5 mt-10 items-start">
-    <div class="graph-container rounded-3xl content-center  p-3">
+
+  <div
+    class="grid grid-flow-col grid-cols-2 grid-rows-1 gap-5 mt-10 items-start"
+  >
+    <div class="graph-container rounded-3xl content-center p-3">
       <div class="grid grid-flow-col h-full content-center items-center">
         <ul class="flex flex-col items-center content-center mt-2">
           <li class="flex flex-col w-3/4 justify-center content-center">
@@ -33,20 +36,23 @@
       <div class="grid grid-flow-col h-full items-center">
         <!-- Mostrar solo cuando los datos están listos -->
         <app-lines-chart
-        class="w-9/12 h-auto my-2 mx-4"
-        *ngIf="isDataLoaded"
-        [labels]="labels"
-        [dataValues]="dataValues"
+          class="w-9/12 h-auto my-2 mx-4"
+          *ngIf="isDataLoaded"
+          [labels]="labels"
+          [dataValues]="dataValues"
         ></app-lines-chart>
         <div class="flex flex-col items-center content-center mt-2 w-20">
           <h3 class="text-3xl text-[#7FA1C3] font-light mb-0">
             Cantidad de tratamientos Suministrados
           </h3>
-      </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="graph-container rounded-3xl content-center  p-3 mt-8">
+  <div class="graph-container rounded-3xl content-center p-3 mt-8">
     <app-drogas-aux-table></app-drogas-aux-table>
+  </div>
+  <div>
+    <app-profit></app-profit>
   </div>
 </main>

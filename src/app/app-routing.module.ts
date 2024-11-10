@@ -11,18 +11,22 @@ import { VeterinariosComponent } from './pages/panel/veterinarios/veterinarios.c
 import { DashboardComponent } from './pages/panel/dashboard/dashboard.component';
 import { SuministrarTratamientosComponent } from './pages/panel/suministrar-tratamientos/suministrar-tratamientos.component';
 import { HistorialMedicoComponent } from './pages/panel/historial-medico/historial-medico.component';
+import { SeleccionMascotasComponent } from './components/seleccion-mascotas/seleccion-mascotas.component';
+
 
 const routes: Routes = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'mascotas', component: MascotasComponent },
   { path: 'clientes', component: ClientesComponent },
+
   { path: 'drogas', component: DrogasComponent },
   { path: 'admin/veterinarios', component: VeterinariosComponent },
   { path: 'admin/dashboard', component: DashboardComponent },
   { path: 'suministrar-tratamiento', component: SuministrarTratamientosComponent },
   { path: 'historial-medico', component: HistorialMedicoComponent },
   { path: 'historial-medico/:id', component: HistorialMedicoComponent },
+  { path: 'adopcion', component: SeleccionMascotasComponent },
   { path: '', component: LandingComponent },
   { path: '**', component: ErrorComponent}
 ];

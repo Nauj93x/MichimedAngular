@@ -337,3 +337,10 @@ form input::placeholder{color: var(--text-secondary);}
   text-align: center;
   color: var(--text-secondary);
 }
+
+
+.button-container {
+  display: flex;
+  gap: 20px; /* Ajusta el espacio entre los botones */
+  margin-bottom: 20px; /* Espacio debajo del contenedor de botones */
+}

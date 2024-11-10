@@ -14,6 +14,7 @@ import { HistorialMedicoDTO } from 'src/app/model/historial-medico-dto';
 export class LandingComponent {
   findMascotasDialog: boolean = false;
   viewTratamientosMascotaDialog: boolean = false;
+  showAdopcionDialog: boolean = false;
   selectedMascota: Mascota | null = null;
   cedula: string = '';
   mascotas: Mascota[] = [];
@@ -91,6 +92,10 @@ export class LandingComponent {
   showTratamientosMascotaDialog(){
     this.findMascotasDialog = false;
     this.viewTratamientosMascotaDialog = true;
+  }
+
+  showAdopcionMascotaDialog() {
+    this.showAdopcionDialog = true;
   }
 
   verTratamientos(idMascota: number) {

@@ -37,9 +37,18 @@
       cuenta para gestionar la salud de tu mascota, o ver y gestionar mascotas
       hospitalizadas si eres veterinario.
     </p>
-    <button (click)="showFindMascotasDialog()" class="btn-2">
-      Ver mis mascotas
-    </button>
+
+
+    <div class="button-container">
+      <button pButton type="button" label="Ver mis mascotas" icon="pi pi-search" (click)="showFindMascotasDialog()" class="btn-2"></button>
+      <button pButton type="button" label="Adoptar un Gato" icon="pi pi-heart" (click)="showAdopcionDialog = true" class="btn-2"></button>
+    </div>
+
+    <p-dialog header="Adopción de Gatos" [(visible)]="showAdopcionDialog" [modal]="true" [style]="{ width: '100%', maxWidth: '800px' }">
+      <app-seleccion-mascotas></app-seleccion-mascotas>
+    </p-dialog>
+    
+
   </section>
   <section class="service-grid">
     <div class="service-item">

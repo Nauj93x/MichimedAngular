@@ -54,6 +54,7 @@ export class MascotasComponent implements OnInit {
     );
 
     this.statuses = [
+      { label: 'Disponible', value: 'Disponible' },
       { label: 'En tratamiento', value: 'En tratamiento' },
       { label: 'Tratado', value: 'Tratado' },
     ];
@@ -91,17 +92,19 @@ export class MascotasComponent implements OnInit {
     });
   }
 
-  getSeverity(status: string) {
-    // Retorna estado mascota
+  getSeverity(status: string): string {
     switch (status) {
+      case 'Disponible':
+        return 'warning'; // Cambia el valor a "warning" para amarillo
       case 'En tratamiento':
         return 'info';
       case 'Tratado':
         return 'success';
       default:
-        return 'info';
+        return 'secondary';
     }
   }
+  
 
   onRowEditInit(mascota: Mascota) {
     this.clonedMascotas[mascota.id as number] = { ...mascota };
@@ -194,6 +197,28 @@ export class MascotasComponent implements OnInit {
       this.newMascotaDialog = false;
     }
   }
+
+  onEstadoChange(mascota: Mascota): void {
+    if (mascota.estado === 'Disponible') {
+      this.confirmationService.confirm({
+        message: `¿Estás seguro de que quieres poner a ${mascota.nombre} en adopción?`,
+        header: 'Confirmar Adopción',
+        icon: 'pi pi-exclamation-triangle',
+        acceptLabel: 'Yes',
+        rejectLabel: 'No',
+        acceptButtonStyleClass: 'accept-button',
+        rejectButtonStyleClass: 'reject-button',
+        accept: () => {
+          this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: `El gato ${mascota.nombre} está ahora en adopción.` });
+        },
+        reject: () => {
+          // Revertir el estado si se rechaza la confirmación
+          mascota.estado = 'En tratamiento';
+        }
+      });
+    }
+  }
+  
 
   exportExcel() {
     // import('xlsx').then((xlsx) => {

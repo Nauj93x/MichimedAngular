@@ -60,5 +60,10 @@ export class VeterinarioService {
     deleteVeterinario(id: number) {
       this.http.delete('http://localhost:8090/veterinarios/delete/' + id).subscribe();
     }
+
+    veterinarioHome(): Observable<Veterinario> {
+      return this.http.get<Veterinario>('http://localhost:8090/veterinarios/details');
+    }
+
 }
 

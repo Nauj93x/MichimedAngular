@@ -1,0 +1,83 @@
+<div class="search-container">
+  <p-dropdown 
+    [options]="gatosDisponibles" 
+    [(ngModel)]="selectedGato" 
+    placeholder="Selecciona un gato..." 
+    (onChange)="onSelectGato()" 
+    optionLabel="label"
+    class="search-dropdown"
+  ></p-dropdown>
+
+  <button *ngIf="selectedGato" class="clear-button" (click)="cancelarBusqueda()">
+    <i class="pi pi-times"></i>
+  </button>
+</div>
+
+
+<!-- Contenedor de tarjetas de gatos -->
+<div class="gatos-grid">
+  <div *ngFor="let gato of gatosFiltrados" class="mascota-card" [ngClass]="{'no-disponible': gato.estado !== 'Disponible'}">
+    <img [src]="gato.foto" alt="{{ gato.nombre }}" class="gato-imagen">
+    <h3>{{ gato.nombre }}</h3>
+    <p>Raza: {{ gato.raza }}</p>
+    <p>Edad: {{ gato.edad }} años</p>
+    <p>Peso: {{ gato.peso }} kg</p>
+    <p>Estado: {{ gato.estado }}</p>
+    <button (click)="abrirStepper(gato)" [disabled]="gato.estado !== 'Disponible'" class="adoptar-button">
+      {{ gato.estado === 'Disponible' ? 'Adoptar' : 'No Disponible' }}
+    </button>
+  </div>
+</div>
+
+<!-- Modal para el Stepper -->
+<p-dialog [(visible)]="stepperVisible" [modal]="true" [style]="{ width: '800px' }" header="Proceso de Adopción" (onHide)="stepperVisible = false">
+  <div class="stepper-content">
+    <p-steps [(activeIndex)]="activeStep" [model]="steps" [readonly]="false" class="steps-custom"></p-steps>
+    
+    <!-- Contenido del primer paso -->
+    <div *ngIf="activeStep === 0" class="step-panel">
+      <h3>Datos del Adoptante</h3>
+      <div class="form-row">
+        <!-- Campo flotante para Nombre -->
+        <p-floatLabel>
+          <input pInputText id="nombre" [(ngModel)]="nombreAdoptante" />
+          <label for="nombre">Nombre del Adoptante</label>
+        </p-floatLabel>
+        
+        <!-- Campo flotante para Teléfono -->
+        <p-floatLabel>
+          <input pInputText id="telefono" [(ngModel)]="telefonoAdoptante" (keypress)="allowOnlyNumbers($event)" />
+          <label for="telefono">Teléfono del Adoptante</label>
+        </p-floatLabel>
+      </div>
+
+      <!-- Botón para avanzar al siguiente paso -->
+      <p-button label="Siguiente" icon="pi pi-arrow-right" (click)="siguientePaso()" styleClass="next-button mt-4" />
+    </div>
+
+    <!-- Contenido del segundo paso -->
+    <div *ngIf="activeStep === 1" class="step-panel">
+      <h3>Confirmación de Información</h3>
+      <p><strong>Nombre:</strong> {{ nombreAdoptante }}</p>
+      <p><strong>Teléfono:</strong> {{ telefonoAdoptante }}</p>
+      <p><strong>Mascota a adoptar:</strong> {{ selectedGato?.nombre }}</p>
+      
+      <div class="button-container">
+        <p-button label="Anterior" icon="pi pi-arrow-left" (click)="pasoAnterior()" styleClass="prev-button"  />
+        <p-button label="Siguiente" icon="pi pi-arrow-right" (click)="siguientePaso()" styleClass="next-button" />
+      </div>
+    </div>
+
+    <!-- Contenido del tercer paso -->
+    <div *ngIf="activeStep === 2" class="step-panel">
+      <h3>Finalizar Solicitud</h3>
+      <p>¡¡Gracias por completar la solicitud de adopción!!</p>
+      <p>Nos pondremos en contacto contigo.</p>
+      
+      <div class="button-container">
+        <p-button label="Anterior" icon="pi pi-arrow-left" (click)="pasoAnterior()" styleClass="prev-button" />
+        <p-button label="Finalizar" icon="pi pi-check" (click)="cerrarStepper()" styleClass="finish-button" />
+      </div>
+    </div>
+  </div>
+</p-dialog>

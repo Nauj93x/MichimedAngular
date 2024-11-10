@@ -45,4 +45,11 @@ export class ClienteService {
   deleteCliente(id: number) {
     this.http.delete('http://localhost:8090/clientes/delete/' + id).subscribe();
   }
+
+  clienteHome(): Observable<Cliente> {
+    return this.http.get<Cliente>('http://localhost:8090/clientes/details');  
+  }
+
+
+
 }

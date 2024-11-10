@@ -139,25 +139,27 @@
           <p-cellEditor>
             <ng-template pTemplate="input">
               <p-dropdown
-                [options]="statuses"
-                inputId="estado"
-                appendTo="body"
-                [(ngModel)]="mascota.estado"
-                [style]="{ width: '100%' }"
-              >
-                <ng-template pTemplate="selectedItem">
-                  <p-tag
-                    [value]="mascota.estado"
-                    [severity]="getSeverity(mascota.estado)"
-                  ></p-tag>
-                </ng-template>
-                <ng-template let-option pTemplate="item">
-                  <p-tag
-                    [value]="option.label"
-                    [severity]="getSeverity(option.label)"
-                  ></p-tag>
-                </ng-template>
-              </p-dropdown>
+              [options]="statuses"
+              inputId="estado"
+              appendTo="body"
+              [(ngModel)]="mascota.estado"
+              (onChange)="onEstadoChange(mascota)"
+              [style]="{ width: '100%' }"
+            >
+              <ng-template pTemplate="selectedItem">
+                <p-tag
+                  [value]="mascota.estado"
+                  [severity]="getSeverity(mascota.estado)"
+                ></p-tag>
+              </ng-template>
+              <ng-template let-option pTemplate="item">
+                <p-tag
+                  [value]="option.label"
+                  [severity]="getSeverity(option.label)"
+                ></p-tag>
+              </ng-template>
+            </p-dropdown>
+            
             </ng-template>
             <ng-template pTemplate="output">
               <p-tag

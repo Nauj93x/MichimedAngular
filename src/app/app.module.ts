@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';  // Asegúrate de importar HttpClientModule
@@ -44,12 +44,15 @@ import { ChartModule } from 'primeng/chart';
 import { FileUploadModule } from 'primeng/fileupload';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TimelineModule } from 'primeng/timeline';
+import { StepsModule } from 'primeng/steps';
 import { CardModule } from 'primeng/card';
 import { CircularDiagramComponent } from './components/circular-diagram/circular-diagram.component';
 import { LinesChartComponent } from './components/lines-chart/lines-chart.component';
 import { DrogasAuxTableComponent } from './components/drogas-aux-table/drogas-aux-table.component';
 import { ProfitComponent } from './components/profit/profit.component';
 import { VeterinariosDsComponent } from './components/veterinarios-ds/veterinarios-ds.component';
+import { SeleccionMascotasComponent } from './components/seleccion-mascotas/seleccion-mascotas.component';
+import { MascotaService } from './services/mascota.service';
 
 
 @NgModule({
@@ -74,7 +77,8 @@ import { VeterinariosDsComponent } from './components/veterinarios-ds/veterinari
     DrogasAuxTableComponent,
     ProfitComponent,
     LoaderComponent,
-    VeterinariosDsComponent
+    VeterinariosDsComponent,
+    SeleccionMascotasComponent
   ],
   imports: [
     BrowserModule,
@@ -99,11 +103,14 @@ import { VeterinariosDsComponent } from './components/veterinarios-ds/veterinari
     FileUploadModule,
     MultiSelectModule,
     TimelineModule,
-    CardModule
+    CardModule,
+    StepsModule,
   ],
   providers: [
-    DrogaService   // Añade el servicio DrogaService en los providers si es necesario
+    DrogaService,
+    MascotaService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
